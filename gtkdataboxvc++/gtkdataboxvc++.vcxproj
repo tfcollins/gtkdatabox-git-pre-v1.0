@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7CA87935-FCD7-4127-89A0-3B30D70D1EBC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>gtkdataboxvc</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Documents and Settings\_\Desktop\work\gtkdatabox\gtk;C:\gtk+\include\gtk-2.0;C:\gtk+\include\glib-2.0;C:\gtk+\lib\glib-2.0\include;C:\gtk+\include\cairo;C:\gtk+\include\pango-1.0;C:\gtk+\lib\gtk-2.0\include;C:\gtk+\include\gdk-pixbuf-2.0;C:\gtk+\include\atk-1.0;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>C:\gtk+\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Documents and Settings\_\Desktop\work\gtkdatabox\gtk;C:\gtk+\include\gtk-2.0;C:\gtk+\include\glib-2.0;C:\gtk+\lib\glib-2.0\include;C:\gtk+\include\cairo;C:\gtk+\include\pango-1.0;C:\gtk+\lib\gtk-2.0\include;C:\gtk+\include\gdk-pixbuf-2.0;C:\gtk+\include\atk-1.0;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
+    <LibraryPath>C:\gtk+\lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <CompileAs>Default</CompileAs>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\gtk\gtkdatabox.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_bars.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_cross_simple.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_graph.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_grid.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_lines.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_markers.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_marshal.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_offset_bars.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_points.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_regions.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_ruler.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_scale.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_xyc_graph.c" />
+    <ClCompile Include="..\gtk\gtkdatabox_xyyc_graph.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\gtk\gtkdatabox.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_bars.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_cross_simple.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_graph.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_grid.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_lines.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_markers.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_marshal.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_offset_bars.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_points.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_regions.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_ruler.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_scale.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_typedefs.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_xyc_graph.h" />
+    <ClInclude Include="..\gtk\gtkdatabox_xyyc_graph.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
