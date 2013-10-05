@@ -56,12 +56,15 @@ AM_CFLAGS			=\
 			-DGDK_DISABLE_DEPRECATED\
 			-DGDK_PIXBUF_DISABLE_DEPRECATED\
 			-DGTK_DISABLE_DEPRECATED\
+			-DGSEAL_ENABLED\
+			-DGTK_DISABLE_SINGLE_INCLUDES\
 			@LIBGLADE_CFLAGS@ \
 			`pkg-config gtk+-2.0 --cflags`
 
 
 LDADD 			= $(top_builddir)/gtk/libgtkdatabox.la\
-		 	@GTK_LIBS@
+		 	@GTK_LIBS@ \
+			-lm
 
 
 if BUILD_LIBGLADE

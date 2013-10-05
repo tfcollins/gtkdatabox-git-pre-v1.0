@@ -34,7 +34,6 @@
 #ifndef __GTK_DATABOX_GRAPH_H__
 #define __GTK_DATABOX_GRAPH_H__
 
-#include <gtk/gtkstyle.h>
 #include <gdk/gdk.h>
 #include <pango/pango.h>
 #include <gtkdatabox.h>
@@ -54,22 +53,14 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_GRAPH_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_GRAPH, \
                                            GtkDataboxGraphClass))
+#define GTK_DATABOX_GRAPH_GET_PRIVATE(obj) \
+	G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_DATABOX_TYPE_GRAPH, GtkDataboxGraphPrivate)
 
    typedef struct _GtkDataboxGraphClass GtkDataboxGraphClass;
 
    /**
-    * GtkDataboxGraphPrivate
-    *
-    * A private data structure used by the #GtkDataboxGraph. It shields all internal things
-    * from developers who are just using the object. 
-    *
-    **/
-   typedef struct _GtkDataboxGraphPrivate GtkDataboxGraphPrivate;
-
-   /**
     * _GtkDataboxGraph
     * @parent: The parent object 
-    * @priv: A private structure containing internal data.
     *
     * Implementation of #GtkDataboxGraph
     *
@@ -78,8 +69,6 @@ G_BEGIN_DECLS
    {
       /*< private >*/
       GObject parent;
-
-      GtkDataboxGraphPrivate *priv;
    };
 
    struct _GtkDataboxGraphClass

@@ -19,6 +19,9 @@
 
 #include <gtkdatabox_xyc_graph.h>
 
+G_DEFINE_TYPE(GtkDataboxXYCGraph, gtk_databox_xyc_graph,
+	GTK_DATABOX_TYPE_GRAPH)
+
 static gint gtk_databox_xyc_graph_real_calculate_extrema (GtkDataboxGraph *
 							  xyc_graph,
 							  gfloat * min_x,
@@ -34,6 +37,15 @@ enum
    PROP_LEN
 };
 
+/**
+ * GtkDataboxXYCGraphPrivate
+ *
+ * A private data structure used by the #GtkDataboxXYCGraph. It shields all internal things
+ * from developers who are just using the object.
+ *
+ **/
+typedef struct _GtkDataboxXYCGraphPrivate GtkDataboxXYCGraphPrivate;
+
 struct _GtkDataboxXYCGraphPrivate
 {
    guint len;
@@ -41,15 +53,13 @@ struct _GtkDataboxXYCGraphPrivate
    gfloat *Y;
 };
 
-static gpointer parent_class = NULL;
-
 static void
 gtk_databox_xyc_graph_set_X (GtkDataboxXYCGraph * xyc_graph, gfloat * X)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
    g_return_if_fail (X);
 
-   xyc_graph->priv->X = X;
+   GTK_DATABOX_XYC_GRAPH_GET_PRIVATE(xyc_graph)->X = X;
 
    g_object_notify (G_OBJECT (xyc_graph), "X-Values");
 }
@@ -60,7 +70,7 @@ gtk_databox_xyc_graph_set_Y (GtkDataboxXYCGraph * xyc_graph, gfloat * Y)
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
    g_return_if_fail (Y);
 
-   xyc_graph->priv->Y = Y;
+   GTK_DATABOX_XYC_GRAPH_GET_PRIVATE(xyc_graph)->Y = Y;
 
    g_object_notify (G_OBJECT (xyc_graph), "Y-Values");
 }
@@ -71,7 +81,7 @@ gtk_databox_xyc_graph_set_length (GtkDataboxXYCGraph * xyc_graph, guint len)
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
    g_return_if_fail (len > 0);
 
-   xyc_graph->priv->len = len;
+   GTK_DATABOX_XYC_GRAPH_GET_PRIVATE(xyc_graph)->len = len;
 
    g_object_notify (G_OBJECT (xyc_graph), "length");
 }
@@ -123,7 +133,7 @@ gtk_databox_xyc_graph_get_X (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), NULL);
 
-   return xyc_graph->priv->X;
+   return GTK_DATABOX_XYC_GRAPH_GET_PRIVATE(xyc_graph)->X;
 }
 
 /**
@@ -139,7 +149,7 @@ gtk_databox_xyc_graph_get_Y (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), NULL);
 
-   return xyc_graph->priv->Y;
+   return GTK_DATABOX_XYC_GRAPH_GET_PRIVATE(xyc_graph)->Y;
 }
 
 /**
@@ -155,7 +165,7 @@ gtk_databox_xyc_graph_get_length (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), 0);
 
-   return xyc_graph->priv->len;
+   return GTK_DATABOX_XYC_GRAPH_GET_PRIVATE(xyc_graph)->len;
 }
 
 static void
@@ -191,30 +201,14 @@ gtk_databox_xyc_graph_get_property (GObject * object,
 }
 
 static void
-xyc_graph_finalize (GObject * object)
+gtk_databox_xyc_graph_class_init (GtkDataboxXYCGraphClass *klass)
 {
-   GtkDataboxXYCGraph *xyc_graph = GTK_DATABOX_XYC_GRAPH (object);
-
-   g_free (xyc_graph->priv);
-
-   /* Chain up to the parent class */
-   G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-static void
-gtk_databox_xyc_graph_class_init (gpointer g_class
-				  /*, gpointer g_class_data */ )
-{
-   GObjectClass *gobject_class = G_OBJECT_CLASS (g_class);
-   GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (g_class);
-   GtkDataboxXYCGraphClass *klass = GTK_DATABOX_XYC_GRAPH_CLASS (g_class);
+   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+   GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (klass);
    GParamSpec *xyc_graph_param_spec;
-
-   parent_class = g_type_class_peek_parent (klass);
 
    gobject_class->set_property = gtk_databox_xyc_graph_set_property;
    gobject_class->get_property = gtk_databox_xyc_graph_get_property;
-   gobject_class->finalize = xyc_graph_finalize;
 
    xyc_graph_param_spec = g_param_spec_pointer ("X-Values",
 						"X coordinates",
@@ -243,41 +237,13 @@ gtk_databox_xyc_graph_class_init (gpointer g_class
 
    graph_class->calculate_extrema =
       gtk_databox_xyc_graph_real_calculate_extrema;
+
+   g_type_class_add_private (klass, sizeof (GtkDataboxXYCGraphPrivate));
 }
 
 static void
-gtk_databox_xyc_graph_instance_init (GTypeInstance * instance
-				     /*, gpointer g_class */ )
+gtk_databox_xyc_graph_init (GtkDataboxXYCGraph *xyc_graph)
 {
-   GtkDataboxXYCGraph *xyc_graph = GTK_DATABOX_XYC_GRAPH (instance);
-
-   xyc_graph->priv = g_new0 (GtkDataboxXYCGraphPrivate, 1);
-}
-
-GType
-gtk_databox_xyc_graph_get_type (void)
-{
-   static GType type = 0;
-
-   if (type == 0)
-   {
-      static const GTypeInfo info = {
-	 sizeof (GtkDataboxXYCGraphClass),
-	 NULL,			/* base_init */
-	 NULL,			/* base_finalize */
-	 (GClassInitFunc) gtk_databox_xyc_graph_class_init,	/* class_init */
-	 NULL,			/* class_finalize */
-	 NULL,			/* class_data */
-	 sizeof (GtkDataboxXYCGraph),	/* instance_size */
-	 0,			/* n_preallocs */
-	 (GInstanceInitFunc) gtk_databox_xyc_graph_instance_init,	/* instance_init */
-	 NULL,			/* value_table */
-      };
-      type = g_type_register_static (GTK_DATABOX_TYPE_GRAPH,
-				     "GtkDataboxXYCGraph", &info, 0);
-   }
-
-   return type;
 }
 
 static gint
@@ -286,6 +252,8 @@ gtk_databox_xyc_graph_real_calculate_extrema (GtkDataboxGraph * graph,
 					      gfloat * min_y, gfloat * max_y)
 {
    GtkDataboxXYCGraph *xyc_graph = GTK_DATABOX_XYC_GRAPH (graph);
+   GtkDataboxXYCGraphPrivate *priv = GTK_DATABOX_XYC_GRAPH_GET_PRIVATE(xyc_graph);
+
    guint i;
 
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (graph), -1);
@@ -293,22 +261,21 @@ gtk_databox_xyc_graph_real_calculate_extrema (GtkDataboxGraph * graph,
    g_return_val_if_fail (max_x, -1);
    g_return_val_if_fail (min_y, -1);
    g_return_val_if_fail (max_y, -1);
-   g_return_val_if_fail (xyc_graph->priv->len, -1);
+   g_return_val_if_fail (priv->len, -1);
 
-   *min_x = *max_x = xyc_graph->priv->X[0];
-   *min_y = *max_y = xyc_graph->priv->Y[0];
+   *min_x = *max_x = priv->X[0];
+   *min_y = *max_y = priv->Y[0];
 
-   for (i = 1; i < xyc_graph->priv->len; ++i)
+   for (i = 1; i < priv->len; ++i)
    {
-      if (xyc_graph->priv->X[i] < *min_x)
-	 *min_x = xyc_graph->priv->X[i];
-      else if (xyc_graph->priv->X[i] > *max_x)
-	 *max_x = xyc_graph->priv->X[i];
-      if (xyc_graph->priv->Y[i] < *min_y)
-	 *min_y = xyc_graph->priv->Y[i];
-      else if (xyc_graph->priv->Y[i] > *max_y)
-	 *max_y = xyc_graph->priv->Y[i];
-
+      if (priv->X[i] < *min_x)
+	 *min_x = priv->X[i];
+      else if (priv->X[i] > *max_x)
+	 *max_x = priv->X[i];
+      if (priv->Y[i] < *min_y)
+	 *min_y = priv->Y[i];
+      else if (priv->Y[i] > *max_y)
+	 *max_y = priv->Y[i];
    }
 
    return 0;

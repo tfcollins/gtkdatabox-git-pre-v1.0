@@ -19,46 +19,52 @@
 
 #include <gtkdatabox_offset_bars.h>
 
+G_DEFINE_TYPE(GtkDataboxOffsetBars, gtk_databox_offset_bars,
+	GTK_DATABOX_TYPE_XYYC_GRAPH)
+
 static void gtk_databox_offset_bars_real_draw (GtkDataboxGraph * bars,
 					GtkDatabox* box);
+
+/**
+ * GtkDataboxOffsetBarsPrivate
+ *
+ * A private data structure used by the #GtkDataboxOffsetBars. It shields all internal things
+ * from developers who are just using the object.
+ *
+ **/
+typedef struct _GtkDataboxOffsetBarsPrivate GtkDataboxOffsetBarsPrivate;
 
 struct _GtkDataboxOffsetBarsPrivate
 {
    GdkSegment *data;
 };
 
-static gpointer parent_class = NULL;
-
 static void
 bars_finalize (GObject * object)
 {
-   GtkDataboxOffsetBars *bars = GTK_DATABOX_OFFSET_BARS (object);
-
-   g_free (bars->priv->data);
-   g_free (bars->priv);
+   g_free (GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(object)->data);
 
    /* Chain up to the parent class */
-   G_OBJECT_CLASS (parent_class)->finalize (object);
+   G_OBJECT_CLASS (gtk_databox_offset_bars_parent_class)->finalize (object);
 }
 
 static void
-gtk_databox_offset_bars_class_init (gpointer g_class /*, gpointer g_class_data */ )
+gtk_databox_offset_bars_class_init (GtkDataboxOffsetBarsClass *klass)
 {
-   GObjectClass *gobject_class = G_OBJECT_CLASS (g_class);
-   GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (g_class);
-   GtkDataboxOffsetBarsClass *klass = GTK_DATABOX_OFFSET_BARS_CLASS (g_class);
-
-   parent_class = g_type_class_peek_parent (klass);
+   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+   GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (klass);
 
    gobject_class->finalize = bars_finalize;
 
    graph_class->draw = gtk_databox_offset_bars_real_draw;
+
+   g_type_class_add_private (klass, sizeof (GtkDataboxOffsetBarsPrivate));
 }
 
 static void
 gtk_databox_offset_bars_complete (GtkDataboxOffsetBars * bars)
 {
-   bars->priv->data =
+   GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(bars)->data =
       g_new0 (GdkSegment,
 	      gtk_databox_xyyc_graph_get_length
 	      (GTK_DATABOX_XYYC_GRAPH (bars)));
@@ -66,40 +72,10 @@ gtk_databox_offset_bars_complete (GtkDataboxOffsetBars * bars)
 }
 
 static void
-gtk_databox_offset_bars_instance_init (GTypeInstance * instance)
+gtk_databox_offset_bars_init (GtkDataboxOffsetBars *bars)
 {
-   GtkDataboxOffsetBars *bars = GTK_DATABOX_OFFSET_BARS (instance);
-
-   bars->priv = g_new0 (GtkDataboxOffsetBarsPrivate, 1);
-
    g_signal_connect (bars, "notify::length",
 		     G_CALLBACK (gtk_databox_offset_bars_complete), NULL);
-}
-
-GType
-gtk_databox_offset_bars_get_type (void)
-{
-   static GType type = 0;
-
-   if (type == 0)
-   {
-      static const GTypeInfo info = {
-	 sizeof (GtkDataboxOffsetBarsClass),
-	 NULL,			/* base_init */
-	 NULL,			/* base_finalize */
-	 (GClassInitFunc) gtk_databox_offset_bars_class_init,	/* class_init */
-	 NULL,			/* class_finalize */
-	 NULL,			/* class_data */
-	 sizeof (GtkDataboxOffsetBars),	/* instance_size */
-	 0,			/* n_preallocs */
-	 (GInstanceInitFunc) gtk_databox_offset_bars_instance_init,	/* instance_init */
-	 NULL,			/* value_table */
-      };
-      type = g_type_register_static (GTK_DATABOX_TYPE_XYYC_GRAPH,
-				     "GtkDataboxOffsetBars", &info, 0);
-   }
-
-   return type;
 }
 
 /**
@@ -139,7 +115,7 @@ gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph,
 			    GtkDatabox* box)
 {
    GtkDataboxOffsetBars *bars = GTK_DATABOX_OFFSET_BARS (graph);
-   GdkSegment *data;
+   GtkDataboxOffsetBarsPrivate *priv = GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(graph);
    GdkGC *gc;
    GdkPixmap *pixmap;
    guint i = 0;
@@ -147,6 +123,7 @@ gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph,
    gfloat *Y1;
    gfloat *Y2;
    guint len;
+   GdkSegment *data;
 
    g_return_if_fail (GTK_DATABOX_IS_OFFSET_BARS (bars));
    g_return_if_fail (GTK_IS_DATABOX (box));
@@ -165,7 +142,7 @@ gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph,
    Y1 = gtk_databox_xyyc_graph_get_Y1 (GTK_DATABOX_XYYC_GRAPH (graph));
    Y2 = gtk_databox_xyyc_graph_get_Y2 (GTK_DATABOX_XYYC_GRAPH (graph));
 
-   data = bars->priv->data;
+   data = priv->data;
 
    for (i = 0; i < len; i++, data++, X++, Y1++, Y2++)
    {
@@ -179,7 +156,7 @@ gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph,
    for (i = 0; i < len; i += 65536)
    {
       gdk_draw_segments (pixmap, gc,
-			 bars->priv->data + i, MIN (65536, len - i));
+			 priv->data + i, MIN (65536, len - i));
    }
 
    return;
