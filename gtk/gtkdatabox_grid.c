@@ -288,6 +288,7 @@ gtk_databox_grid_real_draw (GtkDataboxGraph * graph,
    double grid_dot[] = {0.0, 0.0};
    cairo_t *cr;
    GdkColor *color;
+   uint lineSize;
    GtkAllocation allocation;
 
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
@@ -300,8 +301,9 @@ gtk_databox_grid_real_draw (GtkDataboxGraph * graph,
    gtk_databox_get_total_limits (box, &left, &right, &top, &bottom);
 
    cr = gdk_cairo_create (pixmap);
-   g_object_get (grid, "color", &color, NULL);
+   g_object_get (grid, "color", &color, "size", &lineSize, NULL);
    cairo_set_source_rgb (cr, color->red/65535.,color->green/65535.,color->blue/65535.);
+   cairo_set_line_width (cr, (gfloat)lineSize);
 
    width = allocation.width;
    height = allocation.height;
