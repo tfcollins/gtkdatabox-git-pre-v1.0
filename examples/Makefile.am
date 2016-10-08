@@ -68,9 +68,8 @@ LDADD 			= $(top_builddir)/gtk/libgtkdatabox.la\
 
 
 if BUILD_LIBGLADE
-basics_libglade_LDADD	= $(top_builddir)/gtk/libgtkdatabox.la \
+basics_libglade_LDADD	= $(LDADD) \
 			$(top_builddir)/glade/libdatabox.la \
-		 	@GTK_LIBS@ \
 			@LIBGLADE_LIBS@
 else
 basics_libglade_LDADD = $(LDADD)
