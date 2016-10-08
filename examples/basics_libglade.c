@@ -18,6 +18,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include <gtk/gtk.h>
 #include <glib/gprintf.h>
@@ -33,6 +35,7 @@
 
 #ifdef USE_LIBGLADE
 #include <glade/glade.h>
+#include "basics_libglade.h"
 #endif
 
 #define POINTS 2000
@@ -45,8 +48,6 @@
 /*----------------------------------------------------------------
  *  databox basics
  *----------------------------------------------------------------*/
-
-#define GLADE_FILE "basics_libglade.glade"
 
 static void
 create_basics ()
@@ -65,7 +66,11 @@ create_basics ()
    gint i;
    GladeXML *gxml;
 
-   gxml = glade_xml_new (GLADE_FILE, NULL, NULL);
+   gxml = glade_xml_new_from_buffer (basics_glade, strlen(basics_glade), NULL, NULL);
+
+   if (! gxml) {
+     exit(1);
+   }
 
    /* This is important */
    glade_xml_signal_autoconnect (gxml);

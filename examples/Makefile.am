@@ -46,6 +46,14 @@ addremove_SOURCES       = addremove.c
 basics_libglade_SOURCES = basics_libglade.c
 EXTRA_DIST              = basics_libglade.glade
 
+nodist_basics_libglade_SOURCES = basics_libglade.h
+basics_libglade.$(OBJEXT): basics_libglade.h
+CLEANFILES = basics_libglade.h
+basics_libglade.h: basics_libglade.glade
+	echo "const char * basics_glade = \"\\" > $@
+	sed -e 's/"/\\"/g' -e 's/$$/\\/' basics_libglade.glade >> $@
+	echo "\";" >> $@
+
 INCLUDES		= \
 			-I$(top_srcdir)/gtk
 
