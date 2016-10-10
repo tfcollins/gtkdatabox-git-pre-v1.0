@@ -1160,22 +1160,22 @@ gtk_databox_size_allocate (GtkWidget * widget, GtkAllocation * allocation) {
     GtkDatabox *box = GTK_DATABOX (widget);
     GtkDataboxPrivate *priv = GTK_DATABOX_GET_PRIVATE(box);
 
+    gtk_widget_set_allocation (widget, allocation);
+
+    gtk_databox_calculate_translation_factors (box);
+
     if (!gtk_widget_get_realized(widget))
         return;
 
-    gtk_widget_set_allocation (widget, allocation);
+    gdk_window_move_resize (gtk_widget_get_window (widget),
+			    allocation->x, allocation->y,
+			    allocation->width, allocation->height);
 
-        gdk_window_move_resize (gtk_widget_get_window (widget),
-                                allocation->x, allocation->y,
-                                allocation->width, allocation->height);
-
-        gtk_databox_create_backing_pixmap (box);
+    gtk_databox_create_backing_pixmap (box);
 
     if (priv->selection_active) {
         gtk_databox_selection_cancel (box);
     }
-
-    gtk_databox_calculate_translation_factors (box);
 }
 
 static gint
