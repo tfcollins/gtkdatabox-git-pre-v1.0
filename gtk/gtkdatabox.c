@@ -1747,7 +1747,9 @@ static gfloat
 gtk_databox_get_page_size_x (GtkDatabox* box) {
     GtkDataboxPrivate *priv = GTK_DATABOX_GET_PRIVATE(box);
 
-    if (priv->scale_type_x == GTK_DATABOX_SCALE_LINEAR)
+    if (priv->total_left == priv->total_right)
+        return 0;
+    else if (priv->scale_type_x == GTK_DATABOX_SCALE_LINEAR)
         return (priv->visible_left - priv->visible_right)
                / (priv->total_left - priv->total_right);
     else if (priv->scale_type_x == GTK_DATABOX_SCALE_LOG2)
@@ -1777,7 +1779,9 @@ static gfloat
 gtk_databox_get_page_size_y (GtkDatabox* box) {
     GtkDataboxPrivate *priv = GTK_DATABOX_GET_PRIVATE(box);
 
-    if (priv->scale_type_y == GTK_DATABOX_SCALE_LINEAR)
+    if (priv->total_top == priv->total_bottom)
+        return 0;
+    else if (priv->scale_type_y == GTK_DATABOX_SCALE_LINEAR)
         return (priv->visible_top - priv->visible_bottom)
                / (priv->total_top - priv->total_bottom);
     else if (priv->scale_type_y == GTK_DATABOX_SCALE_LOG2)
