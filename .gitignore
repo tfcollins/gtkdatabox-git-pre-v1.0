@@ -40,4 +40,7 @@ gtkdataboxvc++/gtkdataboxvc++.opensdf
 gtkdataboxvc++/Release
 gtkdataboxvc++/Debug
 ltmain.sh
+depcomp
+install-sh
+missing
 *~
