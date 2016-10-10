@@ -1445,12 +1445,23 @@ gtk_databox_ruler_draw_ticks (GtkDataboxRuler * ruler) {
                               NULL,
                               widget, "ruler", pos + 2, ythickness - 1, layout);
         } else {
+
             y_loc=pos - logical_rect.width - 2; /* standard vertical text y alignment */
-            if (ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL) /* if ticks are present, then draw a little higher */
-                y_loc=pos - logical_rect.width*2/3; /* horizontal text y alignment */
-            if (ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL & !ruler->priv->draw_ticks) /* if ticks aren't present, draw a little lower */
-                y_loc=pos - logical_rect.width/3;
+
+	    /* logical_rect coordinates are reported prior to rotation,
+	     * so for vertically oriented text, width is actually height...
+	     */
+
+	    /* if ticks are present, then draw text higher than tick */
+            if (ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL)
+                y_loc=pos - logical_rect.height;
+
+	    /* if ticks aren't present, center text on phantom tick */
+            if ((ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL) & !ruler->priv->draw_ticks)
+                y_loc=pos - logical_rect.height/2;
+
             x_loc=xthickness-1+ruler->priv->text_hoffset;
+
             if (ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL & ruler->priv->text_alignment == PANGO_ALIGN_RIGHT) /* set right adjusted text */
                 x_loc=width-ink_rect.width-2+ruler->priv->text_hoffset; /* shift 2 pixels left to give a better aesthetic */
             if (ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL & ruler->priv->text_alignment == PANGO_ALIGN_CENTER) /* set centrally adjusted text */
