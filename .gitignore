@@ -43,4 +43,5 @@ ltmain.sh
 depcomp
 install-sh
 missing
+compile
 *~
