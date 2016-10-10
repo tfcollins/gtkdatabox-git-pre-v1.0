@@ -25,6 +25,7 @@ examples/markers
 examples/signals
 examples/basics
 examples/basics2
+examples/basics_libglade.h
 examples/basics_libglade
 examples/colors
 examples/keycontrol
