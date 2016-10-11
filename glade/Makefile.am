@@ -1,10 +1,10 @@
 # $Id: Makefile.am 4 2008-06-22 09:19:11Z rbock $
 
+AM_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir)/gtk
+
 if BUILD_LIBGLADE
 
 # Build the runtime parts for libglade. 
-
-AM_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir)/gtk
 
 glademoduledir = @libglade_moduledir@
 glademodule_LTLIBRARIES = libdatabox.la
@@ -28,10 +28,6 @@ if BUILD_GLADE
 
 # These are glade-3 interface builder modules, only needed if 
 # you are going to design with glade-3
-
-INCLUDES = \
-	-I$(top_builddir)				\
-	-I$(top_srcdir)/gtk				
 
 gladeuimoduledir = @glade_moduledir@
 gladeuimodule_LTLIBRARIES = libgladedatabox.la
