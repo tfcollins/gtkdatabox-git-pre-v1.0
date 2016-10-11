@@ -54,8 +54,7 @@ basics_libglade.h: basics_libglade.glade
 	sed -e 's/"/\\"/g' -e 's/$$/\\/' basics_libglade.glade >> $@
 	echo "\";" >> $@
 
-INCLUDES		= \
-			-I$(top_srcdir)/gtk
+AM_CPPFLAGS		= -I$(top_srcdir)/gtk
 
 AM_CFLAGS			=\
 			-O2\

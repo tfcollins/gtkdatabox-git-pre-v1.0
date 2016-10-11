@@ -4,10 +4,7 @@ if BUILD_LIBGLADE
 
 # Build the runtime parts for libglade. 
 
-INCLUDES = \
-	-I$(top_builddir)				\
-	-I$(top_srcdir)/gtk				
-#	@LIBGLADE_CFLAGS@
+AM_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir)/gtk
 
 glademoduledir = @libglade_moduledir@
 glademodule_LTLIBRARIES = libdatabox.la
