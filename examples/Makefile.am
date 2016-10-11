@@ -50,7 +50,8 @@ nodist_basics_libglade_SOURCES = basics_libglade.h
 basics_libglade.$(OBJEXT): basics_libglade.h
 CLEANFILES = basics_libglade.h
 basics_libglade.h: basics_libglade.glade
-	echo "const char * basics_glade = \"\\" > $@
+	echo "#pragma GCC diagnostic ignored \"-Woverlength-strings\"" > $@
+	echo "const char * basics_glade = \"\\" >> $@
 	sed -e 's/"/\\"/g' -e 's/$$/\\/' basics_libglade.glade >> $@
 	echo "\";" >> $@
 
