@@ -740,7 +740,7 @@ gtk_databox_ruler_get_text_orientation (GtkDataboxRuler * ruler) {
 void
 gtk_databox_ruler_set_text_alignment (GtkDataboxRuler * ruler,
                                         PangoAlignment alignment) {
-    GtkWidget *widget;
+
     g_return_if_fail (GTK_DATABOX_IS_RULER (ruler));
 
     /* check this is a vertical ruler */
@@ -783,7 +783,7 @@ gtk_databox_ruler_get_text_alignment (GtkDataboxRuler * ruler) {
 void
 gtk_databox_ruler_set_text_hoffset (GtkDataboxRuler * ruler,
                                         gint offset) {
-    GtkWidget *widget;
+
     g_return_if_fail (GTK_DATABOX_IS_RULER (ruler));
 
     if (ruler->priv->text_hoffset != offset) {

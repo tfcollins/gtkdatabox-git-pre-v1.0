@@ -112,24 +112,19 @@ static void
 gtk_databox_lines_real_draw (GtkDataboxGraph * graph,
 			     GtkDatabox * box)
 {
-   GtkWidget *widget;
    GtkDataboxLines *lines = GTK_DATABOX_LINES (graph);
    GdkPoint *data;
    GdkPixmap *pixmap;
-   GtkStyle *style;
    GdkGC *gc;
    guint i = 0;
    gfloat *X;
    gfloat *Y;
    guint len;
-   gint size = 0;
 
    g_return_if_fail (GTK_DATABOX_IS_LINES (lines));
    g_return_if_fail (GTK_IS_DATABOX (box));
-   widget = GTK_WIDGET(box);
 
    pixmap = gtk_databox_get_backing_pixmap (box);
-   style = gtk_widget_get_style(widget);
 
    if (!(gc = gtk_databox_graph_get_gc(graph)))
       gc = gtk_databox_graph_create_gc (graph, box);
@@ -137,7 +132,7 @@ gtk_databox_lines_real_draw (GtkDataboxGraph * graph,
    len = gtk_databox_xyc_graph_get_length (GTK_DATABOX_XYC_GRAPH (graph));
    X = gtk_databox_xyc_graph_get_X (GTK_DATABOX_XYC_GRAPH (graph));
    Y = gtk_databox_xyc_graph_get_Y (GTK_DATABOX_XYC_GRAPH (graph));
-   size = gtk_databox_graph_get_size (graph);
+
    data = GTK_DATABOX_LINES_GET_PRIVATE(graph)->data;
 
    gtk_databox_values_to_pixels (box, len, X, Y, data);
