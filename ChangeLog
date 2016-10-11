@@ -1,3 +1,10 @@
+2016-10-10 (0.9.3.0)
+	grids have an additional line style (dotted)
+	examples/basics_libglade compiles glade XML into binary to avoid
+	  the need for an auxilary file
+	the usual "various bugfixes"
+	the project has a new developer, Brent Baccala
+
 2012-11-8 (0.9.2.0)
    - There has been a huge amount of change since the last release...
 	There are many new graphing methods, such as offset bars, region plots.
