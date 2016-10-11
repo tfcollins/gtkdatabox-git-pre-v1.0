@@ -34,7 +34,7 @@ gtk_databox_regions_class_init (GtkDataboxRegionsClass *klass)
 }
 
 static void
-gtk_databox_regions_init (GtkDataboxRegions *regions)
+gtk_databox_regions_init (GtkDataboxRegions *regions __attribute__((unused)))
 {
 }
 

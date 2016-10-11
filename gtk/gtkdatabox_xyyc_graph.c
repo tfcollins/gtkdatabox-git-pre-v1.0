@@ -292,7 +292,7 @@ gtk_databox_xyyc_graph_class_init (GtkDataboxXYYCGraphClass *klass)
 }
 
 static void
-gtk_databox_xyyc_graph_init (GtkDataboxXYYCGraph * xyyc_graph)
+gtk_databox_xyyc_graph_init (GtkDataboxXYYCGraph * xyyc_graph __attribute__((unused)))
 {
 }
 

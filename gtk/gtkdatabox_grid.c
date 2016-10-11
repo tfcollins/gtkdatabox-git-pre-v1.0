@@ -210,7 +210,7 @@ gtk_databox_grid_class_init (GtkDataboxGridClass *klass)
 }
 
 static void
-gtk_databox_grid_init (GtkDataboxGrid *grid)
+gtk_databox_grid_init (GtkDataboxGrid *grid __attribute__((unused)))
 {
 }
 

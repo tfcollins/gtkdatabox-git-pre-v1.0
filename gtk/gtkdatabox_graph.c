@@ -250,7 +250,7 @@ gtk_databox_graph_class_init (GtkDataboxGraphClass *klass)
 }
 
 static void
-gtk_databox_graph_init (GtkDataboxGraph *graph)
+gtk_databox_graph_init (GtkDataboxGraph *graph __attribute__((unused)))
 {
 }
 

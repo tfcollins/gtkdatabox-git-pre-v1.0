@@ -165,7 +165,7 @@ show_button_press_cb (GtkDatabox * box, GdkEventButton * event,
 }
 
 static void
-show_changed_cb (GtkDatabox * box,
+show_changed_cb (GtkDatabox * box __attribute__((unused)),
 		 GtkDataboxValueRectangle * selectionValues,
 		 GtkWidget ** entries)
 {

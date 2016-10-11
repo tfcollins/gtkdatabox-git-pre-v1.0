@@ -1683,7 +1683,7 @@ gtk_databox_ruler_size_allocate (GtkWidget * widget,
 }
 
 static gint
-gtk_databox_ruler_expose (GtkWidget * widget, GdkEventExpose * event) {
+gtk_databox_ruler_expose (GtkWidget * widget, GdkEventExpose * event __attribute__((unused))) {
     GtkDataboxRuler *ruler;
     GtkAllocation allocation;
 
