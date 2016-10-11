@@ -368,6 +368,7 @@ gtk_databox_markers_real_draw (GtkDataboxGraph * graph,
             switch (priv->markers_info[i].position)
             {
             case GTK_DATABOX_MARKERS_C:
+	    default:
                 y = y - size / 2;
                 points[0].x = x;
                 points[0].y = y;
@@ -430,6 +431,7 @@ gtk_databox_markers_real_draw (GtkDataboxGraph * graph,
             switch (priv->markers_info[i].position)
             {
             case GTK_DATABOX_MARKERS_C:
+	    default:
                 points[0].x = x;
                 points[0].y = 0;
                 points[1].x = x;

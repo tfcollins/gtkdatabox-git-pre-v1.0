@@ -1358,6 +1358,9 @@ gtk_databox_scroll_event (GtkWidget *widget, GdkEventScroll *event) {
         case GDK_SCROLL_RIGHT:
             delta = gtk_adjustment_get_step_increment(adj);
             break;
+	default:
+            delta = 0;
+            break;
         }
 
         new_value = CLAMP (gtk_adjustment_get_value(adj) + delta,
