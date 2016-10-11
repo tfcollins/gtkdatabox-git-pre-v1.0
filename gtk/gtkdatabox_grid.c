@@ -512,7 +512,7 @@ gtk_databox_grid_set_hline_vals (GtkDataboxGrid * grid, gfloat *hline_vals)
 gfloat*
 gtk_databox_grid_get_hline_vals (GtkDataboxGrid * grid)
 {
-   g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), -1);
+   g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), NULL);
 
    return GTK_DATABOX_GRID_GET_PRIVATE(grid)->hline_vals;
 }
@@ -545,7 +545,7 @@ gtk_databox_grid_set_vline_vals (GtkDataboxGrid * grid, gfloat *vline_vals)
 gfloat*
 gtk_databox_grid_get_vline_vals (GtkDataboxGrid * grid)
 {
-   g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), -1);
+   g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), NULL);
 
    return GTK_DATABOX_GRID_GET_PRIVATE(grid)->vline_vals;
 }
