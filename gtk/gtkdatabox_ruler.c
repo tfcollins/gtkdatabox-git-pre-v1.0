@@ -1462,9 +1462,9 @@ gtk_databox_ruler_draw_ticks (GtkDataboxRuler * ruler) {
 
             x_loc=xthickness-1+ruler->priv->text_hoffset;
 
-            if (ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL & ruler->priv->text_alignment == PANGO_ALIGN_RIGHT) /* set right adjusted text */
+            if ((ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL) & (ruler->priv->text_alignment == PANGO_ALIGN_RIGHT)) /* set right adjusted text */
                 x_loc=width-ink_rect.width-2+ruler->priv->text_hoffset; /* shift 2 pixels left to give a better aesthetic */
-            if (ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL & ruler->priv->text_alignment == PANGO_ALIGN_CENTER) /* set centrally adjusted text */
+            if ((ruler->priv->text_orientation == GTK_ORIENTATION_HORIZONTAL) & (ruler->priv->text_alignment == PANGO_ALIGN_CENTER)) /* set centrally adjusted text */
                 x_loc=(width-ink_rect.width)/2-2+ruler->priv->text_hoffset;
             gtk_paint_layout (gtk_widget_get_style (widget),
                               ruler->priv->backing_pixmap,

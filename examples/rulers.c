@@ -106,7 +106,7 @@ create_rulers (void)
 
     for (i = 0; i < NO_BOXES; ++i)
     {
-        if (i==0 | i==NO_BOXES-1) /* the first is normal but with the rulers on opposite sides to the default */
+        if ((i==0) || (i==NO_BOXES-1)) /* the first is normal but with the rulers on opposite sides to the default */
             gtk_databox_create_box_with_scrollbars_and_rulers_positioned (&box[i], &table,TRUE, TRUE, TRUE,TRUE,FALSE,FALSE);
         else
             gtk_databox_create_box_with_scrollbars_and_rulers (&box[i], &table,TRUE, TRUE, TRUE,TRUE);
