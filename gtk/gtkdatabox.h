@@ -157,7 +157,7 @@ void gtk_databox_set_box_shadow(GtkDatabox * box, GtkShadowType which_shadow);
 
 gboolean gtk_databox_get_enable_selection (GtkDatabox * box);
 gboolean gtk_databox_get_enable_zoom (GtkDatabox * box);
-GtkShadowType gtk_databox__get_box_shadow(GtkDatabox * box);
+GtkShadowType gtk_databox_get_box_shadow(GtkDatabox * box);
 
 void gtk_databox_zoom_to_selection (GtkDatabox * box);
 void gtk_databox_zoom_out (GtkDatabox * box);
