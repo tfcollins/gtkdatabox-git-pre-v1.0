@@ -46,6 +46,7 @@ depcomp
 install-sh
 missing
 compile
+INSTALL
 gtkdatabox.pc
 gtkdatabox.spec
 *~
