@@ -630,9 +630,14 @@ gtk_databox_realize (GtkWidget * widget) {
     gdk_window_set_user_data (window, box);
     gtk_widget_set_window (widget, window);
 
+#ifdef GSEAL_ENABLE
     gtk_widget_set_style (widget,
         gtk_style_attach (gtk_widget_get_style (widget),
         window));
+#else
+    widget->style = gtk_style_attach (widget->style, widget->window);
+#endif
+
     gtk_style_set_background (gtk_widget_get_style (widget),
         window, GTK_STATE_NORMAL);
 

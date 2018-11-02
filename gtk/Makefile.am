@@ -8,7 +8,7 @@ libgtkdatabox_la_SOURCES= \
 			gtkdatabox_graph.c\
 			gtkdatabox_xyc_graph.c\
 			gtkdatabox_xyyc_graph.c\
- 			gtkdatabox_points.c\
+			gtkdatabox_points.c\
             gtkdatabox_lines.c\
             gtkdatabox_bars.c\
             gtkdatabox_offset_bars.c\
@@ -32,7 +32,7 @@ include_HEADERS		= \
 			gtkdatabox_graph.h\
 			gtkdatabox_xyc_graph.h\
 			gtkdatabox_xyyc_graph.h\
- 			gtkdatabox_points.h\
+			gtkdatabox_points.h\
             gtkdatabox_lines.h\
             gtkdatabox_bars.h\
             gtkdatabox_offset_bars.h\
@@ -61,6 +61,5 @@ AM_CFLAGS			=\
 			-DGDK_PIXBUF_DISABLE_DEPRECATED\
 			-DGTK_DISABLE_DEPRECATED\
 			-DGTK_MULTIHEAD_SAFE=1\
-			-DGSEAL_ENABLE\
 			-DGTK_DISABLE_SINGLE_INCLUDES\
 			`pkg-config gtk+-2.0 --cflags`
