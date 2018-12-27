@@ -1,3 +1,7 @@
+2018-12-27 (0.9.3.1)
+	bug fix that caused xoscope's background color to be displayed incorrectly
+	see https://sourceforge.net/p/xoscope/discussion/23485/thread/2c86f09a/
+
 2016-10-10 (0.9.3.0)
 	grids have an additional line style (dotted)
 	examples/basics_libglade compiles glade XML into binary to avoid
