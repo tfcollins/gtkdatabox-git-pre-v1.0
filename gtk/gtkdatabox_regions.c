@@ -19,9 +19,6 @@
 
 #include <gtkdatabox_regions.h>
 
-G_DEFINE_TYPE(GtkDataboxRegions, gtk_databox_regions,
-	GTK_DATABOX_TYPE_XYYC_GRAPH)
-
 static void gtk_databox_regions_real_draw (GtkDataboxGraph * regions,
 					GtkDatabox* box);
 
@@ -42,11 +39,14 @@ struct _GtkDataboxRegionsPrivate
    guint pixelsalloc;
 };
 
+G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxRegions, gtk_databox_regions,
+	GTK_DATABOX_TYPE_XYYC_GRAPH)
+
 static void
 regions_finalize (GObject * object)
 {
    GtkDataboxRegions *regions = GTK_DATABOX_REGIONS (object);
-   GtkDataboxRegionsPrivate *priv=GTK_DATABOX_REGIONS_GET_PRIVATE(regions);
+   GtkDataboxRegionsPrivate *priv=gtk_databox_regions_get_instance_private(regions);
    g_free (priv->xpixels);
    g_free (priv->y1pixels);
    g_free (priv->y2pixels);
@@ -64,17 +64,17 @@ gtk_databox_regions_class_init (GtkDataboxRegionsClass *klass )
    gobject_class->finalize = regions_finalize;
 
    graph_class->draw = gtk_databox_regions_real_draw;
-
-   g_type_class_add_private (klass, sizeof (GtkDataboxRegionsPrivate));
 }
 
 static void
 gtk_databox_regions_complete (GtkDataboxRegions * regions)
 {
-   GTK_DATABOX_REGIONS_GET_PRIVATE(regions)->xpixels = NULL;
-   GTK_DATABOX_REGIONS_GET_PRIVATE(regions)->y1pixels = NULL;
-   GTK_DATABOX_REGIONS_GET_PRIVATE(regions)->y2pixels = NULL;
-   GTK_DATABOX_REGIONS_GET_PRIVATE(regions)->pixelsalloc = 0;
+   GtkDataboxRegionsPrivate *priv=gtk_databox_regions_get_instance_private(regions);
+
+   priv->xpixels = NULL;
+   priv->y1pixels = NULL;
+   priv->y2pixels = NULL;
+   priv->pixelsalloc = 0;
 }
 
 static void
@@ -182,7 +182,7 @@ gtk_databox_regions_real_draw (GtkDataboxGraph * graph,
 			    GtkDatabox* box)
 {
    GtkDataboxRegions *regions = GTK_DATABOX_REGIONS (graph);
-   GtkDataboxRegionsPrivate *priv=GTK_DATABOX_REGIONS_GET_PRIVATE(regions);
+   GtkDataboxRegionsPrivate *priv=gtk_databox_regions_get_instance_private(regions);
    GdkPoint data[4];
    guint i = 0;
    void *X;

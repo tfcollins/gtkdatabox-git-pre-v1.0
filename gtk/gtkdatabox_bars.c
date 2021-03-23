@@ -19,9 +19,6 @@
 
 #include <gtkdatabox_bars.h>
 
-G_DEFINE_TYPE(GtkDataboxBars, gtk_databox_bars,
-	GTK_DATABOX_TYPE_XYC_GRAPH)
-
 static void gtk_databox_bars_real_draw (GtkDataboxGraph * bars,
 					GtkDatabox* box);
 /**
@@ -40,13 +37,17 @@ struct _GtkDataboxBarsPrivate
    guint pixelsalloc;
 };
 
+G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxBars, gtk_databox_bars,
+	GTK_DATABOX_TYPE_XYC_GRAPH)
+
 static void
 bars_finalize (GObject * object)
 {
    GtkDataboxBars *bars = GTK_DATABOX_BARS (object);
+   GtkDataboxBarsPrivate *priv=gtk_databox_bars_get_instance_private(bars);
 
-   g_free (GTK_DATABOX_BARS_GET_PRIVATE(bars)->xpixels);
-   g_free (GTK_DATABOX_BARS_GET_PRIVATE(bars)->ypixels);
+   g_free (priv->xpixels);
+   g_free (priv->ypixels);
 
    /* Chain up to the parent class */
    G_OBJECT_CLASS (gtk_databox_bars_parent_class)->finalize (object);
@@ -61,16 +62,15 @@ gtk_databox_bars_class_init (GtkDataboxBarsClass *klass)
    gobject_class->finalize = bars_finalize;
 
    graph_class->draw = gtk_databox_bars_real_draw;
-
-	g_type_class_add_private(klass, sizeof(GtkDataboxBarsPrivate));
 }
 
 static void
 gtk_databox_bars_complete (GtkDataboxBars * bars)
 {
-   GTK_DATABOX_BARS_GET_PRIVATE(bars)->xpixels = NULL;
-   GTK_DATABOX_BARS_GET_PRIVATE(bars)->ypixels = NULL;
-   GTK_DATABOX_BARS_GET_PRIVATE(bars)->pixelsalloc = 0;
+   GtkDataboxBarsPrivate *priv=gtk_databox_bars_get_instance_private(bars);
+   priv->xpixels = NULL;
+   priv->ypixels = NULL;
+   priv->pixelsalloc = 0;
 }
 
 static void
@@ -168,7 +168,7 @@ gtk_databox_bars_real_draw (GtkDataboxGraph * graph,
 			    GtkDatabox* box)
 {
    GtkDataboxBars *bars = GTK_DATABOX_BARS (graph);
-   GtkDataboxBarsPrivate *priv=GTK_DATABOX_BARS_GET_PRIVATE(bars);
+   GtkDataboxBarsPrivate *priv=gtk_databox_bars_get_instance_private(bars);
    guint i = 0;
    void *X;
    void *Y;

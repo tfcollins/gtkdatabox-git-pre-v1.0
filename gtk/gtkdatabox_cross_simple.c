@@ -47,7 +47,10 @@ gtk_databox_cross_simple_class_init (GtkDataboxCrossSimpleClass *klass)
    gobject_class->finalize = cross_simple_finalize;
 }
 
-static void gtk_databox_cross_simple_init(GtkDataboxCrossSimple *cross) {}
+static void gtk_databox_cross_simple_init(GtkDataboxCrossSimple *cross) 
+{
+   if (cross == NULL) g_warning ("cross_simple_init with NULL");
+}
 
 /**
  * gtk_databox_cross_simple_new:

@@ -20,9 +20,6 @@
 #include <gtkdatabox_grid.h>
 #include <math.h>
 
-G_DEFINE_TYPE(GtkDataboxGrid, gtk_databox_grid,
-	GTK_DATABOX_TYPE_GRAPH)
-
 static void gtk_databox_grid_real_draw (GtkDataboxGraph * grid,
 					GtkDatabox* box);
 static cairo_t* gtk_databox_grid_real_create_gc (GtkDataboxGraph * graph,
@@ -55,6 +52,9 @@ struct _GtkDataboxGridPrivate
    gfloat *vline_vals;
    GtkDataboxGridLineStyle line_style;
 };
+
+G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxGrid, gtk_databox_grid,
+	GTK_DATABOX_TYPE_GRAPH)
 
 static void
 gtk_databox_grid_set_property (GObject * object,
@@ -156,8 +156,6 @@ gtk_databox_grid_real_create_gc (GtkDataboxGraph * graph,
 static void
 grid_finalize (GObject * object)
 {
-  GtkDataboxGraph *graph = GTK_DATABOX_GRAPH (object);
-
   /* Chain up to the parent class */
   G_OBJECT_CLASS (gtk_databox_grid_parent_class)->finalize (object);
 }
@@ -206,13 +204,12 @@ gtk_databox_grid_class_init (GtkDataboxGridClass *klass)
 
    graph_class->draw = gtk_databox_grid_real_draw;
    graph_class->create_gc = gtk_databox_grid_real_create_gc;
-
-   g_type_class_add_private (klass, sizeof (GtkDataboxGridPrivate));
 }
 
 static void
 gtk_databox_grid_init (GtkDataboxGrid *grid)
 {
+   if (grid == NULL) g_warning ("grid_init with NULL");
 }
 
 /**
@@ -270,7 +267,8 @@ gtk_databox_grid_real_draw (GtkDataboxGraph * graph,
 {
    GtkWidget *widget;
    GtkDataboxGrid *grid = GTK_DATABOX_GRID (graph);
-   GtkDataboxGridPrivate *priv = GTK_DATABOX_GRID_GET_PRIVATE(grid);   gint i = 0;
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   gint i = 0;
    gfloat x;
    gfloat y;
    gint16 width;
@@ -421,8 +419,8 @@ void
 gtk_databox_grid_set_hlines (GtkDataboxGrid * grid, gint hlines)
 {
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-
-   GTK_DATABOX_GRID_GET_PRIVATE(grid)->hlines = MAX (1, hlines);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   priv->hlines = MAX (1, hlines);
 
    g_object_notify (G_OBJECT (grid), "grid-hlines");
 }
@@ -439,8 +437,8 @@ gint
 gtk_databox_grid_get_hlines (GtkDataboxGrid * grid)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), -1);
-
-   return GTK_DATABOX_GRID_GET_PRIVATE(grid)->hlines;
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   return priv->hlines;
 }
 
 /**
@@ -454,8 +452,8 @@ void
 gtk_databox_grid_set_vlines (GtkDataboxGrid * grid, gint vlines)
 {
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-
-   GTK_DATABOX_GRID_GET_PRIVATE(grid)->vlines = MAX (1, vlines);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   priv->vlines = MAX (1, vlines);
 
    g_object_notify (G_OBJECT (grid), "grid-vlines");
 }
@@ -472,8 +470,8 @@ gint
 gtk_databox_grid_get_vlines (GtkDataboxGrid * grid)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), -1);
-
-   return GTK_DATABOX_GRID_GET_PRIVATE(grid)->vlines;
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   return priv->vlines;
 }
 
 /**
@@ -487,8 +485,8 @@ void
 gtk_databox_grid_set_hline_vals (GtkDataboxGrid * grid, gfloat *hline_vals)
 {
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-
-   GTK_DATABOX_GRID_GET_PRIVATE(grid)->hline_vals = hline_vals;
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   priv->hline_vals = hline_vals;
 
    g_object_notify (G_OBJECT (grid), "grid-hline-vals");
 }
@@ -505,8 +503,8 @@ gfloat*
 gtk_databox_grid_get_hline_vals (GtkDataboxGrid * grid)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), NULL);
-
-   return GTK_DATABOX_GRID_GET_PRIVATE(grid)->hline_vals;
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   return priv->hline_vals;
 }
 
 /**
@@ -520,8 +518,8 @@ void
 gtk_databox_grid_set_vline_vals (GtkDataboxGrid * grid, gfloat *vline_vals)
 {
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-
-   GTK_DATABOX_GRID_GET_PRIVATE(grid)->vline_vals = vline_vals;
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   priv->vline_vals = vline_vals;
 
    g_object_notify (G_OBJECT (grid), "grid-vline-vals");
 }
@@ -538,8 +536,8 @@ gfloat*
 gtk_databox_grid_get_vline_vals (GtkDataboxGrid * grid)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), NULL);
-
-   return GTK_DATABOX_GRID_GET_PRIVATE(grid)->vline_vals;
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   return priv->vline_vals;
 }
 
 /**
@@ -554,8 +552,8 @@ void
 gtk_databox_grid_set_line_style (GtkDataboxGrid *grid, gint line_style)
 {
      g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-
-     GTK_DATABOX_GRID_GET_PRIVATE(grid)->line_style = line_style;
+     GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+     priv->line_style = line_style;
 
      g_object_notify (G_OBJECT (grid), "line-style");
 }
@@ -573,6 +571,6 @@ gint
 gtk_databox_grid_get_line_style (GtkDataboxGrid *grid)
 {
   g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), -1);
-
-  return GTK_DATABOX_GRID_GET_PRIVATE(grid)->line_style;
+  GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+  return priv->line_style;
 }

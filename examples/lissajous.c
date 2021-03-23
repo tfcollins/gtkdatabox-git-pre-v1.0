@@ -99,7 +99,7 @@ create_lissajous (void)
 
    label =
       gtk_label_new
-      ("This example resembles an oszilloscope\nreceiving two signals, one is a sine (horizontal),\nthe other is a cosine with ever changing frequency (vertical).\nThe counter is synchron with the updates.");
+      ("This example resembles an oscilloscope\nreceiving two signals, one is a sine (horizontal),\nthe other is a cosine with ever changing frequency (vertical).\nThe counter is synchron with the updates.");
    gtk_box_pack_start (GTK_BOX (box1), label, FALSE, FALSE, 0);
    separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
    gtk_box_pack_start (GTK_BOX (box1), separator, FALSE, FALSE, 0);

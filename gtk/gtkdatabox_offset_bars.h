@@ -47,8 +47,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_OFFSET_BARS_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_OFFSET_BARS, \
                                            GtkDataboxOffsetBarsClass))
-#define GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(obj) \
-	G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_DATABOX_TYPE_OFFSET_BARS, GtkDataboxOffsetBarsPrivate)
 
 /**
  * GtkDataboxOffsetBars:

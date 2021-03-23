@@ -19,9 +19,6 @@
 
 #include <gtkdatabox_offset_bars.h>
 
-G_DEFINE_TYPE(GtkDataboxOffsetBars, gtk_databox_offset_bars,
-	GTK_DATABOX_TYPE_XYYC_GRAPH)
-
 static void gtk_databox_offset_bars_real_draw (GtkDataboxGraph * bars,
 					GtkDatabox* box);
 
@@ -42,14 +39,18 @@ struct _GtkDataboxOffsetBarsPrivate
    guint pixelsalloc;
 };
 
+G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxOffsetBars, gtk_databox_offset_bars,
+	GTK_DATABOX_TYPE_XYYC_GRAPH)
+
 static void
 bars_finalize (GObject * object)
 {
    GtkDataboxOffsetBars *bars = GTK_DATABOX_OFFSET_BARS (object);
+   GtkDataboxOffsetBarsPrivate *priv = gtk_databox_offset_bars_get_instance_private(bars);
 
-   g_free (GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(object)->xpixels);
-   g_free (GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(object)->y1pixels);
-   g_free (GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(object)->y2pixels);
+   g_free (priv->xpixels);
+   g_free (priv->y1pixels);
+   g_free (priv->y2pixels);
 
    /* Chain up to the parent class */
    G_OBJECT_CLASS (gtk_databox_offset_bars_parent_class)->finalize (object);
@@ -64,17 +65,17 @@ gtk_databox_offset_bars_class_init (GtkDataboxOffsetBarsClass *klass)
    gobject_class->finalize = bars_finalize;
 
    graph_class->draw = gtk_databox_offset_bars_real_draw;
-
-   g_type_class_add_private (klass, sizeof (GtkDataboxOffsetBarsPrivate));
 }
 
 static void
 gtk_databox_offset_bars_complete (GtkDataboxOffsetBars * bars)
 {
-   GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(bars)->xpixels = NULL;
-   GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(bars)->y1pixels = NULL;
-   GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(bars)->y2pixels = NULL;
-   GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(bars)->pixelsalloc = 0;
+   GtkDataboxOffsetBarsPrivate *priv = gtk_databox_offset_bars_get_instance_private(bars);
+
+   priv->xpixels = NULL;
+   priv->y1pixels = NULL;
+   priv->y2pixels = NULL;
+   priv->pixelsalloc = 0;
 }
 
 static void
@@ -185,7 +186,7 @@ gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph,
 			    GtkDatabox* box)
 {
    GtkDataboxOffsetBars *bars = GTK_DATABOX_OFFSET_BARS (graph);
-   GtkDataboxOffsetBarsPrivate *priv = GTK_DATABOX_OFFSET_BARS_GET_PRIVATE(graph);
+   GtkDataboxOffsetBarsPrivate *priv = gtk_databox_offset_bars_get_instance_private(bars);
    guint i = 0;
    void *X;
    void *Y1;

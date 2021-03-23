@@ -1,10 +1,12 @@
-2021-05-?? (1.0.0)
+221-05-?? (1.0.0)
 	* Changed: 
 	- Using libtool's versioning system, to avoid breaking binary compatibility
 	through every new minor-fixes release. Starting/resetting with 1:0:0 (see
 	'info libtool' on node *Versioning::)
 	* Fixed:
 	- Autoreconf warnings: INCLUDES ==> AM_CPPFLAGS
+	- Seg-fault using deprecated macro G_TYPE_INSTANCE_GET_PRIVATE. Using
+	now *_get_instance_private() automatic functions.
 	* Updated: 
 	- Distribution files: TODO.
 

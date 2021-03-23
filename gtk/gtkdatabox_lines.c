@@ -19,9 +19,6 @@
 
 #include <gtkdatabox_lines.h>
 
-G_DEFINE_TYPE(GtkDataboxLines, gtk_databox_lines,
-	GTK_DATABOX_TYPE_XYC_GRAPH)
-
 static void gtk_databox_lines_real_draw (GtkDataboxGraph * lines,
 					 GtkDatabox* box);
 
@@ -42,11 +39,14 @@ struct _GtkDataboxLinesPrivate
    guint pixelsalloc;
 };
 
+G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxLines, gtk_databox_lines,
+	GTK_DATABOX_TYPE_XYC_GRAPH)
+
 static void
 lines_finalize (GObject * object)
 {
    GtkDataboxLines *lines = GTK_DATABOX_LINES (object);
-   GtkDataboxLinesPrivate *priv=GTK_DATABOX_LINES_GET_PRIVATE(lines);
+   GtkDataboxLinesPrivate *priv=gtk_databox_lines_get_instance_private(lines);
 
    g_free (priv->xpixels);
    g_free (priv->ypixels);
@@ -64,14 +64,12 @@ gtk_databox_lines_class_init (GtkDataboxLinesClass *klass)
    gobject_class->finalize = lines_finalize;
 
    graph_class->draw = gtk_databox_lines_real_draw;
-
-   g_type_class_add_private (klass, sizeof (GtkDataboxLinesPrivate));
 }
 
 static void
 gtk_databox_lines_init (GtkDataboxLines *lines)
 {
-   GtkDataboxLinesPrivate *priv=GTK_DATABOX_LINES_GET_PRIVATE(lines);
+   GtkDataboxLinesPrivate *priv=gtk_databox_lines_get_instance_private(lines);
    priv->xpixels = NULL;
    priv->ypixels = NULL;
    priv->pixelsalloc = 0;
@@ -165,7 +163,7 @@ gtk_databox_lines_real_draw (GtkDataboxGraph * graph,
 			     GtkDatabox * box)
 {
    GtkDataboxLines *lines = GTK_DATABOX_LINES (graph);
-   GtkDataboxLinesPrivate *priv=GTK_DATABOX_LINES_GET_PRIVATE(graph);
+   GtkDataboxLinesPrivate *priv=gtk_databox_lines_get_instance_private(lines);
    guint i = 0;
    void *X;
    void *Y;

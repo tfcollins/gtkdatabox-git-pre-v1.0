@@ -47,9 +47,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_MARKERS_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_MARKERS, \
                                            GtkDataboxMarkersClass))
-#define GTK_DATABOX_MARKERS_GET_PRIVATE(obj) \
-	G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_DATABOX_TYPE_MARKERS, \
-	GtkDataboxMarkersPrivate)
 
 /**
  * GtkDataboxMarkers:

@@ -20,9 +20,6 @@
 #include <gtkdatabox_markers.h>
 #include <pango/pango.h>
 
-G_DEFINE_TYPE(GtkDataboxMarkers, gtk_databox_markers,
-	GTK_DATABOX_TYPE_XYC_GRAPH)
-
 static void gtk_databox_markers_real_draw (GtkDataboxGraph * markers,
 					  GtkDatabox* box);
 static cairo_t* gtk_databox_markers_real_create_gc (GtkDataboxGraph * graph,
@@ -63,12 +60,15 @@ struct _GtkDataboxMarkersPrivate
    guint pixelsalloc;
 };
 
+G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxMarkers, gtk_databox_markers,
+	GTK_DATABOX_TYPE_XYC_GRAPH)
+
 static void
 gtk_databox_markers_set_mtype (GtkDataboxMarkers * markers, gint type)
 {
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));
-
-   GTK_DATABOX_MARKERS_GET_PRIVATE(markers)->type = type;
+   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   priv->type = type;
 
    g_object_notify (G_OBJECT (markers), "markers-type");
 }
@@ -98,8 +98,8 @@ static gint
 gtk_databox_markers_get_mtype (GtkDataboxMarkers * markers)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_MARKERS (markers), 0);
-
-   return GTK_DATABOX_MARKERS_GET_PRIVATE(markers)->type;
+   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   return priv->type;
 }
 
 static void
@@ -127,7 +127,7 @@ static void
 markers_finalize (GObject * object)
 {
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (object);
-   GtkDataboxMarkersPrivate *priv = GTK_DATABOX_MARKERS_GET_PRIVATE (markers);
+   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
    int i;
    int len;
 
@@ -153,7 +153,7 @@ gtk_databox_markers_real_create_gc (GtkDataboxGraph * graph,
 				   GtkDatabox* box)
 {
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (graph);
-   GtkDataboxMarkersPrivate *priv = GTK_DATABOX_MARKERS_GET_PRIVATE (markers);
+   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
    cairo_t *cr;
    static const double dash = 5.0f;
 
@@ -189,14 +189,13 @@ gtk_databox_markers_class_init (GtkDataboxMarkersClass *klass)
 				    PROP_TYPE, markers_param_spec);
    graph_class->draw = gtk_databox_markers_real_draw;
    graph_class->create_gc = gtk_databox_markers_real_create_gc;
-
-   g_type_class_add_private (klass, sizeof (GtkDataboxMarkersPrivate));
 }
 
 static void
 complete (GtkDataboxMarkers * markers)
 {
-   GTK_DATABOX_MARKERS_GET_PRIVATE(markers)->markers_info =
+   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   priv->markers_info =
       g_new0 (GtkDataboxMarkersInfo,
 	      gtk_databox_xyc_graph_get_length
 	      (GTK_DATABOX_XYC_GRAPH (markers)));
@@ -206,7 +205,7 @@ complete (GtkDataboxMarkers * markers)
 static void
 gtk_databox_markers_init (GtkDataboxMarkers *markers)
 {
-   GtkDataboxMarkersPrivate *priv = GTK_DATABOX_MARKERS_GET_PRIVATE (markers);
+   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
    priv->markers_info = NULL;
    priv->xpixels = NULL;
    priv->ypixels = NULL;
@@ -403,7 +402,7 @@ gtk_databox_markers_real_draw (GtkDataboxGraph * graph,
 {
    GtkWidget *widget;
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (graph);
-   GtkDataboxMarkersPrivate *priv = GTK_DATABOX_MARKERS_GET_PRIVATE (markers);
+   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
    GdkPoint points[3];
    PangoContext *context;
    void *X;
@@ -654,7 +653,7 @@ gtk_databox_markers_set_position (GtkDataboxMarkers * markers,
 				 guint index,
 				 GtkDataboxMarkersPosition position)
 {
-   GtkDataboxMarkersPrivate *priv = GTK_DATABOX_MARKERS_GET_PRIVATE (markers);
+   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
    guint len;
 
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));
@@ -680,7 +679,7 @@ gtk_databox_markers_set_label (GtkDataboxMarkers * markers,
 			      GtkDataboxMarkersTextPosition label_position,
 			      gchar * text, gboolean boxed)
 {
-   GtkDataboxMarkersPrivate *priv = GTK_DATABOX_MARKERS_GET_PRIVATE (markers);
+   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
    guint len;
 
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));

@@ -96,7 +96,7 @@ create_basics (void)
    color.blue = 0;
    color.alpha = 1;
 
-   graph = gtk_databox_points_new (POINTS, X, Y, &color, 1); // FIXME - segfault from here
+   graph = gtk_databox_points_new (POINTS, X, Y, &color, 1);
    gtk_databox_graph_add (GTK_DATABOX (box), graph);
 
    gtk_databox_set_total_limits (GTK_DATABOX (box), -1000., 5000., -10000., 23000.);

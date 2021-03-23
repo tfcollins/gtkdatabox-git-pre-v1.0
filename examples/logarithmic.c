@@ -196,9 +196,11 @@ create_logarithmic (void)
    max_y = 0.01;
 
    for (i = 0; i < NO_BOXES-1; ++i)
+   {
       gtk_databox_set_total_limits (GTK_DATABOX (box[i]), min_x, max_x, min_y,
 				    max_y);
-      gtk_databox_set_total_limits (GTK_DATABOX (box[i]), 8, max_x, min_y,
+   }
+   gtk_databox_set_total_limits (GTK_DATABOX (box[i]), 8, max_x, min_y,
 				    max_y);
 
    gtk_databox_set_scale_type_y (GTK_DATABOX (box[1]), GTK_DATABOX_SCALE_LOG);

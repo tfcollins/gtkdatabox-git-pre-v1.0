@@ -776,13 +776,13 @@ gtk_databox_ruler_set_text_orientation (GtkDataboxRuler * ruler,
     if (ruler->priv->max_y_text_width==0)
         gtkRequisition.width = (padding.left + padding.right) * 2 + RULER_SIZE;
     else
+    {
         gtkRequisition.width = ruler->priv->max_y_text_width;
-	gtk_widget_set_size_request(widget, gtkRequisition.width, gtkRequisition.height);
+    }
+    gtk_widget_set_size_request(widget, gtkRequisition.width, gtkRequisition.height);
 
     if (gtk_widget_is_drawable (widget))
-	{
         gtk_widget_queue_draw (widget);
-	}
 }
 
 /**

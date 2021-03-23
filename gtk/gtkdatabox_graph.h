@@ -53,8 +53,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_GRAPH_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_GRAPH, \
                                            GtkDataboxGraphClass))
-#define GTK_DATABOX_GRAPH_GET_PRIVATE(obj) \
-	G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_DATABOX_TYPE_GRAPH, GtkDataboxGraphPrivate)
 
    typedef struct _GtkDataboxGraphClass GtkDataboxGraphClass;
 
@@ -86,7 +84,7 @@ G_BEGIN_DECLS
       cairo_t* (*create_gc) (GtkDataboxGraph * graph, GtkDatabox * box);
    };
 
-//   GType gtk_databox_graph_get_type (void);
+   GType gtk_databox_graph_get_type (void);
 
    void gtk_databox_graph_set_hide (GtkDataboxGraph * graph, gboolean hide);
    gboolean gtk_databox_graph_get_hide (GtkDataboxGraph * graph);

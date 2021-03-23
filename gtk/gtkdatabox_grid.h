@@ -48,9 +48,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_GRID_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_GRID, \
                                            GtkDataboxGridClass))
-#define GTK_DATABOX_GRID_GET_PRIVATE(obj) \
-	G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_DATABOX_TYPE_GRID, \
-	GtkDataboxGridPrivate)
 
 /**
  * GtkDataboxGrid

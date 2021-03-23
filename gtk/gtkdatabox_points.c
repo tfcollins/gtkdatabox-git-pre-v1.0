@@ -19,12 +19,8 @@
 
 #include <gtkdatabox_points.h>
 
-G_DEFINE_TYPE(GtkDataboxPoints, gtk_databox_points,
-	GTK_DATABOX_TYPE_XYC_GRAPH)
-
 static void gtk_databox_points_real_draw (GtkDataboxGraph * points,
 					  GtkDatabox * box);
-
 /**
  * GtkDataboxPointsPrivate
  *
@@ -41,20 +37,25 @@ struct _GtkDataboxPointsPrivate
    guint pixelsalloc;
 };
 
+G_DEFINE_TYPE_WITH_PRIVATE (GtkDataboxPoints, gtk_databox_points,
+			    GTK_DATABOX_TYPE_XYC_GRAPH)
+
 static void
 points_finalize (GObject * object)
 {
    GtkDataboxPoints *points = GTK_DATABOX_POINTS (object);
+   GtkDataboxPointsPrivate *priv =
+      gtk_databox_points_get_instance_private (points);
 
-   g_free (GTK_DATABOX_POINTS_GET_PRIVATE(object)->xpixels);
-   g_free (GTK_DATABOX_POINTS_GET_PRIVATE(object)->ypixels);
+   g_free (priv->xpixels);
+   g_free (priv->ypixels);
 
    /* Chain up to the parent class */
    G_OBJECT_CLASS (gtk_databox_points_parent_class)->finalize (object);
 }
 
 static void
-gtk_databox_points_class_init (GtkDataboxPointsClass *klass)
+gtk_databox_points_class_init (GtkDataboxPointsClass * klass)
 {
    GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
    GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (klass);
@@ -62,20 +63,21 @@ gtk_databox_points_class_init (GtkDataboxPointsClass *klass)
    gobject_class->finalize = points_finalize;
 
    graph_class->draw = gtk_databox_points_real_draw;
-
-   g_type_class_add_private (klass, sizeof (GtkDataboxPointsPrivate));
 }
 
 static void
 gtk_databox_points_complete (GtkDataboxPoints * points)
 {
-   GTK_DATABOX_POINTS_GET_PRIVATE(points)->xpixels = NULL;
-   GTK_DATABOX_POINTS_GET_PRIVATE(points)->ypixels = NULL;
-   GTK_DATABOX_POINTS_GET_PRIVATE(points)->pixelsalloc = 0;
+   GtkDataboxPointsPrivate *priv =
+      gtk_databox_points_get_instance_private (points);
+
+   priv->xpixels = NULL;
+   priv->ypixels = NULL;
+   priv->pixelsalloc = 0;
 }
 
 static void
-gtk_databox_points_init (GtkDataboxPoints *points)
+gtk_databox_points_init (GtkDataboxPoints * points)
 {
    g_signal_connect (points, "notify::length",
 		     G_CALLBACK (gtk_databox_points_complete), NULL);
@@ -112,8 +114,7 @@ gtk_databox_points_new (guint len, gfloat * X, gfloat * Y,
 			  "xtype", G_TYPE_FLOAT,
 			  "ytype", G_TYPE_FLOAT,
 			  "length", len,
-			  "maxlen", len,
-			  "color", color, "size", size, NULL);
+			  "maxlen", len, "color", color, "size", size, NULL);
 
    return GTK_DATABOX_GRAPH (points);
 }
@@ -139,9 +140,10 @@ gtk_databox_points_new (guint len, gfloat * X, gfloat * Y,
  **/
 GtkDataboxGraph *
 gtk_databox_points_new_full (guint maxlen, guint len,
-			void * X, guint xstart, guint xstride, GType xtype,
-			void * Y, guint ystart, guint ystride, GType ytype,
-			GdkRGBA * color, gint size)
+			     void *X, guint xstart, guint xstride,
+			     GType xtype, void *Y, guint ystart,
+			     guint ystride, GType ytype, GdkRGBA * color,
+			     gint size)
 {
    GtkDataboxPoints *points;
    g_return_val_if_fail (X, NULL);
@@ -165,11 +167,11 @@ gtk_databox_points_new_full (guint maxlen, guint len,
 }
 
 static void
-gtk_databox_points_real_draw (GtkDataboxGraph * graph,
-			      GtkDatabox* box)
+gtk_databox_points_real_draw (GtkDataboxGraph * graph, GtkDatabox * box)
 {
    GtkDataboxPoints *points = GTK_DATABOX_POINTS (graph);
-   GtkDataboxPointsPrivate *priv=GTK_DATABOX_POINTS_GET_PRIVATE(points);
+   GtkDataboxPointsPrivate *priv =
+      gtk_databox_points_get_instance_private (points);
    guint i = 0;
    void *X;
    void *Y;
@@ -190,9 +192,11 @@ gtk_databox_points_real_draw (GtkDataboxGraph * graph,
 
    if (priv->pixelsalloc < len)
    {
-   	priv->pixelsalloc = len;
-	priv->xpixels = (gint16 *)g_realloc(priv->xpixels, len * sizeof(gint16));
-	priv->ypixels = (gint16 *)g_realloc(priv->ypixels, len * sizeof(gint16));
+      priv->pixelsalloc = len;
+      priv->xpixels =
+	 (gint16 *) g_realloc (priv->xpixels, len * sizeof (gint16));
+      priv->ypixels =
+	 (gint16 *) g_realloc (priv->ypixels, len * sizeof (gint16));
    }
 
    xpixels = priv->xpixels;
@@ -200,22 +204,27 @@ gtk_databox_points_real_draw (GtkDataboxGraph * graph,
 
    X = gtk_databox_xyc_graph_get_X (GTK_DATABOX_XYC_GRAPH (graph));
    xstart = gtk_databox_xyc_graph_get_xstart (GTK_DATABOX_XYC_GRAPH (graph));
-   xstride = gtk_databox_xyc_graph_get_xstride (GTK_DATABOX_XYC_GRAPH (graph));
+   xstride =
+      gtk_databox_xyc_graph_get_xstride (GTK_DATABOX_XYC_GRAPH (graph));
    xtype = gtk_databox_xyc_graph_get_xtype (GTK_DATABOX_XYC_GRAPH (graph));
-   gtk_databox_values_to_xpixels(box, xpixels, X, xtype, maxlen, xstart, xstride, len);
+   gtk_databox_values_to_xpixels (box, xpixels, X, xtype, maxlen, xstart,
+				  xstride, len);
 
    Y = gtk_databox_xyc_graph_get_Y (GTK_DATABOX_XYC_GRAPH (graph));
    ystart = gtk_databox_xyc_graph_get_ystart (GTK_DATABOX_XYC_GRAPH (graph));
-   ystride = gtk_databox_xyc_graph_get_ystride (GTK_DATABOX_XYC_GRAPH (graph));
+   ystride =
+      gtk_databox_xyc_graph_get_ystride (GTK_DATABOX_XYC_GRAPH (graph));
    ytype = gtk_databox_xyc_graph_get_ytype (GTK_DATABOX_XYC_GRAPH (graph));
-   gtk_databox_values_to_ypixels(box, ypixels, Y, ytype, maxlen, ystart, ystride, len);
+   gtk_databox_values_to_ypixels (box, ypixels, Y, ytype, maxlen, ystart,
+				  ystride, len);
 
    pointsize = gtk_databox_graph_get_size (graph);
 
    for (i = 0; i < len; i++, xpixels++, ypixels++)
-      cairo_rectangle(cr, *xpixels - pointsize / 2, *ypixels - pointsize / 2, pointsize, pointsize);
+      cairo_rectangle (cr, *xpixels - pointsize / 2, *ypixels - pointsize / 2,
+		       pointsize, pointsize);
 
-   cairo_fill(cr);
-   cairo_destroy(cr);
+   cairo_fill (cr);
+   cairo_destroy (cr);
    return;
 }
