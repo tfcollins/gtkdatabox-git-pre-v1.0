@@ -4,7 +4,7 @@ if BUILD_LIBGLADE
 
 # Build the runtime parts for libglade. 
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_builddir)				\
 	-I$(top_srcdir)/gtk				
 #	@LIBGLADE_CFLAGS@
@@ -32,7 +32,7 @@ if BUILD_GLADE
 # These are glade-3 interface builder modules, only needed if 
 # you are going to design with glade-3
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_builddir)				\
 	-I$(top_srcdir)/gtk				
 

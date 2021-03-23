@@ -33,6 +33,8 @@ examples/colors
 examples/keycontrol
 examples/logarithmic
 examples/rulers
+examples/tags
+gtk/tags
 .gitignore~
 config.*
 libtool

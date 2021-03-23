@@ -19,8 +19,7 @@ libgtkdatabox_la_SOURCES= \
 			gtkdatabox_ruler.c
 
 libgtkdatabox_la_LDFLAGS= \
-		        -version-info $(LT_CURRENT)\
-			-release $(LT_RELEASE)\
+		        -version-info $(DATABOX_LT_VERSION)\
 			-no-undefined \
 			@GTK_LIBS@
 
@@ -53,7 +52,7 @@ $(srcdir)/gtkdatabox_marshal.c: $(srcdir)/gtkdatabox_marshal.list
 $(srcdir)/gtkdatabox_marshal.h: $(srcdir)/gtkdatabox_marshal.list
 	glib-genmarshal --header --prefix=gtk_databox_marshal --internal $< > $@
 
-INCLUDES		= \
+AM_CPPFLAGS		= \
 			-I$(top_srcdir)
 
 AM_CFLAGS			=\

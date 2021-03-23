@@ -1,3 +1,13 @@
+2021-05-?? (1.0.0)
+	* Changed: 
+	- Using libtool's versioning system, to avoid breaking binary compatibility
+	through every new minor-fixes release. Starting/resetting with 1:0:0 (see
+	'info libtool' on node *Versioning::)
+	* Fixed:
+	- Autoreconf warnings: INCLUDES ==> AM_CPPFLAGS
+	* Updated: 
+	- Distribution files: TODO.
+
 2012-11-8 (0.9.2.0)
    - There has been a huge amount of change since the last release...
 	There are many new graphing methods, such as offset bars, region plots.

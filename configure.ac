@@ -9,27 +9,21 @@
 # 
 # Thank's to all the gimp-glib-gtk-gnome-etc.-people
 #
-# If you know automake and friends better then me:
-# Please send any helpful comments to rbock at eudoxos de
-#
+
 # Initialize autoconf by any header file of the source
 #
-
-
-m4_define([databox_major_version], [0]) # Change in case of really major changes
-m4_define([databox_minor_version], [9]) # Change in case of changes in exisiting API
-m4_define([databox_micro_version], [2]) # Change in case of new functions being added
-m4_define([databox_nano_version],  [0]) # Change for bug fixes, code cleanup, etc.
-m4_define([databox_version],       [databox_major_version.databox_minor_version.databox_micro_version.databox_nano_version])
-
+m4_define([databox_current],  [1]) # Increment in case of any change in existing API.
+m4_define([databox_revision], [0]) # Increment for bug fixes, code cleanup, etc. When 'databox_current' increments, reset 'databox_revision' to 0.
+m4_define([databox_age],      [0]) # Increment in case of only new functions being added. If some function were removed or changed, reset 'databox-age' to 0.
+m4_define([databox_lt_version],  [databox_current:databox_revision:databox_age])
+m4_define([databox_version],  [databox_current.databox_revision.databox_age])
 AC_INIT(gtkdatabox, databox_version)
 
 # This configures autoheader to generate a config.h file
 #
 AM_CONFIG_HEADER(config.h)
 
-AC_SUBST(LT_RELEASE, [databox_major_version.databox_minor_version.databox_micro_version])
-AC_SUBST(LT_CURRENT, [databox_nano_version])
+AC_SUBST(DATABOX_LT_VERSION, [databox_lt_version])
 AC_SUBST(DATABOX_VERSION, [databox_version])
 
 #AM_INIT_AUTOMAKE(gtkdatabox, databox_version)
