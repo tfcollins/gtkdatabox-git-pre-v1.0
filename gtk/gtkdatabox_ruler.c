@@ -440,7 +440,7 @@ gtk_databox_ruler_set_property (GObject * object,
         gtk_databox_ruler_set_text_orientation (ruler, (GtkOrientation) g_value_get_uint (value));
         break;
     case PROP_TEXT_ALIGNMENT:
-        gtk_databox_ruler_set_text_alignment (ruler, (GtkOrientation) g_value_get_uint (value));
+        gtk_databox_ruler_set_text_alignment (ruler, (PangoAlignment) g_value_get_uint (value));
         break;
     case PROP_TEXT_HOFFSET:
         gtk_databox_ruler_set_text_hoffset (ruler, (GtkOrientation) g_value_get_uint (value));
@@ -1345,8 +1345,8 @@ gtk_databox_ruler_draw_ticks (GtkDataboxRuler * ruler) {
     if (!gtk_widget_is_drawable (GTK_WIDGET (ruler)))
         return;
 
-	gtk_widget_get_allocation(widget, &allocation);
-	stylecontext = gtk_widget_get_style_context(widget);
+    gtk_widget_get_allocation(widget, &allocation);
+    stylecontext = gtk_widget_get_style_context(widget);
 
     layout = gtk_widget_create_pango_layout (widget, "E+-012456789");
 
@@ -1589,9 +1589,11 @@ gtk_databox_ruler_draw_pos (GtkDataboxRuler * ruler) {
     gint bs_width, bs_height;
     gint ythickness;
     gdouble increment;
+    GdkDrawingContext *drawc;
+    cairo_region_t *crr;
     cairo_t *cr;
-	GtkAllocation allocation;
-	GdkRGBA fg_color;
+    GtkAllocation allocation;
+    GdkRGBA fg_color;
 
     GtkStyleContext *context= gtk_widget_get_style_context (widget);
     GtkBorder padding;
@@ -1625,7 +1627,9 @@ gtk_databox_ruler_draw_pos (GtkDataboxRuler * ruler) {
         if (ruler->priv->invert_edge && (bs_width > 0) && (bs_height > 0))
             return; /* return if positive values and inverted */
 
-        cr = gdk_cairo_create (gtk_widget_get_window(widget));
+        crr = gdk_window_get_visible_region (gtk_widget_get_window (widget));
+        drawc = gdk_window_begin_draw_frame (gtk_widget_get_window (widget), crr);
+        cr = gdk_drawing_context_get_cairo_context (drawc);
 
         /*  If a backing store exists, restore the ruler  */
         if (ruler->priv->backing_surface)
@@ -1663,7 +1667,8 @@ gtk_databox_ruler_draw_pos (GtkDataboxRuler * ruler) {
         }
         cairo_fill (cr);
 
-        cairo_destroy (cr);
+        gdk_window_end_draw_frame (gtk_widget_get_window (widget), drawc);
+        cairo_region_destroy (crr);
 
         /* remember the rectangle of the arrow - so that it may be cleared on re-run */
         ruler->priv->xsrc = x;
@@ -1778,8 +1783,10 @@ gtk_databox_ruler_create_backing_surface (GtkDataboxRuler * ruler) {
     GtkWidget *widget;
     gint width;
     gint height;
-	GtkAllocation allocation;
-	cairo_t *cr;
+    GtkAllocation allocation;
+    GdkDrawingContext *drawc;
+    cairo_region_t *crr;
+    cairo_t *cr;
 
     widget = GTK_WIDGET (ruler);
 	gtk_widget_get_allocation(widget, &allocation);
@@ -1797,7 +1804,9 @@ gtk_databox_ruler_create_backing_surface (GtkDataboxRuler * ruler) {
 	ruler->priv->old_width = width;
 	ruler->priv->old_height = height;
 
-	cr = gdk_cairo_create(gtk_widget_get_window(widget));
+	crr = gdk_window_get_visible_region (gtk_widget_get_window (widget));
+        drawc = gdk_window_begin_draw_frame (gtk_widget_get_window (widget), crr);
+        cr = gdk_drawing_context_get_cairo_context (drawc);
 
     ruler->priv->backing_surface = cairo_surface_create_similar(
 		cairo_get_target(cr),
@@ -1806,6 +1815,9 @@ gtk_databox_ruler_create_backing_surface (GtkDataboxRuler * ruler) {
 
     ruler->priv->xsrc = 0;
     ruler->priv->ysrc = 0;
+
+    gdk_window_end_draw_frame (gtk_widget_get_window (widget), drawc);
+    cairo_region_destroy (crr);
 }
 
 #define __GTK_DATABOX_RULER_C__

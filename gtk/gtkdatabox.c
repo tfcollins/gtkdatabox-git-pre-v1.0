@@ -1143,7 +1143,9 @@ gtk_databox_create_backing_surface(GtkDatabox * box) {
     GtkDataboxPrivate *priv = gtk_databox_get_instance_private(box);
     GtkAllocation allocation;
     GtkWidget *widget;
-	cairo_t *cr;
+    GdkDrawingContext *drawc;
+    cairo_region_t *crr;
+    cairo_t *cr;
     gint width;
     gint height;
 
@@ -1161,13 +1163,16 @@ gtk_databox_create_backing_surface(GtkDatabox * box) {
    priv->old_width = width;
    priv->old_height = height;
 
-    cr = gdk_cairo_create (gtk_widget_get_window (widget));
+   crr = gdk_window_get_visible_region (gtk_widget_get_window (widget));
+   drawc = gdk_window_begin_draw_frame (gtk_widget_get_window (widget), crr);
+   cr = gdk_drawing_context_get_cairo_context (drawc);
 
    priv->backing_surface = cairo_surface_create_similar(
                                 cairo_get_target (cr),
                                 CAIRO_CONTENT_COLOR,
                                 width, height);
-
+   gdk_window_end_draw_frame (gtk_widget_get_window (widget), drawc);
+   cairo_region_destroy (crr);
 }
 
 /**
@@ -1238,8 +1243,9 @@ gtk_databox_draw (GtkWidget * widget, cairo_t * cr) {
 
     cairo_set_source_surface (cr, priv->backing_surface, 0, 0);
     cairo_paint(cr);
-	/* the following was removed - unsure if it creates problems */
-    /*gtk_databox_draw_selection (box, FALSE);*/
+    /* the following was removed - unsure if it creates problems
+    gtk_databox_draw_selection (box, FALSE);
+    */
 
     return FALSE;
 }
@@ -1446,8 +1452,8 @@ void
 gtk_databox_zoom_to_selection (GtkDatabox * box) {
     GtkDataboxPrivate *priv = gtk_databox_get_instance_private(box);
     GtkWidget *widget;
-	GtkAllocation allocation;
-	gdouble temp_value, temp_page_size;
+    GtkAllocation allocation;
+    gdouble temp_value, temp_page_size;
 
     g_return_if_fail(GTK_IS_DATABOX(box));
 
@@ -1459,32 +1465,32 @@ gtk_databox_zoom_to_selection (GtkDatabox * box) {
         return;
     }
 
-	g_object_freeze_notify(G_OBJECT(priv->adj_x));
-	g_object_freeze_notify(G_OBJECT(priv->adj_y));
+    g_object_freeze_notify(G_OBJECT(priv->adj_x));
+    g_object_freeze_notify(G_OBJECT(priv->adj_y));
 
-	temp_value = gtk_adjustment_get_value(priv->adj_x);
+    temp_value = gtk_adjustment_get_value(priv->adj_x);
     temp_value += (gdouble) (MIN (priv->marked.x, priv->select.x))
                                * gtk_adjustment_get_page_size(priv->adj_x)
                                / allocation.width;
-	temp_page_size = gtk_adjustment_get_page_size(priv->adj_x);
+    temp_page_size = gtk_adjustment_get_page_size(priv->adj_x);
     temp_page_size *=
         (gdouble) (ABS (priv->marked.x - priv->select.x) + 1)
         / allocation.width;
 
-	gtk_adjustment_set_page_size(priv->adj_x, temp_page_size);
-	gtk_adjustment_set_value(priv->adj_x, temp_value);
+    gtk_adjustment_set_page_size(priv->adj_x, temp_page_size);
+    gtk_adjustment_set_value(priv->adj_x, temp_value);
 
-	temp_value = gtk_adjustment_get_value(priv->adj_y);
+    temp_value = gtk_adjustment_get_value(priv->adj_y);
     temp_value += (gdouble) (MIN (priv->marked.y, priv->select.y))
                                * gtk_adjustment_get_page_size(priv->adj_y)
                                / allocation.height;
-	temp_page_size = gtk_adjustment_get_page_size(priv->adj_y);
+    temp_page_size = gtk_adjustment_get_page_size(priv->adj_y);
     temp_page_size *=
         (gfloat) (ABS (priv->marked.y - priv->select.y) + 1)
         / allocation.height;
 
-	gtk_adjustment_set_page_size(priv->adj_y, temp_page_size);
-	gtk_adjustment_set_value(priv->adj_y, temp_value);
+    gtk_adjustment_set_page_size(priv->adj_y, temp_page_size);
+    gtk_adjustment_set_value(priv->adj_y, temp_value);
 
     /* If we zoom too far into the data, we will get funny results, because
      * of overflow effects. Therefore zooming is limited to zoom_limit.
@@ -1579,9 +1585,13 @@ static void
 gtk_databox_draw_selection (GtkDatabox * box, gboolean clear) {
     GtkDataboxPrivate *priv = gtk_databox_get_instance_private(box);
     GtkWidget *widget = GTK_WIDGET (box);
-	cairo_t *cr;
-
-	cr = gdk_cairo_create (gtk_widget_get_window (widget));
+    GdkDrawingContext *drawc;
+    cairo_region_t *crr;
+    cairo_t *cr;
+ 
+    crr = gdk_window_get_visible_region (gtk_widget_get_window (widget));
+    drawc = gdk_window_begin_draw_frame (gtk_widget_get_window (widget), crr);
+    cr = gdk_drawing_context_get_cairo_context (drawc);
     cairo_rectangle (cr,
                      MIN (priv->marked.x, priv->select.x) - 0.5,
                      MIN (priv->marked.y, priv->select.y) - 0.5,
@@ -1596,10 +1606,10 @@ gtk_databox_draw_selection (GtkDatabox * box, gboolean clear) {
       cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
       cairo_set_operator (cr, CAIRO_OPERATOR_DIFFERENCE);
       cairo_set_line_width (cr, 1.0);
-	}
-	cairo_stroke(cr);
-
-	cairo_destroy(cr);
+    }
+    cairo_stroke(cr);
+    gdk_window_end_draw_frame (gtk_widget_get_window (widget), drawc);
+    cairo_region_destroy (crr);
 }
 
 static void
