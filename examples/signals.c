@@ -170,6 +170,7 @@ show_changed_cb (GtkDatabox * box,
 		 GtkWidget ** entries)
 {
    gchar *text;
+   g_return_if_fail (GTK_IS_DATABOX (box));
 
    text = g_strdup_printf ("%g", selectionValues->x2 - selectionValues->x1);
    gtk_entry_set_text (GTK_ENTRY (entries[SHOW_DELTA_X]), text);

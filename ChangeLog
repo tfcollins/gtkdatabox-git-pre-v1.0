@@ -4,12 +4,19 @@
 	through every new minor-fixes release. Starting/resetting with 1:0:0 (see
 	'info libtool' on node *Versioning::)
 	- Deprecated functions gdk_cairo_create substituted with recommended code. 
+	- Deprecated functions to get/set background substituted with recommended code.
+	- Deprecated function gtk_adjustment_changed() removed conditionally,
+	for GTK+ version >= 3.18.0.
+	- Re-enabled deprecation warnings in Makefile.am.
 	* Fixed:
 	- Autoreconf warnings: INCLUDES ==> AM_CPPFLAGS
 	- Seg-fault using deprecated macro G_TYPE_INSTANCE_GET_PRIVATE. Using
 	now *_get_instance_private() automatic functions.
+	- All remaining compiling warnings removed.
 	* Updated: 
 	- Distribution files: TODO.
+	- Minimum required versions for Pango and Cairo in configure.ac.
+	- GSEAL_ENABLE not needed anymore in Makefile.am.
 
 2012-11-8 (0.9.2.0)
    - There has been a huge amount of change since the last release...

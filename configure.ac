@@ -37,10 +37,9 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 
 m4_define([gtk_required_version], [3.4.0])
-m4_define([pango_required_version], [1.16.0])
-m4_define([cairo_required_version], [1.4.0])
+m4_define([pango_required_version], [1.29.0])
+m4_define([cairo_required_version], [1.10.0])
 
-AM_PATH_GTK_3_0([gtk_required_version])
 PKG_CHECK_MODULES(GTK, [gtk+-3.0 >= [gtk_required_version]])
 PKG_CHECK_MODULES(GTK, [gdk-3.0 >= [gtk_required_version]])
 PKG_CHECK_MODULES(PANGO, pango >= [pango_required_version])
@@ -48,6 +47,11 @@ PKG_CHECK_MODULES(CAIRO, cairo >= [cairo_required_version])
 AC_SUBST(GTK_REQUIRED, [gtk_required_version])
 AC_SUBST(PANGO_REQUIRED, [pango_required_version])
 AC_SUBST(CAIRO_REQUIRED, [cairo_required_version])
+
+# Remove some deprecated code for GTK >= 3.18.0
+if test x`pkg-config --atleast-version=3.18.0 gtk+-3.0; echo $?` = x0; then
+	AC_DEFINE(GTK3_18, 1, Remove deprecated code for GTK version >= 3.18.0)
+fi
 
 # ------------------ Libglade configuration ------------------------
 AC_ARG_ENABLE(libglade,

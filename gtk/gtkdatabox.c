@@ -649,8 +649,6 @@ gtk_databox_realize (GtkWidget * widget) {
 
     gtk_style_context_add_class(stylecontext, GTK_STYLE_CLASS_BACKGROUND);
 
-	gtk_style_context_set_background(stylecontext, gtk_widget_get_window(widget));
-
     gtk_databox_create_backing_surface (box);
 }
 
@@ -1221,14 +1219,13 @@ gtk_databox_draw (GtkWidget * widget, cairo_t * cr) {
     GList *list;
     cairo_t *cr2;
     GtkStyleContext *stylecontext = gtk_widget_get_style_context(widget);
-    GdkRGBA bg_color;
+    GtkAllocation allocation;
 
     gtk_databox_create_backing_surface (box);
 
     cr2 = cairo_create(priv->backing_surface);
-    gtk_style_context_get_background_color(stylecontext, GTK_STATE_FLAG_NORMAL, &bg_color);
-    gdk_cairo_set_source_rgba (cr2, &bg_color);
-    cairo_paint(cr2);
+    gtk_widget_get_allocation (widget, &allocation);
+    gtk_render_background (stylecontext, cr2, 0.0, 0.0, allocation.width, allocation.height);
     cairo_destroy(cr2);
 
     list = g_list_last (priv->graphs);
@@ -1428,8 +1425,10 @@ gtk_databox_zoomed (GtkDatabox * box) {
     priv->selection_active = FALSE;
     priv->selection_finalized = FALSE;
 
+#ifndef GTK3_18
     gtk_adjustment_changed (priv->adj_x);
     gtk_adjustment_changed (priv->adj_y);
+#endif
 
     gtk_widget_queue_draw (GTK_WIDGET(box));
 

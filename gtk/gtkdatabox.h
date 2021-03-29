@@ -20,6 +20,7 @@
 #ifndef __GTK_DATABOX_H__
 #define __GTK_DATABOX_H__
 
+#include "config.h"
 #include <gtkdatabox_typedefs.h>
 #include <gtkdatabox_graph.h>
 #include <gtkdatabox_ruler.h>

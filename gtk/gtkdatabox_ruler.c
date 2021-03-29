@@ -1325,7 +1325,7 @@ gtk_databox_ruler_draw_ticks (GtkDataboxRuler * ruler) {
     PangoLayout *layout;
     PangoRectangle logical_rect, ink_rect;
 	GtkAllocation allocation;
-	GdkRGBA fg_color, bg_color;
+	GdkRGBA fg_color;
 
     GtkBorder padding;
     gtk_style_context_get_padding (stylecontext, gtk_widget_get_state_flags (widget), &padding);
@@ -1367,9 +1367,7 @@ gtk_databox_ruler_draw_ticks (GtkDataboxRuler * ruler) {
     height = allocation.height;
 
     cr = cairo_create(ruler->priv->backing_surface);
-    gtk_style_context_get_background_color(stylecontext, GTK_STATE_FLAG_NORMAL, &bg_color);
-    gdk_cairo_set_source_rgba (cr, &bg_color);
-    cairo_paint(cr);
+    gtk_render_background (stylecontext, cr, 0.0, 0.0, width, height);
 
     gtk_style_context_get_color(stylecontext, GTK_STATE_FLAG_NORMAL, &fg_color);
     gdk_cairo_set_source_rgba (cr, &fg_color);
@@ -1717,8 +1715,6 @@ gtk_databox_ruler_realize (GtkWidget * widget) {
     stylecontext = gtk_widget_get_style_context(widget);
 
     gtk_style_context_add_class(stylecontext, GTK_STYLE_CLASS_BACKGROUND);
-
-    gtk_style_context_set_background(stylecontext, gtk_widget_get_window(widget));
 
     gtk_databox_ruler_create_backing_surface (ruler);
 }
