@@ -195,7 +195,7 @@ create_basics ()
    /* end of gtk_databox_auto_rescale */
 
    gtk_widget_show (window);
-   gdk_window_set_cursor (box->window, gdk_cursor_new (GDK_CROSS));
+   gdk_window_set_cursor (gtk_widget_get_window(box), gdk_cursor_new_for_display (gdk_display_get_default (), GDK_CROSS));
 }
 
 

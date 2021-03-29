@@ -7,6 +7,8 @@
 	- Deprecated functions to get/set background substituted with recommended code.
 	- Deprecated function gtk_adjustment_changed() removed conditionally,
 	for GTK+ version >= 3.18.0.
+	- Deprecated function gdk_cursor_new() substituted with
+	gdk_cursor_new_for_display(), in examples/*.c.
 	- Re-enabled deprecation warnings in Makefile.am.
 	* Fixed:
 	- Autoreconf warnings: INCLUDES ==> AM_CPPFLAGS

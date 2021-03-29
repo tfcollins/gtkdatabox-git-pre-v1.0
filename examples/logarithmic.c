@@ -48,6 +48,7 @@ create_logarithmic (void)
    GtkWidget *separator;
    GtkWidget *table;
    GtkDataboxGraph *graph;
+   GdkCursor *cursor;
    gfloat min_x, max_x;
    gfloat min_y, max_y;
    gfloat *X;
@@ -220,8 +221,9 @@ create_logarithmic (void)
    gtk_widget_grab_focus (close_button);
 
    gtk_widget_show_all (window);
+   cursor = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_CROSS);
    for (i = 0; i < NO_BOXES; ++i)
-	   gdk_window_set_cursor (gtk_widget_get_window(box[i]), gdk_cursor_new (GDK_CROSS));
+      gdk_window_set_cursor (gtk_widget_get_window(box[i]), cursor);
 }
 
 gint
