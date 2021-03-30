@@ -123,12 +123,7 @@ create_basics (void)
 
    gtk_box_pack_start (GTK_BOX (vbox), grid, TRUE, TRUE, 0);
 
-   color.red = 0.2;
-   color.green = 0.2;
-   color.blue = 0.2;
-   color.alpha = 1;
-
-   gtk_widget_override_background_color (box, GTK_STATE_FLAG_NORMAL, &color);
+   gtk_databox_set_bg_color (GTK_DATABOX (box), "#333333");
 
    X = g_new0 (gfloat, POINTS);
    Y = g_new0 (gfloat, POINTS);

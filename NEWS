@@ -1,3 +1,5 @@
-2021: clean-up code for GTK3 and release it.
+2021:
+- Clean-up code for GTK3 and release it.
+- Adding new function to set the background color of databox.
 
 From late 2012 ... the push will be to integrate changes for GTK3

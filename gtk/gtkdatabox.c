@@ -138,6 +138,7 @@ struct _GtkDataboxPrivate {
     gboolean selection_finalized;
 
     GtkShadowType box_shadow; /* The type of shadow drawn on the pixmap edge */
+    GtkCssProvider *cssp; /* Internal style sheet used for background-color */
 };
 
 /**
@@ -424,6 +425,7 @@ gtk_databox_init (GtkDatabox * box) {
     priv->selection_active = FALSE;
     priv->selection_finalized = FALSE;
     priv->box_shadow=GTK_SHADOW_NONE;
+    priv->cssp = gtk_css_provider_new ();
 
     /* gtk_databox_set_total_limits(box, -1., 1., 1., -1.); */
 	priv->visible_left = priv->total_left = -1.0;
@@ -645,8 +647,7 @@ gtk_databox_realize (GtkWidget * widget) {
                         attributes_mask));
     gdk_window_set_user_data (gtk_widget_get_window(widget), box);
 
-	stylecontext = gtk_widget_get_style_context(widget);
-
+    stylecontext = gtk_widget_get_style_context(widget);
     gtk_style_context_add_class(stylecontext, GTK_STYLE_CLASS_BACKGROUND);
 
     gtk_databox_create_backing_surface (box);
@@ -1099,6 +1100,30 @@ gtk_databox_get_box_shadow(GtkDatabox * box) {
     g_return_val_if_fail (GTK_IS_DATABOX (box), -1);
     GtkDataboxPrivate *priv = gtk_databox_get_instance_private(box);
     return priv->box_shadow;
+}
+
+/**
+ * gtk_databox_set_bg_background:
+ * @box: a #GtkDatabox widget
+ * @bg_color: a color name, as used in CSS (html color)
+ *
+ * Convenience function to override the background color of @box, acording to @bg_color.
+ **/
+void gtk_databox_set_bg_color (GtkDatabox * box, gchar *bg_color) {
+    GtkWidget * widget;
+    GtkDataboxPrivate *priv;
+    GtkStyleContext *stylecontext;
+    gchar *css_bg_color;
+
+    g_return_if_fail (GTK_IS_DATABOX (box));
+    widget = GTK_WIDGET (box);
+    priv = gtk_databox_get_instance_private (box);
+
+    css_bg_color = g_strdup_printf (".%s {background-color: %s;}", GTK_STYLE_CLASS_BACKGROUND, bg_color);
+    gtk_css_provider_load_from_data (priv->cssp, css_bg_color, -1, NULL);
+    stylecontext = gtk_widget_get_style_context (widget);
+    gtk_style_context_add_provider (stylecontext, GTK_STYLE_PROVIDER (priv->cssp), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    g_free (css_bg_color);
 }
 
 static void
