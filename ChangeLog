@@ -1,28 +1,30 @@
 2021-05-?? (1.0.0)
 	* Added:
 	- Convenience function to override the background-color of a databox: 
-	gtk_databox_set_bg_color.
+	  gtk_databox_set_bg_color.
 	* Changed: 
 	- Using libtool's versioning system, to avoid breaking binary compatibility
-	through every new minor-fixes release. Starting/resetting with 1:0:0 (see
-	'info libtool' on node *Versioning::).
+	  through every new minor-fixes release. Starting/resetting with 1:0:0 (see
+	  'info libtool' on node *Versioning::).
 	- Deprecated function gdk_cairo_create substituted with recommended code. 
 	- Deprecated functions to get/set background substituted with recommended code.
 	- Deprecated function gtk_adjustment_changed removed conditionally,
-	for GTK+ version >= 3.18.0.
+	  for GTK+ version >= 3.18.0.
 	- Deprecated function gdk_cursor_new substituted with
-	gdk_cursor_new_for_display, in examples/*.c.
+	  gdk_cursor_new_for_display, in examples/*.c.
 	- Deprecated function gtk_widget_override_background_color substituted
-	with new function gtk_databox_set_bg_color, in examples/*.c
+	  with new function gtk_databox_set_bg_color, in examples/*.c
 	- Re-enabled deprecation warnings in Makefile.am.
 	* Fixed:
 	- Autoreconf warnings: INCLUDES ==> AM_CPPFLAGS
 	- Seg-fault using deprecated macro G_TYPE_INSTANCE_GET_PRIVATE. Using
-	now *_get_instance_private() automatic functions.
+	  now *_get_instance_private() automatic functions.
 	- All remaining compiling warnings removed.
 	- examples/addremove wasn't working.
+	* Removed:
+	- libglade support, as it's based on GTK2.
 	* Updated: 
-	- Distribution files: TODO.
+	- Distribution files: TODO, README, Doxygen.
 	- Minimum required versions for Pango and Cairo in configure.ac.
 	- GSEAL_ENABLE not needed anymore in Makefile.am.
 	- gtkdatabox_marshal.c/h regenerated.

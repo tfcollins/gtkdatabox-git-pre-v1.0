@@ -13,7 +13,6 @@ noinst_PROGRAMS         = \
                           grid_array\
                           signals\
                           lissajous\
-			              basics_libglade \
                           enable_disable\
                           addremove
 
@@ -46,9 +45,6 @@ enable_disable_SOURCES  = enable_disable.c
 
 addremove_SOURCES       = addremove.c
 
-basics_libglade_SOURCES = basics_libglade.c
-EXTRA_DIST              = basics_libglade.glade
-
 AM_CPPFLAGS		= \
 			-I$(top_srcdir)/gtk
 
@@ -64,14 +60,3 @@ AM_CFLAGS			=\
 LDADD 			= $(top_builddir)/gtk/libgtkdatabox.la\
 		 	@GTK_LIBS@ \
 			-lm
-
-
-if BUILD_LIBGLADE
-basics_libglade_LDADD	= $(top_builddir)/gtk/libgtkdatabox.la \
-			$(top_builddir)/glade/libdatabox.la \
-		 	@GTK_LIBS@ \
-			@LIBGLADE_LIBS@
-else
-basics_libglade_LDADD = $(LDADD)
-endif
-

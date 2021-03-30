@@ -53,32 +53,6 @@ if test x`pkg-config --atleast-version=3.18.0 gtk+-3.0; echo $?` = x0; then
 	AC_DEFINE(GTK3_18, 1, Remove deprecated code for GTK version >= 3.18.0)
 fi
 
-# ------------------ Libglade configuration ------------------------
-AC_ARG_ENABLE(libglade,
-	[  --enable-libglade       enable libglade support],
-	[ac_cv_enable_libglade=$enableval], [ac_cv_enable_libglade=no])
-AC_MSG_CHECKING([whether to build libglade support module])
-if test x"$ac_cv_enable_libglade" = xyes; then
-	AC_MSG_RESULT(yes)
-	PKG_CHECK_MODULES(LIBGLADE, libglade-2.0 >= 2.0.0,
-			ac_cv_enable_libglade=yes, ac_cv_enable_libglade=no)
-	if test x"$ac_cv_enable_libglade" = xyes; then
-		AC_DEFINE(USE_LIBGLADE, 1, Define if you want libglade support)
-		libglade_moduledir=`pkg-config libglade-2.0 --variable=moduledir`
-		AC_DEFINE_UNQUOTED(LIBGLADE_MODULEDIR, [$libglade_moduledir], [Libglade module directory])
-	else
-		AC_MSG_RESULT(not found)
-	fi
-
-else
-	AC_MSG_RESULT(no)
-fi
-AC_SUBST(LIBGLADE_CFLAGS)
-AC_SUBST(LIBGLADE_LIBS)
-AC_SUBST(libglade_moduledir)
-
-AM_CONDITIONAL(BUILD_LIBGLADE, test x"$ac_cv_enable_libglade" = xyes)
-
 # ------------------ Glade3 configuration ------------------------
 
 AC_ARG_ENABLE(glade,
@@ -120,8 +94,6 @@ AC_OUTPUT(Makefile              \
 	)
 
 AC_MSG_RESULT([
-
-	Install libglade-2.0 module:	${ac_cv_enable_libglade}
 	Install glade-3 module:         ${ac_cv_enable_glade}
 ])
 
