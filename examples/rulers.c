@@ -153,13 +153,8 @@ create_rulers (void)
     gtk_databox_set_ruler_y (GTK_DATABOX (box[3]), ruler);
 
     /* set the background */
-    color.red = 0.33;
-    color.green = 0.33;
-    color.blue = 0.33;
-    color.alpha = 1;
-
     for (i = 0; i < NO_BOXES; ++i)
-        gtk_widget_override_background_color (box[i], GTK_STATE_FLAG_NORMAL, &color);
+      gtk_databox_set_bg_color (GTK_DATABOX (box[i]), "#555");
 
     /* add a sinus^2 */
     X = g_new0 (gfloat, POINTS);

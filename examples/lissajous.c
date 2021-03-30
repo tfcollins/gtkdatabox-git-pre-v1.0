@@ -121,12 +121,7 @@ create_lissajous (void)
 
    gtk_box_pack_start (GTK_BOX (box1), table, TRUE, TRUE, 0);
 
-   color.red = 0;
-   color.green = 0;
-   color.blue = 0.5;
-   color.alpha = 1;
-
-   gtk_widget_override_background_color (box, GTK_STATE_FLAG_NORMAL, &color);
+   gtk_databox_set_bg_color (GTK_DATABOX (box), "#008");
 
    lissajousX = g_new0 (gfloat, POINTS);
    lissajousY = g_new0 (gfloat, POINTS);

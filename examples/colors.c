@@ -129,12 +129,7 @@ create_colors (void)
    gtk_databox_set_enable_selection (GTK_DATABOX (box), FALSE);
    gtk_databox_set_enable_zoom (GTK_DATABOX (box), FALSE);
 
-   color.red = 0;
-   color.green = 0;
-   color.blue = 0;
-   color.alpha = 1;
-
-   gtk_widget_override_background_color (box, GTK_STATE_FLAG_NORMAL, &color);
+   gtk_databox_set_bg_color (GTK_DATABOX (box), "black");
 
    menu = gtk_menu_new ();
    root_menu = gtk_menu_item_new_with_label ("Color Menu");
@@ -154,7 +149,7 @@ create_colors (void)
    g_signal_connect (G_OBJECT (box), "destroy",
 		     G_CALLBACK (gtk_main_quit), NULL);
 
-
+   color.alpha = 1.0;
    for (i = 0; i < NO_OF_DATASETS; i++)
    {
       if (!i)

@@ -110,12 +110,7 @@ create_markerss (void)
 						      TRUE, TRUE, TRUE, TRUE);
    gtk_box_pack_start (GTK_BOX (box1), table, TRUE, TRUE, 0);
 
-   color.red = 0.33;
-   color.green = 0.33;
-   color.blue = 0.33;
-   color.alpha = 1;
-
-   gtk_widget_override_background_color (box, GTK_STATE_FLAG_NORMAL, &color);
+   gtk_databox_set_bg_color (GTK_DATABOX (box), "#545454");
 
    X = g_new0 (gfloat, 20 + 4 + 5);
    Y = g_new0 (gfloat, 20 + 4 + 5);

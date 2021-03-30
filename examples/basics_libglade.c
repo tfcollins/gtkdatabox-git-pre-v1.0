@@ -91,12 +91,7 @@ create_basics ()
    gtk_databox_set_ruler_y (GTK_DATABOX (box), GTK_DATABOX_RULER (ruler));
    /* end of gtk_databox_create_box_with_scrollbars_and_rulers */
 
-
-   color.red = 0.33;
-   color.green = 0.33;
-   color.blue = 0.33;
-   gtk_widget_override_background_color (box, GTK_STATE_FLAG_NORMAL, &color);
-
+   gtk_databox_set_bg_color (GTK_DATABOX (box), "#555555");
 
    X = g_new0 (gfloat, POINTS);
    Y = g_new0 (gfloat, POINTS);

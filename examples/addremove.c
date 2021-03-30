@@ -150,7 +150,9 @@ create_addremove (void)
    color.red = 0.33;
    color.green = 0.33;
    color.blue = 0.33;
-   gtk_widget_override_background_color (box, GTK_STATE_FLAG_NORMAL, &color);
+   color.alpha = 1.0;
+
+   gtk_databox_set_bg_color (GTK_DATABOX (box), "#555555");
 
    X = g_new0 (gfloat, POINTS);
 
@@ -179,7 +181,6 @@ create_addremove (void)
    Y[2] = -1100.;
    X[3] = +1100.;
    Y[3] = +1100.;
-
 
    color.red = 1;
    color.green = 0;
