@@ -52,18 +52,25 @@ G_BEGIN_DECLS
                                            GtkDataboxCrossSimpleClass))
 
 /**
- * GtkDataboxCrossSimple:
- * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines,  #GtkDataboxBars, #GtkDataboxMarkers
+ * GtkDataboxCrossSimple
  *
  * #GtkDataboxCrossSimple is a #GtkDataboxGraph class for displaying a simple coordinate cross (a vertical line 
  * at x=0 and a horizontal line at y=0). 
  *
  * A more sophisticated coordinate cross would be welcome :-)
  *
+ * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines,  #GtkDataboxBars, #GtkDataboxMarkers
+ *
  */
 
    typedef struct _GtkDataboxCrossSimple GtkDataboxCrossSimple;
 
+/**
+ * GtkDataboxCrossSimpleClass
+ *
+ * The object class of #GtkDataboxCrossSimple.
+ *
+ **/
    typedef struct _GtkDataboxCrossSimpleClass GtkDataboxCrossSimpleClass;
 
    struct _GtkDataboxCrossSimple

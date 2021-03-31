@@ -49,15 +49,21 @@ G_BEGIN_DECLS
                                            GtkDataboxPointsClass))
 
 /**
- * GtkDataboxPoints:
- * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxLines, #GtkDataboxBars, #GtkDataboxMarkers
+ * GtkDataboxPoints
  *
  * #GtkDataboxPoints is a #GtkDataboxGraph class for displaying xy-values as dots.
  *
+ * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxLines, #GtkDataboxBars, #GtkDataboxMarkers
  */
 
    typedef struct _GtkDataboxPoints GtkDataboxPoints;
 
+   /**
+    * GtkDataboxPointsClass
+    *
+    * The object class of #GtkDataboxPoints.
+    *
+    **/
    typedef struct _GtkDataboxPointsClass GtkDataboxPointsClass;
 
    struct _GtkDataboxPoints

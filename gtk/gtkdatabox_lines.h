@@ -56,6 +56,12 @@ G_BEGIN_DECLS
  */
    typedef struct _GtkDataboxLines GtkDataboxLines;
 
+   /**
+    * GtkDataboxLinesClass
+    *
+    * The object class of #GtkDataboxLines.
+    *
+    **/
    typedef struct _GtkDataboxLinesClass GtkDataboxLinesClass;
 
    struct _GtkDataboxLines

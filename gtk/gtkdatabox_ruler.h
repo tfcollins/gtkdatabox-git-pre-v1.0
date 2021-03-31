@@ -62,6 +62,14 @@
 #define __GTK_DATABOX_RULER_H__
 
 #ifdef _MSC_VER
+/**
+ * log2
+ * @x: a floating point number 
+ *
+ * Convenience macro to compute the log of a number under base 2, on systems that do not have it.
+ *
+ * Return value: floating point log2 of @x.
+ **/
 #define log2(x) (log(x)/log(2))
 #endif
 
@@ -76,6 +84,7 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_IS_RULER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_DATABOX_TYPE_RULER))
 #define GTK_DATABOX_IS_RULER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_DATABOX_TYPE_RULER))
 #define GTK_DATABOX_RULER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_DATABOX_TYPE_RULER, GtkDataboxRulerClass))
+
 /**
  * GtkDataboxRuler:
  *
@@ -83,14 +92,6 @@ G_BEGIN_DECLS
  *
  **/
 typedef struct _GtkDataboxRuler GtkDataboxRuler;
-typedef struct _GtkDataboxRulerClass GtkDataboxRulerClass;
-
-/**
- * GTK_DATABOX_RULER_MAX_MAX_LENGTH
- *
- * The maximum upper limit of label length in characters
- */
-#define GTK_DATABOX_RULER_MAX_MAX_LENGTH 63
 
 /**
  * GtkDataboxRulerPrivate
@@ -99,7 +100,20 @@ typedef struct _GtkDataboxRulerClass GtkDataboxRulerClass;
  * from developers who are just using the object.
  *
  **/
- typedef struct _GtkDataboxRulerPrivate GtkDataboxRulerPrivate;
+typedef struct _GtkDataboxRulerPrivate GtkDataboxRulerPrivate;
+
+/**
+ * GtkDataboxRulerClass
+ *
+ * The object class of #GtkDataboxRuler.
+ *
+ **/
+typedef struct _GtkDataboxRulerClass GtkDataboxRulerClass;
+
+struct _GtkDataboxRulerClass
+{
+   GtkWidgetClass parent_class;
+};
 
 struct _GtkDataboxRuler
 {
@@ -108,15 +122,15 @@ struct _GtkDataboxRuler
    GtkDataboxRulerPrivate *priv;
 };
 
-struct _GtkDataboxRulerClass
-{
-   GtkWidgetClass parent_class;
-};
+/**
+ * GTK_DATABOX_RULER_MAX_MAX_LENGTH
+ *
+ * The maximum upper limit of label length in characters
+ */
+#define GTK_DATABOX_RULER_MAX_MAX_LENGTH 63
 
+     GType gtk_databox_ruler_get_type (void) G_GNUC_CONST;
 
-GType
-gtk_databox_ruler_get_type (void)
-   G_GNUC_CONST;
      GtkWidget *gtk_databox_ruler_new (GtkOrientation orientation);
 
      void gtk_databox_ruler_set_range (GtkDataboxRuler * ruler,
@@ -170,7 +184,7 @@ gtk_databox_ruler_get_type (void)
     void gtk_databox_ruler_set_manual_tick_cnt(GtkDataboxRuler * ruler, guint manual_tick_cnt);
     guint gtk_databox_ruler_get_manual_tick_cnt(GtkDataboxRuler * ruler);
 
-    void gtk_databox_ruler_set_manual_tick_labels(GtkDataboxRuler * ruler, gchar *labels[]);
+    void gtk_databox_ruler_set_manual_tick_labels(GtkDataboxRuler *ruler, gchar **manual_tick_labels);
     gchar ** gtk_databox_ruler_get_manual_tick_labels(GtkDataboxRuler * ruler);
 
     void gtk_databox_ruler_set_box_shadow(GtkDataboxRuler * ruler, GtkShadowType which_shadow);

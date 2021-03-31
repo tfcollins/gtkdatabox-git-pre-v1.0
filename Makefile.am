@@ -3,8 +3,10 @@
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gtkdatabox.pc
 
-SUBDIRS = gtk glade examples 
+SUBDIRS = gtk glade examples doc
 
-EXTRA_DIST = m4 depcomp scripts gtkdatabox.pc.in gtkdatabox.spec.in glade/gtkdatabox.xml api
+EXTRA_DIST = m4 depcomp scripts gtkdatabox.pc.in gtkdatabox.spec.in glade/gtkdatabox.xml
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
+
+ACLOCAL_AMFLAGS = -I m4

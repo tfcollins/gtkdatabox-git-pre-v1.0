@@ -49,14 +49,20 @@ G_BEGIN_DECLS
                                            GtkDataboxOffsetBarsClass))
 
 /**
- * GtkDataboxOffsetBars:
- * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines, #GtkDataboxMarkers, #GtkDataboxBars
+ * GtkDataboxOffsetBars
  *
  * #GtkDataboxOffsetBars is a #GtkDataboxGraph class for displaying xyy-values as vertical bars which rise/drop from y1.
  *
+ * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines, #GtkDataboxMarkers, #GtkDataboxBars
  */
    typedef struct _GtkDataboxOffsetBars GtkDataboxOffsetBars;
 
+   /**
+    * GtkDataboxOffsetBarsClass
+    *
+    * The object class of #GtkDataboxOffsetBars.
+    *
+    **/
    typedef struct _GtkDataboxOffsetBarsClass GtkDataboxOffsetBarsClass;
 
    struct _GtkDataboxOffsetBars

@@ -66,8 +66,6 @@ G_BEGIN_DECLS
                                            GTK_TYPE_DATABOX, \
                                            GtkDataboxClass))
 
-typedef struct _GtkDataboxClass GtkDataboxClass;
-
 typedef struct
 {
     gfloat x1;
@@ -89,6 +87,8 @@ struct _GtkDatabox
     GtkWidget box;
 };
 
+typedef struct _GtkDataboxClass GtkDataboxClass;
+
 struct _GtkDataboxClass
 {
     GtkWidgetClass parent_class;
@@ -108,7 +108,7 @@ GType gtk_databox_get_type (void);
 
 GtkWidget *gtk_databox_new (void);
 
-GList * gtk_databox_get_graphs (GtkDatabox *);
+GList * gtk_databox_get_graphs (GtkDatabox *box);
 
 gint gtk_databox_graph_add (GtkDatabox * box, GtkDataboxGraph * graph);
 gint gtk_databox_graph_add_front (GtkDatabox * box, GtkDataboxGraph * graph);
@@ -169,14 +169,12 @@ gint16 gtk_databox_value_to_pixel_y (GtkDatabox * box, gfloat value);
 gfloat gtk_databox_pixel_to_value_x (GtkDatabox * box, gint16 pixel);
 gfloat gtk_databox_pixel_to_value_y (GtkDatabox * box, gint16 pixel);
 void gtk_databox_values_to_xpixels (GtkDatabox *box, gint16 *pixels,
-	void *values, GType vtype, guint size, guint start, guint stride, guint len);
+	void *values, GType vtype, guint maxlen, guint start, guint stride, guint len);
 void gtk_databox_values_to_ypixels (GtkDatabox *box, gint16 *pixels,
-	void *values, GType vtype, guint size, guint start, guint stride, guint len);
+	void *values, GType vtype, guint maxlen, guint start, guint stride, guint len);
 
-void gtk_databox_create_box_with_scrollbars_and_rulers (GtkWidget **
-        p_box,
-        GtkWidget **
-        p_table,
+void gtk_databox_create_box_with_scrollbars_and_rulers (GtkWidget **p_box,
+        GtkWidget **p_grid,
         gboolean scrollbar_x,
         gboolean scrollbar_y,
         gboolean ruler_x,
@@ -184,7 +182,7 @@ void gtk_databox_create_box_with_scrollbars_and_rulers (GtkWidget **
 
 void
 gtk_databox_create_box_with_scrollbars_and_rulers_positioned (GtkWidget ** p_box,
-        GtkWidget ** p_table,
+        GtkWidget ** p_grid,
         gboolean scrollbar_x,
         gboolean scrollbar_y,
         gboolean ruler_x,

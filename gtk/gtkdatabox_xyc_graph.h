@@ -60,6 +60,12 @@ G_BEGIN_DECLS
  */
    typedef struct _GtkDataboxXYCGraph GtkDataboxXYCGraph;
 
+   /**
+    * GtkDataboxXYCGraphClass
+    *
+    * The object class of #GtkDataboxXYCGraph.
+    *
+    **/
    typedef struct _GtkDataboxXYCGraphClass GtkDataboxXYCGraphClass;
 
    struct _GtkDataboxXYCGraph

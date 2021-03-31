@@ -1,5 +1,6 @@
 #!/bin/sh
 
+gtkdocize
 aclocal
 libtoolize -c -f --automake
 autoheader 

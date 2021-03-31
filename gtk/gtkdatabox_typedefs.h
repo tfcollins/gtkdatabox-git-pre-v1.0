@@ -22,31 +22,42 @@
 
 #include <gdk/gdk.h>
 
-G_BEGIN_DECLS
-   /**
-    * GtkDatabox:
-    * @box: The parent object 
-    *
-    * A GTK+ widget to display large amounts of numerical data quickly and easily. 
-    * The numerical data is represented/displayed by #GtkDataboxGraph objects, e.g.
-    * #GtkDataboxPoints.
-    *
-    * Implemented by #_GtkDatabox;
-    *
-    **/
-   typedef struct _GtkDatabox GtkDatabox;
+/**
+ * SECTION:gtkdatabox_typedefs
+ * @short_description: GtkDatabox type definitions for cross reference.
+ * @include: gtkdatabox_typedefs.h
+ * @see_also: #GtkDatabox, #GtkDataboxGraph
+ *
+ * This file is just used to resolve cross reference in the implementation
+ * of the objects GtkDatabox and GtkDataboxGraph.
+ */
 
-  /**
+G_BEGIN_DECLS
+/**
+* GtkDatabox
+*
+* A GTK+ widget to display large amounts of numerical data quickly and easily. 
+* The numerical data is represented/displayed by #GtkDataboxGraph objects, e.g.
+* #GtkDataboxPoints.
+*
+* Implemented by #_GtkDatabox;
+*
+* @box: the parent object
+**/
+typedef struct _GtkDatabox GtkDatabox;
+
+   /**
     * GtkDataboxGraph
-    * @parent: The parent object 
-    *
-    * The GtkDataboxGraph is the base class for all kinds of graphs (e.g. lines, points, decorations like coordinate crosses) 
+    * The GtkDataboxGraph is the base class for all kinds of graphs 
+    * (e.g. lines, points, decorations like coordinate crosses) 
     * to be shown in a #GtkDatabox wiget.
     *
     * Implemented by #_GtkDataboxGraph
     *
+    * @parent: the parent object 
     **/
-typedef struct _GtkDataboxGraph GtkDataboxGraph;
+   typedef struct _GtkDataboxGraph GtkDataboxGraph;
+
 G_END_DECLS
 #endif /* __GTK_DATABOX_TYPEDEFS_H__ */
 

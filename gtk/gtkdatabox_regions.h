@@ -49,14 +49,20 @@ G_BEGIN_DECLS
                                            GtkDataboxRegionsClass))
 
 /**
- * GtkDataboxRegions:
- * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines, #GtkDataboxMarkers, #GtkDataboxBars, #GtkDataboxOffsetBars
+ * GtkDataboxRegions
  *
  * #GtkDataboxRegions is a #GtkDataboxGraph class for displaying xxyy-values as oblongs.
  *
+ * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines, #GtkDataboxMarkers, #GtkDataboxBars, #GtkDataboxOffsetBars
  */
    typedef struct _GtkDataboxRegions GtkDataboxRegions;
 
+   /**
+    * GtkDataboxRegionsClass
+    *
+    * The object class of #GtkDataboxRegions.
+    *
+    **/
    typedef struct _GtkDataboxRegionsClass GtkDataboxRegionsClass;
 
    struct _GtkDataboxRegions

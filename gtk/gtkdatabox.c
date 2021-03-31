@@ -92,13 +92,13 @@ enum {
     LAST_PROPERTY
 };
 
-/**
+/*
  * GtkDataboxPrivate
  *
  * A private data structure used by the #GtkDatabox. It shields all internal things
  * from developers who are just using the widget.
  *
- **/
+ */
 typedef struct _GtkDataboxPrivate GtkDataboxPrivate;
 
 struct _GtkDataboxPrivate {
@@ -456,15 +456,15 @@ gtk_databox_new (void) {
 }
 
 /**
- * gtk_databox_get_graphs:
+ * gtk_databox_get_graphs
  * @box: A #GtkDatabox widget
  *
- * Return a list of graphs that were previously added to @box
+ * Return a list of graphs that were previously added to @box.
  *
  * Return value: A #GList that contains all graphs
  */
 GList *
-gtk_databox_get_graphs (GtkDatabox * box) 
+gtk_databox_get_graphs (GtkDatabox *box) 
 {
     g_return_val_if_fail (GTK_IS_DATABOX (box), (GList*)-1);
     GtkDataboxPrivate *priv = gtk_databox_get_instance_private(box);
@@ -472,7 +472,7 @@ gtk_databox_get_graphs (GtkDatabox * box)
 }
 
 static gint
-gtk_databox_motion_notify (GtkWidget * widget, GdkEventMotion * event) {
+gtk_databox_motion_notify (GtkWidget *widget, GdkEventMotion *event) {
     GtkDatabox *box = GTK_DATABOX (widget);
     GtkDataboxPrivate *priv = gtk_databox_get_instance_private(box);
     GdkModifierType state;
@@ -1107,13 +1107,15 @@ gtk_databox_get_box_shadow(GtkDatabox * box) {
 }
 
 /**
- * gtk_databox_set_bg_background:
+ * gtk_databox_set_bg_color:
  * @box: a #GtkDatabox widget
  * @bg_color: a color name, as used in CSS (html color)
  *
  * Convenience function to override the background color of @box, acording to @bg_color.
+ *
  **/
-void gtk_databox_set_bg_color (GtkDatabox * box, gchar *bg_color) {
+void
+gtk_databox_set_bg_color (GtkDatabox * box, gchar *bg_color) {
     GtkWidget * widget;
     GtkDataboxPrivate *priv;
     GtkStyleContext *stylecontext;
@@ -2206,10 +2208,16 @@ gtk_databox_value_to_pixel_y (GtkDatabox * box, gfloat value) {
 
 /**
  * gtk_databox_values_to_xpixels:
- * @box: A #GtkDatabox widget
- * @value: An x values array
+ * @box: A #GtkDatabox widget.
+ * @pixels: address to return pixel x coordinates.
+ * @values: An x values array.
+ * @vtype: GType of @values. 
+ * @maxlen: maximum length of the arrays.
+ * @start: first value to compute.
+ * @stride: bytes per row of plotting.
+ * @len: how many values to compute.
  *
- * Calculates the horizontal pixel coordinates which represents the x @values.
+ * Calculates the horizontal coordinates for @pixels which represents the x @values.
  * Pixel coordinates are relative to the left corner of the @box which is equivalent to (0).
  *
  * Return value: Pixel coordinates
@@ -2273,9 +2281,15 @@ gtk_databox_values_to_xpixels (GtkDatabox *box, gint16 *pixels,
 /**
  * gtk_databox_values_to_ypixels:
  * @box: A #GtkDatabox widget
- * @value: An y values array
+ * @pixels: address to return pixel y coordinates.
+ * @values: an y values array.
+ * @vtype: GType of @values. 
+ * @maxlen: maximum length of the arrays.
+ * @start: first value to compute.
+ * @stride: bytes per row of plotting.
+ * @len: how many values to compute.
  *
- * Calculates the vertical pixel coordinates which represents the y @values.
+ * Calculates the vertical coordinates for @pixels which represents the y @values.
  * Pixel coordinates are relative to the top corner of the @box which is equivalent to (0).
  *
  * Return value: Pixel coordinates
@@ -2411,6 +2425,8 @@ gtk_databox_pixel_to_value_y (GtkDatabox * box, gint16 pixel) {
  * This function produces the default databox with rulers at the top left and
  * scroll bars at the bottom right.
  *
+ * Return value: #GtkGrid in the @p_grid object pointer.
+ *
  * @see_also: gtk_databox_new(), gtk_databox_set_adjustment_x(), gtk_databox_set_adjustment_y(), gtk_databox_set_ruler_x(), gtk_databox_set_ruler_y()
  */
 void
@@ -2442,6 +2458,8 @@ gtk_databox_create_box_with_scrollbars_and_rulers (GtkWidget ** p_box,
  *
  * This function produces the default databox with rulers at the top left and
  * scroll bars at the bottom right.
+ *
+ * Return value: #GtkGrid in the @p_grid object pointer.
  *
  * @see_also: gtk_databox_new(), gtk_databox_set_adjustment_x(), gtk_databox_set_adjustment_y(), gtk_databox_set_ruler_x(), gtk_databox_set_ruler_y(), gtk_databox_create_box_with_scrollbars_and_rulers()
  */

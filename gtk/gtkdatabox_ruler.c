@@ -724,7 +724,7 @@ static void gtk_databox_ruler_get_preferred_height (GtkWidget *widget, gint *min
 
 
 /**
- * gtk_databox_ruler_get_orientation:
+ * gtk_databox_ruler_get_orientation
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the orientation of the @ruler (horizontal or vertical).
@@ -740,7 +740,7 @@ gtk_databox_ruler_get_orientation (GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_text_orientation:
+ * gtk_databox_ruler_set_text_orientation
  * @ruler: a #GtkDataboxRuler
  * @orientation: new orientation of the tick marks in the vertical ruler
  *
@@ -786,7 +786,7 @@ gtk_databox_ruler_set_text_orientation (GtkDataboxRuler * ruler,
 }
 
 /**
- * gtk_databox_ruler_get_text_orientation:
+ * gtk_databox_ruler_get_text_orientation
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the text orientation of the @ruler (horizontal or vertical).
@@ -803,7 +803,7 @@ gtk_databox_ruler_get_text_orientation (GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_text_alignment:
+ * gtk_databox_ruler_set_text_alignment
  * @ruler: a #GtkDataboxRuler
  * @alignment: new alignment of the tick label in the vertical ruler when horizontal text is set
  *
@@ -828,7 +828,7 @@ gtk_databox_ruler_set_text_alignment (GtkDataboxRuler * ruler,
 }
 
 /**
- * gtk_databox_ruler_get_text_alignment:
+ * gtk_databox_ruler_get_text_alignment
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the text alignment of the @ruler (vertical).
@@ -845,7 +845,7 @@ gtk_databox_ruler_get_text_alignment (GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_text_hoffset:
+ * gtk_databox_ruler_set_text_hoffset
  * @ruler: a #GtkDataboxRuler
  * @offset: new x offset of the tick label in the ruler
  *
@@ -866,7 +866,7 @@ gtk_databox_ruler_set_text_hoffset (GtkDataboxRuler * ruler,
 }
 
 /**
- * gtk_databox_ruler_get_text_hoffset:
+ * gtk_databox_ruler_get_text_hoffset
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the text x (horizontal) offset of the @ruler.
@@ -882,7 +882,7 @@ gtk_databox_ruler_get_text_hoffset (GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_draw_position:
+ * gtk_databox_ruler_set_draw_position
  * @ruler: a #GtkDataboxRuler
  * @draw: whether to draw the position arrows on the ruler at all
  *
@@ -903,7 +903,7 @@ gtk_databox_ruler_set_draw_position(GtkDataboxRuler * ruler, gboolean draw) {
 }
 
 /**
- * gtk_databox_ruler_get_draw_position:
+ * gtk_databox_ruler_get_draw_position
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the draw position arrows option from the @ruler (horizontal or vertical).
@@ -919,7 +919,7 @@ gtk_databox_ruler_get_draw_position(GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_draw_ticks:
+ * gtk_databox_ruler_set_draw_ticks
  * @ruler: a #GtkDataboxRuler
  * @draw: whether to draw the ticks on the ruler at all
  *
@@ -940,7 +940,7 @@ gtk_databox_ruler_set_draw_ticks(GtkDataboxRuler * ruler, gboolean draw) {
 }
 
 /**
- * gtk_databox_ruler_get_draw_ticks:
+ * gtk_databox_ruler_get_draw_ticks
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the draw ticks option from the @ruler (horizontal or vertical).
@@ -956,7 +956,7 @@ gtk_databox_ruler_get_draw_ticks(GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_draw_subticks:
+ * gtk_databox_ruler_set_draw_subticks
  * @ruler: a #GtkDataboxRuler
  * @draw: whether to draw the subticks on the ruler
  *
@@ -976,7 +976,7 @@ gtk_databox_ruler_set_draw_subticks(GtkDataboxRuler * ruler, gboolean draw) {
 }
 
 /**
- * gtk_databox_ruler_get_draw_subticks:
+ * gtk_databox_ruler_get_draw_subticks
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the draw subticks option from the @ruler (horizontal or vertical).
@@ -992,7 +992,7 @@ gtk_databox_ruler_get_draw_subticks(GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_grid_set_manual_ticks:
+ * gtk_databox_ruler_set_manual_ticks
  * @ruler: a #GtkDataboxRuler
  * @manual_ticks: sets the pointer to the hline values for the @ruler
  *
@@ -1008,7 +1008,7 @@ gtk_databox_ruler_set_manual_ticks (GtkDataboxRuler * ruler, gfloat *manual_tick
 }
 
 /**
- * gtk_databox_grid_get_manual_ticks:
+ * gtk_databox_ruler_get_manual_ticks
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the pointer to the manual tick values for the @ruler.
@@ -1023,14 +1023,14 @@ gtk_databox_ruler_get_manual_ticks (GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_grid_set_manual_tick_cnt:
+ * gtk_databox_ruler_set_manual_tick_cnt
  * @ruler: a #GtkDataboxRuler
  * @manual_tick_cnt: sets the number of manual ticks for the @ruler
  *
  * Sets the number of manual ticks for the @ruler (horizontal or vertical).
  **/
 void
-gtk_databox_ruler_set_manual_tick_cnt (GtkDataboxRuler * ruler, guint manual_tick_cnt) {
+gtk_databox_ruler_set_manual_tick_cnt (GtkDataboxRuler *ruler, guint manual_tick_cnt) {
     g_return_if_fail (GTK_DATABOX_IS_RULER (ruler));
 
     ruler->priv->manual_tick_cnt = manual_tick_cnt;
@@ -1039,7 +1039,7 @@ gtk_databox_ruler_set_manual_tick_cnt (GtkDataboxRuler * ruler, guint manual_tic
 }
 
 /**
- * gtk_databox_grid_get_manual_tick_cnt:
+ * gtk_databox_ruler_get_manual_tick_cnt
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the number manual tick values for the @ruler.
@@ -1054,7 +1054,7 @@ gtk_databox_ruler_get_manual_tick_cnt (GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_grid_set_manual_tick_labels:
+ * gtk_databox_ruler_set_manual_tick_labels
  * @ruler: a #GtkDataboxRuler
  * @manual_tick_labels: sets the pointer to the labels for the ticks on the @ruler
  *
@@ -1064,7 +1064,7 @@ gtk_databox_ruler_get_manual_tick_cnt (GtkDataboxRuler * ruler) {
  * Sets the tick labels of the @ruler (horizontal or vertical).
  **/
 void
-gtk_databox_ruler_set_manual_tick_labels (GtkDataboxRuler * ruler, gchar **manual_tick_labels) {
+gtk_databox_ruler_set_manual_tick_labels (GtkDataboxRuler *ruler, gchar **manual_tick_labels) {
     g_return_if_fail (GTK_DATABOX_IS_RULER (ruler));
 
     ruler->priv->manual_tick_labels = manual_tick_labels;
@@ -1073,7 +1073,7 @@ gtk_databox_ruler_set_manual_tick_labels (GtkDataboxRuler * ruler, gchar **manua
 }
 
 /**
- * gtk_databox_grid_get_manual_tick_labels:
+ * gtk_databox_ruler_get_manual_tick_labels
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the pointer to the manual tick labels for the @ruler.
@@ -1088,7 +1088,7 @@ gtk_databox_ruler_get_manual_tick_labels (GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_invert_edge:
+ * gtk_databox_ruler_set_invert_edge
  * @ruler: a #GtkDataboxRuler
  * @invert: whether to draw the ruler detail with the edge inverted
  *
@@ -1108,7 +1108,7 @@ gtk_databox_ruler_set_invert_edge(GtkDataboxRuler * ruler, gboolean invert) {
 }
 
 /**
- * gtk_databox_ruler_get_invert_edge:
+ * gtk_databox_ruler_get_invert_edge
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the invert edge option from the @ruler (horizontal or vertical).
@@ -1124,11 +1124,11 @@ gtk_databox_ruler_get_invert_edge(GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_linear_label_format:
+ * gtk_databox_ruler_set_linear_label_format
  * @ruler: a #GtkDataboxRuler
- * @invert: How to format the labels for linear rulers
+ * @format: How to format the labels for linear rulers
  *
- * Sets the meta format string for the labels of linear rulers, for example "%%+-%dg" will become "%+-#g" where # is the int variable
+ * Sets the meta @format string for the labels of linear rulers, for example "%%+-%dg" will become "%+-#g" where # is the int variable
  **/
 void
 gtk_databox_ruler_set_linear_label_format(GtkDataboxRuler * ruler, gchar *format) {
@@ -1149,7 +1149,7 @@ gtk_databox_ruler_set_linear_label_format(GtkDataboxRuler * ruler, gchar *format
 }
 
 /**
- * gtk_databox_ruler_get_linear_label_format:
+ * gtk_databox_ruler_get_linear_label_format
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the linear label meta format of the @ruler (horizontal or vertical).
@@ -1165,11 +1165,11 @@ gtk_databox_ruler_get_linear_label_format(GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_log_label_format:
+ * gtk_databox_ruler_set_log_label_format
  * @ruler: a #GtkDataboxRuler
- * @invert: How to format the labels for log scaled rulers
+ * @format: How to format the labels for log scaled rulers
  *
- * Sets the meta format string for the labels of log scaled rulers, for example "%%-%dg" will become "%-#g" where # is the int variable
+ * Sets the meta @format string for the labels of log scaled rulers, for example "%%-%dg" will become "%-#g" where # is the int variable
  **/
 void
 gtk_databox_ruler_set_log_label_format(GtkDataboxRuler * ruler, gchar *format) {
@@ -1190,7 +1190,7 @@ gtk_databox_ruler_set_log_label_format(GtkDataboxRuler * ruler, gchar *format) {
 }
 
 /**
- * gtk_databox_ruler_get_log_label_format:
+ * gtk_databox_ruler_get_log_label_format
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the log label meta format of the @ruler (horizontal or vertical).
@@ -1206,7 +1206,7 @@ gtk_databox_ruler_get_log_label_format(GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_get_range:
+ * gtk_databox_ruler_get_range
  * @ruler: a #GtkDataboxRuler
  * @lower: location to store lower limit of the ruler, or %NULL
  * @upper: location to store upper limit of the ruler, or %NULL
@@ -1230,7 +1230,7 @@ gtk_databox_ruler_get_range (GtkDataboxRuler * ruler,
 }
 
 /**
- * gtk_databox_ruler_get_max_length:
+ * gtk_databox_ruler_get_max_length
  * @ruler: A #GtkDataboxRuler widget
  *
  * This function returns the maximum number of digits to be used for each tick
@@ -1247,7 +1247,7 @@ gtk_databox_ruler_get_max_length (GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_get_scale_type:
+ * gtk_databox_ruler_get_scale_type
  * @ruler: A #GtkDataboxRuler widget
  *
  * This function returns the scale type of the @ruler (linear or logarithmic).
@@ -1263,7 +1263,7 @@ gtk_databox_ruler_get_scale_type (GtkDataboxRuler * ruler) {
 }
 
 /**
- * gtk_databox_ruler_set_box_shadow:
+ * gtk_databox_ruler_set_box_shadow
  * @ruler: a #GtkDataboxRuler
  * @which_shadow: How to render the box shadow on the ruler edges.
  *
@@ -1282,7 +1282,7 @@ gtk_databox_ruler_set_box_shadow(GtkDataboxRuler * ruler, GtkShadowType which_sh
 }
 
 /**
- * gtk_databox_ruler_get_box_shadow:
+ * gtk_databox_ruler_get_box_shadow
  * @ruler: a #GtkDataboxRuler
  *
  * Gets the type of shadow being rendered to the @ruler (GTK_SHADOW_NONE, GTK_SHADOW_IN, GTK_SHADOW_OUT, GTK_SHADOW_ETCHED_IN, GTK_SHADOW_ETCHED_OUT).

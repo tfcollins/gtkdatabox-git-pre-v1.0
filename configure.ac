@@ -85,10 +85,20 @@ AM_CONDITIONAL(BUILD_GLADE, test x"$ac_cv_enable_glade" = xyes)
 
 # ------------------ End of Glade 3 configuration ------------------------
 
+
+# Check for gtk-doc
+AC_CONFIG_MACRO_DIR(m4)
+m4_ifdef([GTK_DOC_CHECK], [
+GTK_DOC_CHECK([1.14],[--flavour no-tmpl])
+],[
+AM_CONDITIONAL([ENABLE_GTK_DOC], false)
+])
+
 AC_OUTPUT(Makefile              \
 	gtk/Makefile            \
 	glade/Makefile		\
 	examples/Makefile       \
+	doc/Makefile		\
         gtkdatabox.pc           \
         gtkdatabox.spec         \
 	)

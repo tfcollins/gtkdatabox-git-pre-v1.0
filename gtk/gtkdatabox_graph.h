@@ -54,20 +54,13 @@ G_BEGIN_DECLS
                                            GTK_DATABOX_TYPE_GRAPH, \
                                            GtkDataboxGraphClass))
 
+/**
+ * GtkDataboxGraphClass
+ *
+ * The object class of #GtkDataboxGraph.
+ *
+ **/
    typedef struct _GtkDataboxGraphClass GtkDataboxGraphClass;
-
-   /**
-    * _GtkDataboxGraph
-    * @parent: The parent object
-    *
-    * Implementation of #GtkDataboxGraph
-    *
-    **/
-   struct _GtkDataboxGraph
-   {
-      /*< private >*/
-      GObject parent;
-   };
 
    struct _GtkDataboxGraphClass
    {
@@ -83,6 +76,20 @@ G_BEGIN_DECLS
 				 gfloat * min_y, gfloat * max_y);
       cairo_t* (*create_gc) (GtkDataboxGraph * graph, GtkDatabox * box);
    };
+
+   /**
+    * _GtkDataboxGraph
+    * @parent: the parent object
+    *
+    * Implementation of #GtkDataboxGraph
+    *
+    **/
+   struct _GtkDataboxGraph
+   {
+      /*< private >*/
+      GObject parent;
+   };
+
 
    GType gtk_databox_graph_get_type (void);
 

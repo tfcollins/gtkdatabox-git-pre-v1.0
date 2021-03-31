@@ -18,10 +18,12 @@
  */
 
 /**
- * @file gtkdatabox_scale.h
+ * SECTION:gtkdatabox_scale
+ * @short_description: scale type enumeration
+ * @include: gtkdatabox_scale.h
+ * @see_also: #GtkDatabox
  *
- * Currently just an enumeration used in several places...
- * 
+ * Currently this file just adds the scale type enumeration used in several places.
  */
 
 #ifndef __GTK_DATABOX_SCALE_H__
@@ -32,8 +34,9 @@
 G_BEGIN_DECLS
 
 /**
- * GtkDataboxScaleType:
+ * GtkDataboxScaleType
  * @GTK_DATABOX_SCALE_LINEAR:           Linear scale
+ * @GTK_DATABOX_SCALE_LOG2:             Logarithmic scale (base 2)
  * @GTK_DATABOX_SCALE_LOG:              Logarithmic scale (base 10)
  *
  * Scale type for #GtkDatabox and #GtkDataboxRuler objects.

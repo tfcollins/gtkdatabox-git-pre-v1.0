@@ -59,15 +59,29 @@ G_BEGIN_DECLS
 
    typedef struct _GtkDataboxGrid GtkDataboxGrid;
 
+   /**
+    * GtkDataboxGridClass
+    *
+    * The object class of #GtkDataboxGrid.
+    *
+    **/
    typedef struct _GtkDataboxGridClass GtkDataboxGridClass;
 
+   /**
+    * GtkDataboxGridLineStyle:
+    * @GTK_DATABOX_GRID_DASHED_LINES: Grid drawn with dashed lines.
+    * @GTK_DATABOX_GRID_SOLID_LINES: Grid drawn with solid lines.
+    * @GTK_DATABOX_GRID_DOTTED_LINES: Grid drawn with dotted lines.
+    *
+    * Line styles to use in a #GtkDataboxGrid.
+    */
    typedef enum
-     {
-       GTK_DATABOX_GRID_DASHED_LINES = 0,   /* Grid drawn with dashed lines */
-       GTK_DATABOX_GRID_SOLID_LINES,        /* Grid drawn with solid lines */
-       GTK_DATABOX_GRID_DOTTED_LINES        /* Grid drawn with dotted lines */
-     }
-     GtkDataboxGridLineStyle;
+   {
+       GTK_DATABOX_GRID_DASHED_LINES = 0,
+       GTK_DATABOX_GRID_SOLID_LINES,
+       GTK_DATABOX_GRID_DOTTED_LINES
+   }
+   GtkDataboxGridLineStyle;
 
    struct _GtkDataboxGrid
    {

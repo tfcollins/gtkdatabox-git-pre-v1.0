@@ -49,14 +49,20 @@ G_BEGIN_DECLS
                                            GtkDataboxBarsClass))
 
 /**
- * GtkDataboxBars:
- * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines, #GtkDataboxMarkers
- *
+ * GtkDataboxBars
  * #GtkDataboxBars is a #GtkDataboxGraph class for displaying xy-values as vertical bars which rise/drop from y=0.
+ *
+ * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines, #GtkDataboxMarkers
  *
  */
    typedef struct _GtkDataboxBars GtkDataboxBars;
 
+/**
+ * GtkDataboxBarsClass
+ *
+ * The object class of #GtkDataboxBars.
+ *
+ **/
    typedef struct _GtkDataboxBarsClass GtkDataboxBarsClass;
 
    struct _GtkDataboxBars

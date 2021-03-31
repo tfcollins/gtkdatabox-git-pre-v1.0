@@ -49,14 +49,21 @@ G_BEGIN_DECLS
                                            GtkDataboxMarkersClass))
 
 /**
- * GtkDataboxMarkers:
- * @parent: The parent object 
+ * GtkDataboxMarkers
  * 
  * #GtkDataboxMarkers is a #GtkDataboxGraph class for displaying labeled markers (circles, triangles, lines) for xy-values.
+ *
+ * @parent: The parent object 
  *
  */
    typedef struct _GtkDataboxMarkers GtkDataboxMarkers;
 
+   /**
+    * GtkDataboxMarkersClass
+    *
+    * The object class of #GtkDataboxMarkers.
+    *
+    **/
    typedef struct _GtkDataboxMarkersClass GtkDataboxMarkersClass;
 
    /**
