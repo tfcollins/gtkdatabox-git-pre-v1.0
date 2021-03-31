@@ -19,6 +19,14 @@
 
 #include <gtkdatabox_scale.h>
 
+/**
+ * gtk_databox_scale_type_get_type
+ *
+ * Getter function for the #GtkDataboxScaleType Gtype.
+ *
+ * Return value: #GType of #GtkDataboxScaleType.
+ *
+ */
 GType
 gtk_databox_scale_type_get_type (void)
 {

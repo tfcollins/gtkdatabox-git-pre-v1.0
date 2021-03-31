@@ -43,6 +43,14 @@
 #define LINEAR_FORMAT_MARKUP "%%-+%dg"
 #define LOG_FORMAT_MARKUP "%%-%dg"
 
+#ifdef _MSC_VER
+#ifndef _DATABOX_LOG2_
+#define _DATABOX_LOG2_
+/*< private >*/
+#define log2(x) (log(x)/log(2))
+#endif /*_DATABOX_LOG2_ */
+#endif /*_MSC_VER */
+
 static void gtk_databox_ruler_draw_ticks (GtkDataboxRuler * ruler);
 static void gtk_databox_ruler_draw_pos (GtkDataboxRuler * ruler);
 static gint gtk_databox_ruler_motion_notify (GtkWidget * widget,

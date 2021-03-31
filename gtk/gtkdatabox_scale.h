@@ -17,19 +17,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-/**
- * SECTION:gtkdatabox_scale
- * @short_description: scale type enumeration
- * @include: gtkdatabox_scale.h
- * @see_also: #GtkDatabox
- *
- * Currently this file just adds the scale type enumeration used in several places.
- */
-
 #ifndef __GTK_DATABOX_SCALE_H__
 #define __GTK_DATABOX_SCALE_H__
 
 #include <glib-object.h>
+
+/**
+ * SECTION:gtkdatabox_scale
+ * @short_description: scale type enumeration
+ * @include: gtkdatabox_scale.h
+ * @see_also: #GtkDatabox, #GtkDataboxRuler
+ *
+ * This file adds the #GtkDataboxScaleType enumeration used in several places.
+ */
 
 G_BEGIN_DECLS
 

@@ -29,6 +29,13 @@
  * Modified by Roland Bock 2007 - 2008.
  */
 
+#ifndef __GTK_DATABOX_RULER_H__
+#define __GTK_DATABOX_RULER_H__
+
+#include <gdk/gdk.h>
+#include <gtk/gtk.h>
+#include <gtkdatabox_scale.h>
+
 /**
  * SECTION:gtkdatabox_ruler
  * @short_description: An improved version of the #GtkRuler.
@@ -58,24 +65,6 @@
  *    </listitem>
  * </itemizedlist>
  **/
-#ifndef __GTK_DATABOX_RULER_H__
-#define __GTK_DATABOX_RULER_H__
-
-#ifdef _MSC_VER
-/**
- * log2
- * @x: a floating point number 
- *
- * Convenience macro to compute the log of a number under base 2, on systems that do not have it.
- *
- * Return value: floating point log2 of @x.
- **/
-#define log2(x) (log(x)/log(2))
-#endif
-
-#include <gdk/gdk.h>
-#include <gtk/gtk.h>
-#include <gtkdatabox_scale.h>
 
 G_BEGIN_DECLS
 #define GTK_DATABOX_TYPE_RULER            (gtk_databox_ruler_get_type ())

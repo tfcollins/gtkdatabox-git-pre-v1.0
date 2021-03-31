@@ -117,7 +117,6 @@ gtk_databox_ruler_set_manual_tick_labels
 gtk_databox_ruler_get_manual_tick_labels
 gtk_databox_ruler_set_box_shadow
 gtk_databox_ruler_get_box_shadow
-log2
 <SUBSECTION Standard>
 GTK_DATABOX_IS_RULER
 GTK_DATABOX_IS_RULER_CLASS
@@ -126,6 +125,13 @@ GTK_DATABOX_RULER_CLASS
 GTK_DATABOX_RULER_GET_CLASS
 GTK_DATABOX_TYPE_RULER
 gtk_databox_ruler_get_type
+</SECTION>
+
+<SECTION>
+<FILE>gtkdatabox_scale</FILE>
+<TITLE>GtkDataboxScaleType</TITLE>
+GtkDataboxScaleType
+gtk_databox_scale_type_get_type
 </SECTION>
 
 <SECTION>

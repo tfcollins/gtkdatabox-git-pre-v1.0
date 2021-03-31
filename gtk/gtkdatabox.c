@@ -27,6 +27,13 @@
 #include <gtk/gtk.h>
 #include <math.h>
 
+#ifdef _MSC_VER
+#ifndef _DATABOX_LOG2_
+#define _DATABOX_LOG2_
+/*< private >*/
+#define log2(x) (log(x)/log(2))
+#endif /*_DATABOX_LOG2_ */
+#endif /*_MSC_VER */
 
 static gint gtk_databox_button_press (GtkWidget * widget,
                                       GdkEventButton * event);

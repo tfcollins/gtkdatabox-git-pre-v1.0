@@ -11,8 +11,8 @@
     <title>GtkDatabox Reference Manual</title>
     <releaseinfo>
       For &package_string;.
-      The latest version of this documentation will be found on-line at
-      <ulink role="online-location" url="https://sourceforge.net/p/gtkdatabox/git/ci/master/tree/">Git repository at sf.net</ulink> (to be updated).
+      The latest version of this documentation will be found on-line from: 
+      <ulink role="online-location" url="https://sourceforge.net/p/gtkdatabox/wiki/Home/">GtkDatabox Wiki at SF.net</ulink>.
     </releaseinfo>
   </bookinfo>
 
@@ -31,6 +31,7 @@
     <xi:include href="xml/gtkdatabox_offset_bars.xml"/>
     <xi:include href="xml/gtkdatabox_points.xml"/>
     <xi:include href="xml/gtkdatabox_regions.xml"/>
+    <xi:include href="xml/gtkdatabox_scale.xml"/>
     <xi:include href="xml/gtkdatabox_typedefs.xml"/>
   </chapter>
   <chapter id="object-tree">
@@ -46,6 +47,6 @@
     <xi:include href="xml/api-index-deprecated.xml"><xi:fallback /></xi:include>
   </index>
   <!-- enable this when you use gobject introspection annotations
-  <xi:include href="xml/annotation-glossary.xml"><xi:fallback /></xi:include>
   -->
+  <xi:include href="xml/annotation-glossary.xml"><xi:fallback /></xi:include>
 </book>

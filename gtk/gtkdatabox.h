@@ -23,6 +23,7 @@
 #include <gtkdatabox_typedefs.h>
 #include <gtkdatabox_graph.h>
 #include <gtkdatabox_ruler.h>
+#include <gtkdatabox_scale.h>
 #include <gtk/gtk.h>
 
 /**
