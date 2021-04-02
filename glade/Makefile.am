@@ -27,4 +27,18 @@ libgladedatabox_la_SOURCES = \
 catalogsdir = @glade_catalogdir@
 catalogs_DATA = gtkdatabox.xml
 
+# Install icon file
+themedir = $(datadir)/icons/hicolor
+size = scalable
+context = apps
+iconsdir = $(themedir)/$(size)/$(context)
+icons_DATA = \
+	     widget-gladedatabox-gtk_databox.svg \
+	     widget-gladedatabox-gtk_databox_ruler.svg
+
+EXTRA_DIST = \
+	     $(icons_DATA) \
+	     widget-gladedatabox-gtk_databox.fig \
+	     widget-gladedatabox-gtk_databox_ruler.fig
+
 endif

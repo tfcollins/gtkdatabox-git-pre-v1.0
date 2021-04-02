@@ -647,6 +647,8 @@ gtk_databox_realize (GtkWidget * widget) {
     attributes.visual = gtk_widget_get_visual (widget);
     attributes.event_mask = gtk_widget_get_events (widget);
     attributes.event_mask |= (GDK_EXPOSURE_MASK |
+			      GDK_SCROLL_MASK |
+			      GDK_TOUCH_MASK |
                               GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK |
                               GDK_POINTER_MOTION_MASK |
                               GDK_POINTER_MOTION_HINT_MASK);
@@ -1407,7 +1409,7 @@ gtk_databox_scroll_event (GtkWidget *widget, GdkEventScroll *event) {
 
         if ((event->direction == GDK_SCROLL_UP ||
                 event->direction == GDK_SCROLL_DOWN) &&
-                !(event->state & GDK_MOD1_MASK)) {
+                !(event->state & GDK_SHIFT_MASK)) {
             adj = priv->adj_y;
         } else {
             adj = priv->adj_x;

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Creator: fig2dev Version 3.2.8 -->
+<!-- CreationDate: 2021-04-01 20:52:01 -->
+<!-- Magnification: 1.05 -->
+<svg	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="105pt" height="85pt"
+	viewBox="766 316 1663 1348">
+<g fill="none">
+<!-- Line -->
+<rect x="810" y="405" width="1485" height="1215" fill="#ffffff"
+	stroke="#505050" stroke-width="45px" stroke-linejoin="round"/>
+<!-- Line -->
+<polyline points=" 810,405 900,360 2385,360 2385,1575 2295,1620 2295,405 810,405" fill="#8d8d8d"
+	stroke="#505050" stroke-width="45px" stroke-linejoin="round" stroke-linecap="round"/>
+<!-- Line -->
+<polyline points=" 2295,405 2385,360"
+	stroke="#505050" stroke-width="45px" stroke-linecap="round"/>
+<!-- Line -->
+<polyline points=" 900,1215 1035,1215"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<polyline points=" 900,1035 1035,1035"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<polyline points=" 900,855 1035,855"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<polyline points=" 1035,675 900,675"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<rect x="900" y="495" width="135" height="900"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<polyline points=" 1215,1395 1215,1530"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<polyline points=" 1395,1395 1395,1530"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<polyline points=" 1575,1395 1575,1530"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<polyline points=" 1755,1395 1755,1530"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<polyline points=" 1935,1395 1935,1530"
+	stroke="#000000" stroke-width="45px"/>
+<!-- Line -->
+<rect x="1035" y="1395" width="1080" height="135"
+	stroke="#000000" stroke-width="45px"/>
+</g>
+</svg>
