@@ -1,6 +1,7 @@
 aclocal.m4
 configure
 autom4te.cache
+m4/*
 Makefile.in
 */Makefile.in
 */*/Makefile.in
@@ -36,6 +37,7 @@ examples/rulers
 examples/tags
 gtk/tags
 .gitignore~
+*~
 config.*
 libtool
 gtkdatabox/*
@@ -43,9 +45,15 @@ gtkdataboxvc++/ipch
 gtkdataboxvc++/gtkdataboxvc++.opensdf
 gtkdataboxvc++/Release
 gtkdataboxvc++/Debug
-ltmain.sh
-*~
-compile
 gtkdatabox.pc
 gtkdatabox.spec
+ltmain.sh
+compile
 stamp-h1
+depcomp
+missing
+gtk-doc.m4
+gtk-doc.make
+test-drive
+mkinstalldirst
+install-sh

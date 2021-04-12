@@ -45,19 +45,39 @@ databox_widget_parent_changed (GtkWidget * widget,
 }
 
 void
-glade_gtk_databox_ruler_deep_post_create (GladeWidgetAdaptor * adaptor,
+glade_gtk_databox_ruler_post_create (GladeWidgetAdaptor * adaptor,
 					  GObject * widget,
 					  GladeCreateReason reason)
 {
    GladeWidget *gwidget = glade_widget_get_from_gobject (widget);
 
-
    glade_widget_set_action_sensitive (gwidget, "remove_parent", FALSE);
 
    if (GTK_IS_WINDOW (widget))
+   {
       glade_widget_set_action_sensitive (gwidget, "add_parent", FALSE);
+   }
 
    /* Watch parents and set actions sensitive/insensitive */
    g_signal_connect (G_OBJECT (widget), "notify::parent",
 		     G_CALLBACK (databox_widget_parent_changed), adaptor);
+}
+
+void
+glade_databox_ruler_set_orientation (GtkDataboxRuler * ruler,
+                                   GtkOrientation orientation) 
+{
+    gtk_databox_ruler_set_orientation (ruler, orientation);
+}
+
+GType
+glade_databox_type ()
+{
+	return (gtk_databox_get_type ());
+}
+
+GType
+glade_databox_ruler_type ()
+{
+	return (gtk_databox_ruler_get_type ());
 }

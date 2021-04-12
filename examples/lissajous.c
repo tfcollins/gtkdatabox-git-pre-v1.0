@@ -25,6 +25,7 @@
 #include <math.h>
 
 #define POINTS 2000
+#define FRAME_RATE 50
 
 /*----------------------------------------------------------------
  *  databox lissajous
@@ -33,13 +34,13 @@
 static gfloat *lissajousX = NULL;
 static gfloat *lissajousY = NULL;
 
-static gint lissajous_idle = 0;
-static gfloat lissajous_frequency = 3. * G_PI / 2.;
-static GtkWidget *lissajous_label = NULL;
-static guint lissajous_counter = 0;
+static gint lissajous_timeout_id;
+static gfloat lissajous_frequency;
+static GtkWidget *lissajous_label;
+static guint lissajous_counter;
 
 static gboolean
-lissajous_idle_func (GtkDatabox * box)
+lissajous_draw_func (GtkDatabox * box)
 {
    gfloat freq;
    gfloat off;
@@ -49,7 +50,7 @@ lissajous_idle_func (GtkDatabox * box)
    if (!GTK_IS_DATABOX (box))
       return FALSE;
 
-   lissajous_frequency += 0.001;
+   lissajous_frequency += 0.025;
    off = lissajous_counter * 4 * G_PI / POINTS;
 
    freq = 14 + 10 * sin (lissajous_frequency);
@@ -83,7 +84,6 @@ create_lissajous (void)
    GdkRGBA color;
    gint i;
 
-   lissajous_frequency = 0;
    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
    gtk_widget_set_size_request (window, 500, 500);
 
@@ -109,7 +109,7 @@ create_lissajous (void)
    separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
    gtk_box_pack_start (GTK_BOX (box1), separator, FALSE, FALSE, 0);
 
-   lissajous_idle = 0;
+   lissajous_timeout_id = 0;
    lissajous_frequency = 3. * G_PI / 2.;
    lissajous_counter = 0;
 
@@ -155,7 +155,8 @@ create_lissajous (void)
    gtk_box_pack_start (GTK_BOX (box2), close_button, TRUE, TRUE, 0);
    gtk_widget_set_can_default(close_button, TRUE);
    gtk_widget_grab_default (close_button);
-   lissajous_idle = g_idle_add ((GSourceFunc) lissajous_idle_func, box);
+   lissajous_timeout_id = g_timeout_add (1000 / FRAME_RATE,
+               (GSourceFunc) lissajous_draw_func, box);
 
    gtk_widget_show_all (window);
 }

@@ -26,8 +26,10 @@
 	- Seg-fault using deprecated macro G_TYPE_INSTANCE_GET_PRIVATE. Using
 	  now *_get_instance_private() automatic functions.
 	- All remaining compiling warnings removed.
-	- examples/addremove wasn't working fine.
 	- Scrolling with mouse middle button or touch-pad.
+	- examples/addremove wasn't working fine.
+	- example/lissajous was drawing continously in the idle loop, now it
+	  draws at 50 frames/sec with 'g_timeout'.
 	* Removed:
 	- libglade support, as it's based on GTK2.
 	* Updated: 

@@ -157,7 +157,7 @@ struct _GtkDataboxRulerPrivate
     GtkShadowType box_shadow; /* The type of shadow drawn on the ruler pixmap */
 };
 
-G_DEFINE_TYPE (GtkDataboxRuler, gtk_databox_ruler, GTK_TYPE_WIDGET)
+G_DEFINE_TYPE_WITH_PRIVATE (GtkDataboxRuler, gtk_databox_ruler, GTK_TYPE_WIDGET)
 
 static void gtk_databox_ruler_class_init (GtkDataboxRulerClass * class) {
     GObjectClass *gobject_class;
@@ -1412,7 +1412,11 @@ gtk_databox_ruler_draw_ticks (GtkDataboxRuler * ruler) {
     }
 
     if ((upper - lower) == 0)
-        goto out;
+    {
+        cairo_destroy (cr);
+        g_object_unref (layout);
+        return;
+    }
 
     if (ruler->priv->orientation == GTK_ORIENTATION_HORIZONTAL)
         increment = (gdouble) width / (upper - lower);
@@ -1580,9 +1584,8 @@ gtk_databox_ruler_draw_ticks (GtkDataboxRuler * ruler) {
     }
 
     cairo_fill (cr);
-out:
+//out:
     cairo_destroy (cr);
-
     g_object_unref (layout);
 }
 
