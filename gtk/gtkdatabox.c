@@ -1134,9 +1134,10 @@ gtk_databox_set_bg_color (GtkDatabox * box, gchar *bg_color) {
     widget = GTK_WIDGET (box);
     priv = gtk_databox_get_instance_private (box);
 
+    stylecontext = gtk_widget_get_style_context (widget);
+    gtk_style_context_remove_provider (stylecontext, GTK_STYLE_PROVIDER (priv->cssp));
     css_bg_color = g_strdup_printf (".%s {background-color: %s;}", GTK_STYLE_CLASS_BACKGROUND, bg_color);
     gtk_css_provider_load_from_data (priv->cssp, css_bg_color, -1, NULL);
-    stylecontext = gtk_widget_get_style_context (widget);
     gtk_style_context_add_provider (stylecontext, GTK_STYLE_PROVIDER (priv->cssp), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     g_free (css_bg_color);
 }

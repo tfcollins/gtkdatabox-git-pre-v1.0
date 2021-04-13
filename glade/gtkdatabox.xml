@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <glade-catalog name="gladedatabox" library="gladedatabox" depends="gtk+">
   <glade-widget-classes>
-    <glade-widget-class name="GtkDatabox" parent="GtkDrawingArea" generic-name="gtk_databox" title="Databox">
-      <properties>
-        <property id="scale-type-x" default="GTK_DATABOX_SCALE_LINEAR"/>
-	<property id="scale-type-y" default="GTK_DATABOX_SCALE_LINEAR"/>
-      </properties>
-    </glade-widget-class>
+    <glade-widget-class name="GtkDatabox" parent="GtkDrawingArea" generic-name="gtk_databox" title="Databox"/>
     <glade-widget-class name="GtkDataboxRuler" parent="GtkWidget" generic-name="gtk_databox_ruler" title="Databox ruler">
       <post-create-function>glade_gtk_databox_ruler_post_create</post-create-function>
       <properties>

@@ -38,6 +38,7 @@ icons_DATA = \
 
 EXTRA_DIST = \
 	     $(icons_DATA) \
+	     gtkdatabox.png \
 	     widget-gladedatabox-gtk_databox.fig \
 	     widget-gladedatabox-gtk_databox_ruler.fig
 

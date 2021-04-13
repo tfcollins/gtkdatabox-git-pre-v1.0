@@ -34,6 +34,7 @@
 #include <stdlib.h>
 
 #include <gtkdatabox.h>
+#include <gtkdatabox_scale.h>
 #include <gtkdatabox_ruler.h>
 
 
@@ -49,7 +50,10 @@ glade_gtk_databox_ruler_post_create (GladeWidgetAdaptor * adaptor,
 					  GObject * widget,
 					  GladeCreateReason reason)
 {
-   GladeWidget *gwidget = glade_widget_get_from_gobject (widget);
+   GladeWidget *gwidget;
+   return;
+
+   gwidget = glade_widget_get_from_gobject (widget);
 
    glade_widget_set_action_sensitive (gwidget, "remove_parent", FALSE);
 

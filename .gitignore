@@ -18,6 +18,8 @@ Makefile
 */*/*.Plo
 gtkdatabox.pc
 gtkdatabox.spec
+doc/html
+doc/xml
 examples/addremove
 examples/enable_disable
 examples/grid
@@ -54,6 +56,6 @@ depcomp
 missing
 gtk-doc.m4
 gtk-doc.make
-test-drive
+test-driver
 mkinstalldirst
 install-sh

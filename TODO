@@ -1,5 +1,3 @@
 Well, come up with cool ideas :-)
 
-This has to be done in the future:
-
-- 
+- Make GtkDataboxRuler be accepted in Glade, not crashing it.
