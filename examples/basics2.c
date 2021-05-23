@@ -57,8 +57,8 @@ create_basics (void)
    gfloat min_y, max_y;
    gfloat *X;
    gfloat *Y;
-   gfloat *Y1; /*  for the offset bars and regions*/
-   gfloat *Y2; /* for the offset bars and regions */
+   gfloat *Y1;			/*  for the offset bars and regions */
+   gfloat *Y2;			/* for the offset bars and regions */
    gfloat buffer;
    GdkRGBA color;
    gint i;
@@ -92,7 +92,7 @@ create_basics (void)
 
    box = gtk_databox_new ();
 
-   g_object_set(G_OBJECT(box), "expand", TRUE, NULL);
+   g_object_set (G_OBJECT (box), "expand", TRUE, NULL);
 
    gtk_grid_attach (GTK_GRID (grid), box, 1, 1, 1, 1);
 
@@ -100,12 +100,13 @@ create_basics (void)
     * this way ...*/
    scrollbar = gtk_scrollbar_new (GTK_ORIENTATION_HORIZONTAL, NULL);
    gtk_databox_set_adjustment_x (GTK_DATABOX (box),
-				gtk_range_get_adjustment (GTK_RANGE
-							  (scrollbar)));
+				 gtk_range_get_adjustment (GTK_RANGE
+							   (scrollbar)));
    gtk_grid_attach (GTK_GRID (grid), scrollbar, 1, 2, 1, 1);
    /* or this way ... */
-   scrollbar = gtk_scrollbar_new(GTK_ORIENTATION_VERTICAL,
-      (gtk_databox_get_adjustment_y (GTK_DATABOX (box))));
+   scrollbar = gtk_scrollbar_new (GTK_ORIENTATION_VERTICAL,
+				  (gtk_databox_get_adjustment_y
+				   (GTK_DATABOX (box))));
    gtk_grid_attach (GTK_GRID (grid), scrollbar, 2, 1, 1, 1);
 
 
@@ -193,9 +194,9 @@ create_basics (void)
 
    for (i = 0; i < OFFSET_BARS; i++)
    {
-      X[i] = (i+0.5) * POINTS / OFFSET_BARS;
-      Y1[i] = 80. * sin ((i+0.5) * 2 * G_PI / OFFSET_BARS);
-      Y2[i] = -0.5*(80. * sin ((i+0.5) * 2 * G_PI / OFFSET_BARS));
+      X[i] = (i + 0.5) * POINTS / OFFSET_BARS;
+      Y1[i] = 80. * sin ((i + 0.5) * 2 * G_PI / OFFSET_BARS);
+      Y2[i] = -0.5 * (80. * sin ((i + 0.5) * 2 * G_PI / OFFSET_BARS));
    }
    color.red = 1;
    color.green = 0;
@@ -211,9 +212,9 @@ create_basics (void)
 
    for (i = 0; i < REGIONS; i++)
    {
-      X[i] = (i+0.5) * POINTS / REGIONS;
-      Y1[i] = .5*80. * sin ((i+0.5) * 2 * G_PI / REGIONS);
-      Y2[i] = .5*-0.5*(80. * sin ((i+0.5) * 2 * G_PI / REGIONS));
+      X[i] = (i + 0.5) * POINTS / REGIONS;
+      Y1[i] = .5 * 80. * sin ((i + 0.5) * 2 * G_PI / REGIONS);
+      Y2[i] = .5 * -0.5 * (80. * sin ((i + 0.5) * 2 * G_PI / REGIONS));
    }
    color.red = 0.5;
    color.green = 0.25;
@@ -266,12 +267,14 @@ create_basics (void)
    g_signal_connect_swapped (G_OBJECT (close_button), "clicked",
 			     G_CALLBACK (gtk_main_quit), G_OBJECT (box));
    gtk_box_pack_start (GTK_BOX (vbox), close_button, FALSE, FALSE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
    gtk_widget_grab_focus (close_button);
 
    gtk_widget_show_all (window);
-   gdk_window_set_cursor (gtk_widget_get_window(box), gdk_cursor_new_for_display (gdk_display_get_default (), GDK_CROSS));
+   gdk_window_set_cursor (gtk_widget_get_window (box),
+			  gdk_cursor_new_for_display (gdk_display_get_default
+						      (), GDK_CROSS));
 }
 
 gint

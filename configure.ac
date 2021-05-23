@@ -29,6 +29,10 @@ AC_SUBST(DATABOX_VERSION, [databox_version])
 #AM_INIT_AUTOMAKE(gtkdatabox, databox_version)
 AM_INIT_AUTOMAKE([tar-ustar])
 
+# Support silent build rules. Disable by either passing
+# --disable-silent-rules to configure or passing V=1 to make
+AM_SILENT_RULES([yes])
+
 AC_LIBTOOL_WIN32_DLL
 AM_PROG_LIBTOOL
 

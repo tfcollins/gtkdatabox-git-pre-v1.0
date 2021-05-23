@@ -47,7 +47,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_MARKERS_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_MARKERS, \
                                            GtkDataboxMarkersClass))
-
 /**
  * GtkDataboxMarkers
  * 
@@ -56,7 +55,7 @@ G_BEGIN_DECLS
  * @parent: The parent object 
  *
  */
-   typedef struct _GtkDataboxMarkers GtkDataboxMarkers;
+typedef struct _GtkDataboxMarkers GtkDataboxMarkers;
 
    /**
     * GtkDataboxMarkersClass
@@ -64,7 +63,7 @@ G_BEGIN_DECLS
     * The object class of #GtkDataboxMarkers.
     *
     **/
-   typedef struct _GtkDataboxMarkersClass GtkDataboxMarkersClass;
+typedef struct _GtkDataboxMarkersClass GtkDataboxMarkersClass;
 
    /**
     * GtkDataboxMarkersPosition:
@@ -76,15 +75,15 @@ G_BEGIN_DECLS
     *
     * Position of a marker relative to its respective X/Y value.
     */
-   typedef enum
-   {
-      GTK_DATABOX_MARKERS_C = 0,
-      GTK_DATABOX_MARKERS_N,
-      GTK_DATABOX_MARKERS_E,
-      GTK_DATABOX_MARKERS_S,
-      GTK_DATABOX_MARKERS_W
-   }
-   GtkDataboxMarkersPosition;
+typedef enum
+{
+   GTK_DATABOX_MARKERS_C = 0,
+   GTK_DATABOX_MARKERS_N,
+   GTK_DATABOX_MARKERS_E,
+   GTK_DATABOX_MARKERS_S,
+   GTK_DATABOX_MARKERS_W
+}
+GtkDataboxMarkersPosition;
 
    /**
     * GtkDataboxMarkersTextPosition:
@@ -100,19 +99,19 @@ G_BEGIN_DECLS
     *
     * Position of a label relative to its repective marker.
     */
-   typedef enum
-   {
-      GTK_DATABOX_MARKERS_TEXT_CENTER = 0,/* text centered   on marker */
-      GTK_DATABOX_MARKERS_TEXT_N,	  /* text north      of marker */
-      GTK_DATABOX_MARKERS_TEXT_NE,	  /* text north-east of marker */
-      GTK_DATABOX_MARKERS_TEXT_E,	  /* text east       of marker */
-      GTK_DATABOX_MARKERS_TEXT_SE,	  /* text south-east of marker */
-      GTK_DATABOX_MARKERS_TEXT_S,	  /* text south      of marker */
-      GTK_DATABOX_MARKERS_TEXT_SW,	  /* text south-west of marker */
-      GTK_DATABOX_MARKERS_TEXT_W,	  /* text west       of marker */
-      GTK_DATABOX_MARKERS_TEXT_NW	  /* text north-west of marker */
-   }
-   GtkDataboxMarkersTextPosition;
+typedef enum
+{
+   GTK_DATABOX_MARKERS_TEXT_CENTER = 0,	/* text centered   on marker */
+   GTK_DATABOX_MARKERS_TEXT_N,	/* text north      of marker */
+   GTK_DATABOX_MARKERS_TEXT_NE,	/* text north-east of marker */
+   GTK_DATABOX_MARKERS_TEXT_E,	/* text east       of marker */
+   GTK_DATABOX_MARKERS_TEXT_SE,	/* text south-east of marker */
+   GTK_DATABOX_MARKERS_TEXT_S,	/* text south      of marker */
+   GTK_DATABOX_MARKERS_TEXT_SW,	/* text south-west of marker */
+   GTK_DATABOX_MARKERS_TEXT_W,	/* text west       of marker */
+   GTK_DATABOX_MARKERS_TEXT_NW	/* text north-west of marker */
+}
+GtkDataboxMarkersTextPosition;
 
    /**
     * GtkDataboxMarkersType:
@@ -123,46 +122,49 @@ G_BEGIN_DECLS
     *
     * Type of the marker
     */
-   typedef enum
-   {
-      GTK_DATABOX_MARKERS_NONE = 0,	/* No Marker (just text) */
-      GTK_DATABOX_MARKERS_TRIANGLE,	/* Marker is a triangle */
-      GTK_DATABOX_MARKERS_SOLID_LINE,	/* Marker is a solid line */
-      GTK_DATABOX_MARKERS_DASHED_LINE	/* Marker is a dashed line */
-   }
-   GtkDataboxMarkersType;
+typedef enum
+{
+   GTK_DATABOX_MARKERS_NONE = 0,	/* No Marker (just text) */
+   GTK_DATABOX_MARKERS_TRIANGLE,	/* Marker is a triangle */
+   GTK_DATABOX_MARKERS_SOLID_LINE,	/* Marker is a solid line */
+   GTK_DATABOX_MARKERS_DASHED_LINE	/* Marker is a dashed line */
+}
+GtkDataboxMarkersType;
 
-   struct _GtkDataboxMarkers
-   {
-      /*< private >*/
-      GtkDataboxXYCGraph parent;
-   };
+struct _GtkDataboxMarkers
+{
+   /*< private > */
+   GtkDataboxXYCGraph parent;
+};
 
-   struct _GtkDataboxMarkersClass
-   {
-      GtkDataboxXYCGraphClass parent_class;
-   };
+struct _GtkDataboxMarkersClass
+{
+   GtkDataboxXYCGraphClass parent_class;
+};
 
-   GType gtk_databox_markers_get_type (void);
+GType gtk_databox_markers_get_type (void);
 
-   GtkDataboxGraph *gtk_databox_markers_new (guint len, gfloat * X, gfloat * Y,
-					    GdkRGBA * color, guint size,
-					    GtkDataboxMarkersType type);
+GtkDataboxGraph *gtk_databox_markers_new (guint len, gfloat * X, gfloat * Y,
+					  GdkRGBA * color, guint size,
+					  GtkDataboxMarkersType type);
 
-   void gtk_databox_markers_set_position (GtkDataboxMarkers * markers,
-					 guint index,
-					 GtkDataboxMarkersPosition position);
+void gtk_databox_markers_set_position (GtkDataboxMarkers * markers,
+				       guint index,
+				       GtkDataboxMarkersPosition position);
 
-   void gtk_databox_markers_set_label (GtkDataboxMarkers * markers,
-				      guint index,
-				      GtkDataboxMarkersTextPosition label_position,
-				      gchar * text, gboolean boxed);
+void gtk_databox_markers_set_label (GtkDataboxMarkers * markers,
+				    guint index,
+				    GtkDataboxMarkersTextPosition
+				    label_position, gchar * text,
+				    gboolean boxed);
 
-   GtkDataboxGraph *gtk_databox_markers_new_full (guint maxlen, guint len,
-			void * X, guint xstart, guint xstride, GType xtype,
-			void * Y, guint ystart, guint ystride, GType ytype,
-			GdkRGBA * color, guint size,
-			GtkDataboxMarkersType type);
+GtkDataboxGraph *gtk_databox_markers_new_full (guint maxlen, guint len,
+					       void *X, guint xstart,
+					       guint xstride, GType xtype,
+					       void *Y, guint ystart,
+					       guint ystride, GType ytype,
+					       GdkRGBA * color, guint size,
+					       GtkDataboxMarkersType type);
 
 G_END_DECLS
-#endif				/* __GTK_DATABOX_MARKERS_H__ */
+#endif /* __GTK_DATABOX_MARKERS_H__ */

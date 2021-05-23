@@ -35,14 +35,15 @@ gtk_databox_scale_type_get_type (void)
    if (type == 0)
    {
       static const GEnumValue values[] = {
-         { GTK_DATABOX_SCALE_LINEAR, "GTK_DATABOX_SCALE_LINEAR", "linear" },
-         { GTK_DATABOX_SCALE_LOG, "GTK_DATABOX_SCALE_LOG", "log" },
-         { GTK_DATABOX_SCALE_LOG2, "GTK_DATABOX_SCALE_LOG2", "log2" },
-         { 0, NULL, NULL }};
-      type = g_enum_register_static (g_intern_static_string ("GtkDataboxScaleType"), values);
+	 {GTK_DATABOX_SCALE_LINEAR, "GTK_DATABOX_SCALE_LINEAR", "linear"},
+	 {GTK_DATABOX_SCALE_LOG, "GTK_DATABOX_SCALE_LOG", "log"},
+	 {GTK_DATABOX_SCALE_LOG2, "GTK_DATABOX_SCALE_LOG2", "log2"},
+	 {0, NULL, NULL}
+      };
+      type =
+	 g_enum_register_static (g_intern_static_string
+				 ("GtkDataboxScaleType"), values);
    }
 
    return type;
 }
-
-

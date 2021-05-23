@@ -19,11 +19,9 @@
 
 #include <gtkdatabox_cross_simple.h>
 
-G_DEFINE_TYPE(GtkDataboxCrossSimple, gtk_databox_cross_simple,
-	GTK_DATABOX_TYPE_MARKERS)
-
-static void
-cross_simple_finalize (GObject * object)
+G_DEFINE_TYPE (GtkDataboxCrossSimple, gtk_databox_cross_simple,
+	       GTK_DATABOX_TYPE_MARKERS)
+     static void cross_simple_finalize (GObject * object)
 {
    gpointer pointer;
 
@@ -40,16 +38,18 @@ cross_simple_finalize (GObject * object)
 }
 
 static void
-gtk_databox_cross_simple_class_init (GtkDataboxCrossSimpleClass *klass)
+gtk_databox_cross_simple_class_init (GtkDataboxCrossSimpleClass * klass)
 {
    GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
    gobject_class->finalize = cross_simple_finalize;
 }
 
-static void gtk_databox_cross_simple_init(GtkDataboxCrossSimple *cross) 
+static void
+gtk_databox_cross_simple_init (GtkDataboxCrossSimple * cross)
 {
-   if (cross == NULL) g_warning ("cross_simple_init with NULL");
+   if (cross == NULL)
+      g_warning ("cross_simple_init with NULL");
 }
 
 /**
@@ -70,25 +70,20 @@ gtk_databox_cross_simple_new (GdkRGBA * color, guint size)
    gint len = 2;
 
    cross_simple = g_object_new (GTK_DATABOX_TYPE_CROSS_SIMPLE,
-				"markers-type", GTK_DATABOX_MARKERS_SOLID_LINE,
-				"X-Values", X,
-				"Y-Values", Y,
-			 	"xstart", 0,
-			 	"ystart", 0,
-			 	"xstride", 1,
-			 	"ystride", 1,
-			 	"xtype", G_TYPE_FLOAT,
-			 	"ytype", G_TYPE_FLOAT,
-				"length", len,
-				"maxlen", len,
-				"color", color, "size", size, NULL);
+				"markers-type",
+				GTK_DATABOX_MARKERS_SOLID_LINE, "X-Values", X,
+				"Y-Values", Y, "xstart", 0, "ystart", 0,
+				"xstride", 1, "ystride", 1, "xtype",
+				G_TYPE_FLOAT, "ytype", G_TYPE_FLOAT, "length",
+				len, "maxlen", len, "color", color, "size",
+				size, NULL);
 
    gtk_databox_markers_set_position (GTK_DATABOX_MARKERS (cross_simple), 0,
-				    GTK_DATABOX_MARKERS_C);
+				     GTK_DATABOX_MARKERS_C);
    gtk_databox_markers_set_label (GTK_DATABOX_MARKERS (cross_simple), 0,
-				 GTK_DATABOX_MARKERS_TEXT_SW, "0", FALSE);
+				  GTK_DATABOX_MARKERS_TEXT_SW, "0", FALSE);
    gtk_databox_markers_set_position (GTK_DATABOX_MARKERS (cross_simple), 1,
-				    GTK_DATABOX_MARKERS_W);
+				     GTK_DATABOX_MARKERS_W);
 
    return GTK_DATABOX_GRAPH (cross_simple);
 }

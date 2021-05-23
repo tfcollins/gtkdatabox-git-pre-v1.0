@@ -21,9 +21,9 @@
 #include <pango/pango.h>
 
 static void gtk_databox_markers_real_draw (GtkDataboxGraph * markers,
-					  GtkDatabox* box);
-static cairo_t* gtk_databox_markers_real_create_gc (GtkDataboxGraph * graph,
-					       GtkDatabox* box);
+					   GtkDatabox * box);
+static cairo_t *gtk_databox_markers_real_create_gc (GtkDataboxGraph * graph,
+						    GtkDatabox * box);
 
 /* IDs of properties */
 enum
@@ -60,14 +60,14 @@ struct _GtkDataboxMarkersPrivate
    guint pixelsalloc;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxMarkers, gtk_databox_markers,
-	GTK_DATABOX_TYPE_XYC_GRAPH)
-
-static void
-gtk_databox_markers_set_mtype (GtkDataboxMarkers * markers, gint type)
+G_DEFINE_TYPE_WITH_PRIVATE (GtkDataboxMarkers, gtk_databox_markers,
+			    GTK_DATABOX_TYPE_XYC_GRAPH)
+     static void
+	gtk_databox_markers_set_mtype (GtkDataboxMarkers * markers, gint type)
 {
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));
-   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   GtkDataboxMarkersPrivate *priv =
+      gtk_databox_markers_get_instance_private (markers);
    priv->type = type;
 
    g_object_notify (G_OBJECT (markers), "markers-type");
@@ -75,8 +75,8 @@ gtk_databox_markers_set_mtype (GtkDataboxMarkers * markers, gint type)
 
 static void
 gtk_databox_markers_set_property (GObject * object,
-				 guint property_id,
-				 const GValue * value, GParamSpec * pspec)
+				  guint property_id,
+				  const GValue * value, GParamSpec * pspec)
 {
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (object);
 
@@ -98,14 +98,15 @@ static gint
 gtk_databox_markers_get_mtype (GtkDataboxMarkers * markers)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_MARKERS (markers), 0);
-   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   GtkDataboxMarkersPrivate *priv =
+      gtk_databox_markers_get_instance_private (markers);
    return priv->type;
 }
 
 static void
 gtk_databox_markers_get_property (GObject * object,
-				 guint property_id,
-				 GValue * value, GParamSpec * pspec)
+				  guint property_id,
+				  GValue * value, GParamSpec * pspec)
 {
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (object);
 
@@ -127,7 +128,8 @@ static void
 markers_finalize (GObject * object)
 {
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (object);
-   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   GtkDataboxMarkersPrivate *priv =
+      gtk_databox_markers_get_instance_private (markers);
    int i;
    int len;
 
@@ -149,29 +151,31 @@ markers_finalize (GObject * object)
 }
 
 static cairo_t *
-gtk_databox_markers_real_create_gc (GtkDataboxGraph * graph,
-				   GtkDatabox* box)
+gtk_databox_markers_real_create_gc (GtkDataboxGraph * graph, GtkDatabox * box)
 {
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (graph);
-   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   GtkDataboxMarkersPrivate *priv =
+      gtk_databox_markers_get_instance_private (markers);
    cairo_t *cr;
    static const double dash = 5.0f;
 
    g_return_val_if_fail (GTK_DATABOX_IS_MARKERS (graph), NULL);
 
-   cr = GTK_DATABOX_GRAPH_CLASS (gtk_databox_markers_parent_class)->create_gc (graph, box);
+   cr =
+      GTK_DATABOX_GRAPH_CLASS (gtk_databox_markers_parent_class)->
+      create_gc (graph, box);
 
    if (cr)
    {
       if (priv->type == GTK_DATABOX_MARKERS_DASHED_LINE)
-         cairo_set_dash (cr, &dash, 1, 0.0);
+	 cairo_set_dash (cr, &dash, 1, 0.0);
    }
 
    return cr;
 }
 
 static void
-gtk_databox_markers_class_init (GtkDataboxMarkersClass *klass)
+gtk_databox_markers_class_init (GtkDataboxMarkersClass * klass)
 {
    GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
    GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (klass);
@@ -182,8 +186,8 @@ gtk_databox_markers_class_init (GtkDataboxMarkersClass *klass)
    gobject_class->finalize = markers_finalize;
 
    markers_param_spec = g_param_spec_int ("markers-type", "Type of markers", "Type of markers for this graph, e.g. triangles or lines", G_MININT, G_MAXINT, 0,	/*  default value */
-					 G_PARAM_CONSTRUCT |
-					 G_PARAM_READWRITE);
+					  G_PARAM_CONSTRUCT |
+					  G_PARAM_READWRITE);
 
    g_object_class_install_property (gobject_class,
 				    PROP_TYPE, markers_param_spec);
@@ -194,18 +198,20 @@ gtk_databox_markers_class_init (GtkDataboxMarkersClass *klass)
 static void
 complete (GtkDataboxMarkers * markers)
 {
-   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   GtkDataboxMarkersPrivate *priv =
+      gtk_databox_markers_get_instance_private (markers);
    priv->markers_info =
       g_new0 (GtkDataboxMarkersInfo,
-	      gtk_databox_xyc_graph_get_length
-	      (GTK_DATABOX_XYC_GRAPH (markers)));
+	      gtk_databox_xyc_graph_get_length (GTK_DATABOX_XYC_GRAPH
+						(markers)));
 
 }
 
 static void
-gtk_databox_markers_init (GtkDataboxMarkers *markers)
+gtk_databox_markers_init (GtkDataboxMarkers * markers)
 {
-   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   GtkDataboxMarkersPrivate *priv =
+      gtk_databox_markers_get_instance_private (markers);
    priv->markers_info = NULL;
    priv->xpixels = NULL;
    priv->ypixels = NULL;
@@ -229,8 +235,8 @@ gtk_databox_markers_init (GtkDataboxMarkers *markers)
  **/
 GtkDataboxGraph *
 gtk_databox_markers_new (guint len, gfloat * X, gfloat * Y,
-			GdkRGBA * color, guint size,
-			GtkDataboxMarkersType type)
+			 GdkRGBA * color, guint size,
+			 GtkDataboxMarkersType type)
 {
    GtkDataboxMarkers *markers;
    g_return_val_if_fail (X, NULL);
@@ -238,18 +244,18 @@ gtk_databox_markers_new (guint len, gfloat * X, gfloat * Y,
    g_return_val_if_fail ((len > 0), NULL);
 
    markers = g_object_new (GTK_DATABOX_TYPE_MARKERS,
-			  "X-Values", X,
-			  "Y-Values", Y,
-			  "xstart", 0,
-			  "ystart", 0,
-			  "xstride", 1,
-			  "ystride", 1,
-			  "xtype", G_TYPE_FLOAT,
-			  "ytype", G_TYPE_FLOAT,
-			  "length", len,
-			  "maxlen", len,
-			  "color", color,
-			  "size", size, "markers-type", type, NULL);
+			   "X-Values", X,
+			   "Y-Values", Y,
+			   "xstart", 0,
+			   "ystart", 0,
+			   "xstride", 1,
+			   "ystride", 1,
+			   "xtype", G_TYPE_FLOAT,
+			   "ytype", G_TYPE_FLOAT,
+			   "length", len,
+			   "maxlen", len,
+			   "color", color,
+			   "size", size, "markers-type", type, NULL);
 
    return GTK_DATABOX_GRAPH (markers);
 }
@@ -276,10 +282,10 @@ gtk_databox_markers_new (guint len, gfloat * X, gfloat * Y,
  **/
 GtkDataboxGraph *
 gtk_databox_markers_new_full (guint maxlen, guint len,
-			void * X, guint xstart, guint xstride, GType xtype,
-			void * Y, guint ystart, guint ystride, GType ytype,
-			GdkRGBA * color, guint size,
-			GtkDataboxMarkersType type)
+			      void *X, guint xstart, guint xstride,
+			      GType xtype, void *Y, guint ystart,
+			      guint ystride, GType ytype, GdkRGBA * color,
+			      guint size, GtkDataboxMarkersType type)
 {
    GtkDataboxMarkers *markers;
    g_return_val_if_fail (X, NULL);
@@ -287,24 +293,24 @@ gtk_databox_markers_new_full (guint maxlen, guint len,
    g_return_val_if_fail ((len > 0), NULL);
 
    markers = g_object_new (GTK_DATABOX_TYPE_MARKERS,
-			  "X-Values", X,
-			  "Y-Values", Y,
-			  "xstart", xstart,
-			  "ystart", ystart,
-			  "xstride", xstride,
-			  "ystride", ystride,
-			  "xtype", xtype,
-			  "ytype", ytype,
-			  "length", len,
-			  "maxlen", maxlen,
-			  "color", color,
-			  "size", size, "markers-type", type, NULL);
+			   "X-Values", X,
+			   "Y-Values", Y,
+			   "xstart", xstart,
+			   "ystart", ystart,
+			   "xstride", xstride,
+			   "ystride", ystride,
+			   "xtype", xtype,
+			   "ytype", ytype,
+			   "length", len,
+			   "maxlen", maxlen,
+			   "color", color,
+			   "size", size, "markers-type", type, NULL);
 
    return GTK_DATABOX_GRAPH (markers);
 }
 
 static gint
-gtk_databox_label_write_at (cairo_t *cr,
+gtk_databox_label_write_at (cairo_t * cr,
 			    PangoLayout * pl,
 			    GdkPoint coord,
 			    GtkDataboxMarkersTextPosition position,
@@ -380,29 +386,30 @@ gtk_databox_label_write_at (cairo_t *cr,
    }
 
 
-   cairo_move_to(cr, coord.x + hdist_text, coord.y + vdist_text);
-   pango_cairo_show_layout(cr, pl);
+   cairo_move_to (cr, coord.x + hdist_text, coord.y + vdist_text);
+   pango_cairo_show_layout (cr, pl);
 
-   if (boxed) {
+   if (boxed)
+   {
       cairo_save (cr);
       cairo_set_line_width (cr, 1.0);
       cairo_set_dash (cr, NULL, 0, 0.0);
       cairo_rectangle (cr, coord.x + hdist_box - 0.5,
-			  coord.y + vdist_box - 0.5, width + 3.5, height + 3.5);
-	  cairo_stroke(cr);
-	  cairo_restore(cr);
-	}
+		       coord.y + vdist_box - 0.5, width + 3.5, height + 3.5);
+      cairo_stroke (cr);
+      cairo_restore (cr);
+   }
 
    return (0);
 }
 
 static void
-gtk_databox_markers_real_draw (GtkDataboxGraph * graph,
-			      GtkDatabox* box)
+gtk_databox_markers_real_draw (GtkDataboxGraph * graph, GtkDatabox * box)
 {
    GtkWidget *widget;
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (graph);
-   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   GtkDataboxMarkersPrivate *priv =
+      gtk_databox_markers_get_instance_private (markers);
    GdkPoint points[3];
    PangoContext *context;
    void *X;
@@ -424,19 +431,21 @@ gtk_databox_markers_real_draw (GtkDataboxGraph * graph,
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));
    g_return_if_fail (GTK_IS_DATABOX (box));
 
-   widget = GTK_WIDGET(box);
-   gtk_widget_get_allocation(widget, &allocation);
+   widget = GTK_WIDGET (box);
+   gtk_widget_get_allocation (widget, &allocation);
 
-   context = gtk_widget_get_pango_context(widget);
+   context = gtk_widget_get_pango_context (widget);
 
    len = gtk_databox_xyc_graph_get_length (GTK_DATABOX_XYC_GRAPH (graph));
    maxlen = gtk_databox_xyc_graph_get_maxlen (GTK_DATABOX_XYC_GRAPH (graph));
 
    if (priv->pixelsalloc < len)
    {
-   	priv->pixelsalloc = len;
-	priv->xpixels = (gint16 *)g_realloc(priv->xpixels, len * sizeof(gint16));
-	priv->ypixels = (gint16 *)g_realloc(priv->ypixels, len * sizeof(gint16));
+      priv->pixelsalloc = len;
+      priv->xpixels =
+	 (gint16 *) g_realloc (priv->xpixels, len * sizeof (gint16));
+      priv->ypixels =
+	 (gint16 *) g_realloc (priv->ypixels, len * sizeof (gint16));
    }
 
    xpixels = priv->xpixels;
@@ -444,15 +453,19 @@ gtk_databox_markers_real_draw (GtkDataboxGraph * graph,
 
    X = gtk_databox_xyc_graph_get_X (GTK_DATABOX_XYC_GRAPH (graph));
    xstart = gtk_databox_xyc_graph_get_xstart (GTK_DATABOX_XYC_GRAPH (graph));
-   xstride = gtk_databox_xyc_graph_get_xstride (GTK_DATABOX_XYC_GRAPH (graph));
+   xstride =
+      gtk_databox_xyc_graph_get_xstride (GTK_DATABOX_XYC_GRAPH (graph));
    xtype = gtk_databox_xyc_graph_get_xtype (GTK_DATABOX_XYC_GRAPH (graph));
-   gtk_databox_values_to_xpixels(box, xpixels, X, xtype, maxlen, xstart, xstride, len);
+   gtk_databox_values_to_xpixels (box, xpixels, X, xtype, maxlen, xstart,
+				  xstride, len);
 
    Y = gtk_databox_xyc_graph_get_Y (GTK_DATABOX_XYC_GRAPH (graph));
    ystart = gtk_databox_xyc_graph_get_ystart (GTK_DATABOX_XYC_GRAPH (graph));
-   ystride = gtk_databox_xyc_graph_get_ystride (GTK_DATABOX_XYC_GRAPH (graph));
+   ystride =
+      gtk_databox_xyc_graph_get_ystride (GTK_DATABOX_XYC_GRAPH (graph));
    ytype = gtk_databox_xyc_graph_get_ytype (GTK_DATABOX_XYC_GRAPH (graph));
-   gtk_databox_values_to_ypixels(box, ypixels, Y, ytype, maxlen, ystart, ystride, len);
+   gtk_databox_values_to_ypixels (box, ypixels, Y, ytype, maxlen, ystart,
+				  ystride, len);
 
    size = gtk_databox_graph_get_size (graph);
 
@@ -461,140 +474,139 @@ gtk_databox_markers_real_draw (GtkDataboxGraph * graph,
 
    cr = gtk_databox_graph_create_gc (graph, box);
 
-	for (i = 0; i < len; ++i)
-	{
-		coord.x = x = xpixels[i];
-		coord.y = y = ypixels[i];
+   for (i = 0; i < len; ++i)
+   {
+      coord.x = x = xpixels[i];
+      coord.y = y = ypixels[i];
 
-		switch (priv->type)
-		{
-			case GTK_DATABOX_MARKERS_TRIANGLE:
-				switch (priv->markers_info[i].position)
-				{
-					case GTK_DATABOX_MARKERS_C:
-						y = y - size / 2;
-						points[0].x = x;
-						points[0].y = y;
-						points[1].x = x - size / 2;
-						points[1].y = y + size;
-						points[2].x = x + size / 2;
-						points[2].y = y + size;
-						break;
+      switch (priv->type)
+      {
+      case GTK_DATABOX_MARKERS_TRIANGLE:
+	 switch (priv->markers_info[i].position)
+	 {
+	 case GTK_DATABOX_MARKERS_C:
+	    y = y - size / 2;
+	    points[0].x = x;
+	    points[0].y = y;
+	    points[1].x = x - size / 2;
+	    points[1].y = y + size;
+	    points[2].x = x + size / 2;
+	    points[2].y = y + size;
+	    break;
 
-					case GTK_DATABOX_MARKERS_N:
-						coord.y = y - 2 - size / 2;
-						y = y - 2;
-						points[0].x = x;
-						points[0].y = y;
-						points[1].x = x - size / 2;
-						points[1].y = y - size;
-						points[2].x = x + size / 2;
-						points[2].y = y - size;
-						break;
+	 case GTK_DATABOX_MARKERS_N:
+	    coord.y = y - 2 - size / 2;
+	    y = y - 2;
+	    points[0].x = x;
+	    points[0].y = y;
+	    points[1].x = x - size / 2;
+	    points[1].y = y - size;
+	    points[2].x = x + size / 2;
+	    points[2].y = y - size;
+	    break;
 
-					case GTK_DATABOX_MARKERS_E:
-						coord.x = x + 2 + size / 2;
-						x = x + 2;
-						points[0].x = x;
-						points[0].y = y;
-						points[1].x = x + size;
-						points[1].y = y + size / 2;
-						points[2].x = x + size;
-						points[2].y = y - size / 2;
-						break;
+	 case GTK_DATABOX_MARKERS_E:
+	    coord.x = x + 2 + size / 2;
+	    x = x + 2;
+	    points[0].x = x;
+	    points[0].y = y;
+	    points[1].x = x + size;
+	    points[1].y = y + size / 2;
+	    points[2].x = x + size;
+	    points[2].y = y - size / 2;
+	    break;
 
-					case GTK_DATABOX_MARKERS_S:
-						coord.y = y + 2 + size / 2;
-						y = y + 2;
-						points[0].x = x;
-						points[0].y = y;
-						points[1].x = x - size / 2;
-						points[1].y = y + size;
-						points[2].x = x + size / 2;
-						points[2].y = y + size;
-						break;
+	 case GTK_DATABOX_MARKERS_S:
+	    coord.y = y + 2 + size / 2;
+	    y = y + 2;
+	    points[0].x = x;
+	    points[0].y = y;
+	    points[1].x = x - size / 2;
+	    points[1].y = y + size;
+	    points[2].x = x + size / 2;
+	    points[2].y = y + size;
+	    break;
 
-					case GTK_DATABOX_MARKERS_W:
-					default:
-						coord.x = x - 2 - size / 2;
-						x = x - 2;
-						points[0].x = x;
-						points[0].y = y;
-						points[1].x = x - size;
-						points[1].y = y + size / 2;
-						points[2].x = x - size;
-						points[2].y = y - size / 2;
-						break;
-				}
-				cairo_move_to(cr, points[0].x + 0.5, points[0].y + 0.5);
-				cairo_line_to(cr, points[1].x + 0.5, points[1].y + 0.5);
-				cairo_line_to(cr, points[2].x + 0.5, points[2].y + 0.5);
-				cairo_close_path  (cr);
-				cairo_fill(cr);
-				break;
-				/* End of GTK_DATABOX_MARKERS_TRIANGLE */
+	 case GTK_DATABOX_MARKERS_W:
+	 default:
+	    coord.x = x - 2 - size / 2;
+	    x = x - 2;
+	    points[0].x = x;
+	    points[0].y = y;
+	    points[1].x = x - size;
+	    points[1].y = y + size / 2;
+	    points[2].x = x - size;
+	    points[2].y = y - size / 2;
+	    break;
+	 }
+	 cairo_move_to (cr, points[0].x + 0.5, points[0].y + 0.5);
+	 cairo_line_to (cr, points[1].x + 0.5, points[1].y + 0.5);
+	 cairo_line_to (cr, points[2].x + 0.5, points[2].y + 0.5);
+	 cairo_close_path (cr);
+	 cairo_fill (cr);
+	 break;
+	 /* End of GTK_DATABOX_MARKERS_TRIANGLE */
 
-				case GTK_DATABOX_MARKERS_SOLID_LINE:
-				case GTK_DATABOX_MARKERS_DASHED_LINE:
-				switch (priv->markers_info[i].position)
-				{
-					case GTK_DATABOX_MARKERS_C:
-						points[0].x = x;
-						points[0].y = 0;
-						points[1].x = x;
-						points[1].y = widget_height;
-						break;
+      case GTK_DATABOX_MARKERS_SOLID_LINE:
+      case GTK_DATABOX_MARKERS_DASHED_LINE:
+	 switch (priv->markers_info[i].position)
+	 {
+	 case GTK_DATABOX_MARKERS_C:
+	    points[0].x = x;
+	    points[0].y = 0;
+	    points[1].x = x;
+	    points[1].y = widget_height;
+	    break;
 
-					case GTK_DATABOX_MARKERS_N:
-						points[0].x = x;
-						points[0].y = 0;
-						points[1].x = x;
-						points[1].y = widget_height;
-						break;
+	 case GTK_DATABOX_MARKERS_N:
+	    points[0].x = x;
+	    points[0].y = 0;
+	    points[1].x = x;
+	    points[1].y = widget_height;
+	    break;
 
-					case GTK_DATABOX_MARKERS_E:
-						points[0].x = 0;
-						points[0].y = y;
-						points[1].x = widget_width;
-						points[1].y = y;
-						break;
+	 case GTK_DATABOX_MARKERS_E:
+	    points[0].x = 0;
+	    points[0].y = y;
+	    points[1].x = widget_width;
+	    points[1].y = y;
+	    break;
 
-					case GTK_DATABOX_MARKERS_S:
-						points[0].x = x;
-						points[0].y = 0;
-						points[1].x = x;
-						points[1].y = widget_height;
-						break;
+	 case GTK_DATABOX_MARKERS_S:
+	    points[0].x = x;
+	    points[0].y = 0;
+	    points[1].x = x;
+	    points[1].y = widget_height;
+	    break;
 
-					case GTK_DATABOX_MARKERS_W:
-					default:
-						points[0].x = 0;
-						points[0].y = y;
-						points[1].x = widget_width;
-						points[1].y = y;
-						break;
-				}
-				cairo_move_to(cr, points[0].x + 0.5, points[0].y + 0.5);
-				cairo_line_to(cr, points[1].x + 0.5, points[1].y + 0.5);
-				cairo_stroke(cr);
+	 case GTK_DATABOX_MARKERS_W:
+	 default:
+	    points[0].x = 0;
+	    points[0].y = y;
+	    points[1].x = widget_width;
+	    points[1].y = y;
+	    break;
+	 }
+	 cairo_move_to (cr, points[0].x + 0.5, points[0].y + 0.5);
+	 cairo_line_to (cr, points[1].x + 0.5, points[1].y + 0.5);
+	 cairo_stroke (cr);
 
-				break;
-				/* End of GTK_DATABOX_MARKERS_LINE */
+	 break;
+	 /* End of GTK_DATABOX_MARKERS_LINE */
 
-				case GTK_DATABOX_MARKERS_NONE:
-				default:
-					break;
-		}
+      case GTK_DATABOX_MARKERS_NONE:
+      default:
+	 break;
+      }
 
       if (priv->markers_info[i].text)
       {
-		if (!priv->markers_info[i].label)
-		{
-			priv->markers_info[i].label =
-			pango_layout_new (context);
-			pango_layout_set_text (priv->markers_info[i].label,
-			priv->markers_info[i].text, -1);
-		}
+	 if (!priv->markers_info[i].label)
+	 {
+	    priv->markers_info[i].label = pango_layout_new (context);
+	    pango_layout_set_text (priv->markers_info[i].label,
+				   priv->markers_info[i].text, -1);
+	 }
 
 	 if (priv->type == GTK_DATABOX_MARKERS_SOLID_LINE
 	     || priv->type == GTK_DATABOX_MARKERS_DASHED_LINE)
@@ -630,13 +642,13 @@ gtk_databox_markers_real_draw (GtkDataboxGraph * graph,
 	 gtk_databox_label_write_at (cr,
 				     priv->markers_info[i].label,
 				     coord,
-				     priv->markers_info[i].
-				     label_position, (size + 1) / 2 + 2,
+				     priv->markers_info[i].label_position,
+				     (size + 1) / 2 + 2,
 				     priv->markers_info[i].boxed);
       }
    }
 
-   cairo_destroy(cr);
+   cairo_destroy (cr);
    return;
 }
 
@@ -650,10 +662,11 @@ gtk_databox_markers_real_draw (GtkDataboxGraph * graph,
  **/
 void
 gtk_databox_markers_set_position (GtkDataboxMarkers * markers,
-				 guint index,
-				 GtkDataboxMarkersPosition position)
+				  guint index,
+				  GtkDataboxMarkersPosition position)
 {
-   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   GtkDataboxMarkersPrivate *priv =
+      gtk_databox_markers_get_instance_private (markers);
    guint len;
 
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));
@@ -675,11 +688,12 @@ gtk_databox_markers_set_position (GtkDataboxMarkers * markers,
  **/
 void
 gtk_databox_markers_set_label (GtkDataboxMarkers * markers,
-			      guint index,
-			      GtkDataboxMarkersTextPosition label_position,
-			      gchar * text, gboolean boxed)
+			       guint index,
+			       GtkDataboxMarkersTextPosition label_position,
+			       gchar * text, gboolean boxed)
 {
-   GtkDataboxMarkersPrivate *priv = gtk_databox_markers_get_instance_private (markers);
+   GtkDataboxMarkersPrivate *priv =
+      gtk_databox_markers_get_instance_private (markers);
    guint len;
 
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));

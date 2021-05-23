@@ -191,18 +191,19 @@ create_logarithmic (void)
    min_y = 1000.;
    max_y = 0.01;
 
-   for (i = 0; i < NO_BOXES-1; ++i)
+   for (i = 0; i < NO_BOXES - 1; ++i)
    {
       gtk_databox_set_total_limits (GTK_DATABOX (box[i]), min_x, max_x, min_y,
 				    max_y);
    }
    gtk_databox_set_total_limits (GTK_DATABOX (box[i]), 8, max_x, min_y,
-				    max_y);
+				 max_y);
 
    gtk_databox_set_scale_type_y (GTK_DATABOX (box[1]), GTK_DATABOX_SCALE_LOG);
    gtk_databox_set_scale_type_x (GTK_DATABOX (box[2]), GTK_DATABOX_SCALE_LOG);
    gtk_databox_set_scale_type_y (GTK_DATABOX (box[2]), GTK_DATABOX_SCALE_LOG);
-   gtk_databox_set_scale_type_x (GTK_DATABOX (box[3]), GTK_DATABOX_SCALE_LOG2);
+   gtk_databox_set_scale_type_x (GTK_DATABOX (box[3]),
+				 GTK_DATABOX_SCALE_LOG2);
 
    separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
    gtk_box_pack_start (GTK_BOX (vbox), separator, FALSE, TRUE, 0);
@@ -211,14 +212,15 @@ create_logarithmic (void)
    g_signal_connect (G_OBJECT (close_button), "clicked",
 		     G_CALLBACK (gtk_main_quit), NULL);
    gtk_box_pack_start (GTK_BOX (vbox), close_button, FALSE, FALSE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
    gtk_widget_grab_focus (close_button);
 
    gtk_widget_show_all (window);
-   cursor = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_CROSS);
+   cursor =
+      gdk_cursor_new_for_display (gdk_display_get_default (), GDK_CROSS);
    for (i = 0; i < NO_BOXES; ++i)
-      gdk_window_set_cursor (gtk_widget_get_window(box[i]), cursor);
+      gdk_window_set_cursor (gtk_widget_get_window (box[i]), cursor);
 }
 
 gint

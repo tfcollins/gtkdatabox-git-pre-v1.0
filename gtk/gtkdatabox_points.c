@@ -39,9 +39,7 @@ struct _GtkDataboxPointsPrivate
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtkDataboxPoints, gtk_databox_points,
 			    GTK_DATABOX_TYPE_XYC_GRAPH)
-
-static void
-points_finalize (GObject * object)
+     static void points_finalize (GObject * object)
 {
    GtkDataboxPoints *points = GTK_DATABOX_POINTS (object);
    GtkDataboxPointsPrivate *priv =

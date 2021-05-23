@@ -60,8 +60,8 @@ handle_signal_zoomed (GtkDatabox * box)
 
 static gint
 handle_signal_selection_finalized (GtkDatabox * box,
-				 GtkDataboxValueRectangle * selectionValues
-				 /*, void *unused */ )
+				   GtkDataboxValueRectangle * selectionValues
+				   /*, void *unused */ )
 {
    printf ("Name of the signal: %s\n", get_name_of_current_signal (box));
    printf ("It tells you that the user has stopped changing the selection\n");
@@ -253,7 +253,7 @@ create_signals (void)
 
    for (i = 0; i < POINTS; i++)
    {
-      X[i] = i+100.;
+      X[i] = i + 100.;
       Y[i] = 100. * sin (i * 2 * G_PI / POINTS);
    }
    color.red = 0;
@@ -290,7 +290,7 @@ create_signals (void)
    g_signal_connect_swapped (G_OBJECT (close_button), "clicked",
 			     G_CALLBACK (gtk_main_quit), G_OBJECT (box));
    gtk_box_pack_start (GTK_BOX (box2), close_button, TRUE, TRUE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
 
    g_signal_connect (G_OBJECT (box), "zoomed",

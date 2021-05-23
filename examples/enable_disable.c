@@ -146,7 +146,7 @@ create_show_hide (void)
    g_signal_connect_swapped (G_OBJECT (close_button), "clicked",
 			     G_CALLBACK (gtk_main_quit), G_OBJECT (box));
    gtk_box_pack_start (GTK_BOX (box2), close_button, TRUE, TRUE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    for (i = 0; i < noEnableSets; ++i)
    {
       GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);

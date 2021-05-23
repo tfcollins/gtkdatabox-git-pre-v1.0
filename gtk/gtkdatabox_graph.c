@@ -21,19 +21,19 @@
 #include <gtk/gtk.h>
 
 static void gtk_databox_graph_real_draw (GtkDataboxGraph * graph,
-    GtkDatabox * draw);
+					 GtkDatabox * draw);
 static gint gtk_databox_graph_real_calculate_extrema (GtkDataboxGraph * graph,
-    gfloat * min_x,
-    gfloat * max_x,
-    gfloat * min_y,
-    gfloat * max_y);
+						      gfloat * min_x,
+						      gfloat * max_x,
+						      gfloat * min_y,
+						      gfloat * max_y);
 
 /* IDs of properties */
 enum
 {
-  GRAPH_COLOR = 1,
-  GRAPH_SIZE,
-  GRAPH_HIDE,
+   GRAPH_COLOR = 1,
+   GRAPH_SIZE,
+   GRAPH_HIDE,
 };
 
 /**
@@ -47,77 +47,76 @@ typedef struct _GtkDataboxGraphPrivate GtkDataboxGraphPrivate;
 
 struct _GtkDataboxGraphPrivate
 {
-  GdkRGBA color;
-  gint size;
-  gboolean hide;
-  GdkRGBA rgba;
+   GdkRGBA color;
+   gint size;
+   gboolean hide;
+   GdkRGBA rgba;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxGraph, gtk_databox_graph,
-	G_TYPE_OBJECT)
-
-static void
-gtk_databox_graph_set_property (GObject * object,
-                                guint property_id,
-                                const GValue * value, GParamSpec * pspec)
+G_DEFINE_TYPE_WITH_PRIVATE (GtkDataboxGraph, gtk_databox_graph, G_TYPE_OBJECT)
+     static void
+	gtk_databox_graph_set_property (GObject * object,
+					guint property_id,
+					const GValue * value,
+					GParamSpec * pspec)
 {
-  GtkDataboxGraph *graph = GTK_DATABOX_GRAPH (object);
+   GtkDataboxGraph *graph = GTK_DATABOX_GRAPH (object);
 
-  switch (property_id)
-    {
-    case GRAPH_COLOR:
-    {
-      gtk_databox_graph_set_color (graph,
-                                   (GdkRGBA *)
-                                   g_value_get_pointer (value));
-    }
-    break;
-    case GRAPH_SIZE:
-    {
-      gtk_databox_graph_set_size (graph, g_value_get_int (value));
-    }
-    break;
-    case GRAPH_HIDE:
-    {
-      gtk_databox_graph_set_hide (graph, g_value_get_boolean (value));
-    }
-    break;
-    default:
+   switch (property_id)
+   {
+   case GRAPH_COLOR:
+      {
+	 gtk_databox_graph_set_color (graph,
+				      (GdkRGBA *)
+				      g_value_get_pointer (value));
+      }
+      break;
+   case GRAPH_SIZE:
+      {
+	 gtk_databox_graph_set_size (graph, g_value_get_int (value));
+      }
+      break;
+   case GRAPH_HIDE:
+      {
+	 gtk_databox_graph_set_hide (graph, g_value_get_boolean (value));
+      }
+      break;
+   default:
       /* We don't have any other property... */
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+   }
 }
 
 static void
 gtk_databox_graph_get_property (GObject * object,
-                                guint property_id,
-                                GValue * value, GParamSpec * pspec)
+				guint property_id,
+				GValue * value, GParamSpec * pspec)
 {
-  GtkDataboxGraph *graph = GTK_DATABOX_GRAPH (object);
+   GtkDataboxGraph *graph = GTK_DATABOX_GRAPH (object);
 
-  switch (property_id)
-    {
-    case GRAPH_COLOR:
-    {
-      g_value_set_pointer (value, gtk_databox_graph_get_color (graph));
-    }
-    break;
-    case GRAPH_SIZE:
-    {
-      g_value_set_int (value, gtk_databox_graph_get_size (graph));
-    }
-    break;
-    case GRAPH_HIDE:
-    {
-      g_value_set_boolean (value, gtk_databox_graph_get_hide (graph));
-    }
-    break;
-    default:
+   switch (property_id)
+   {
+   case GRAPH_COLOR:
+      {
+	 g_value_set_pointer (value, gtk_databox_graph_get_color (graph));
+      }
+      break;
+   case GRAPH_SIZE:
+      {
+	 g_value_set_int (value, gtk_databox_graph_get_size (graph));
+      }
+      break;
+   case GRAPH_HIDE:
+      {
+	 g_value_set_boolean (value, gtk_databox_graph_get_hide (graph));
+      }
+      break;
+   default:
       /* We don't have any other property... */
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+   }
 }
 
 /**
@@ -131,67 +130,67 @@ gtk_databox_graph_get_property (GObject * object,
  *
  * Return value: The new graphics context.
  */
-cairo_t*
-gtk_databox_graph_create_gc (GtkDataboxGraph * graph,
-                             GtkDatabox* box)
+cairo_t *
+gtk_databox_graph_create_gc (GtkDataboxGraph * graph, GtkDatabox * box)
 {
-  return GTK_DATABOX_GRAPH_GET_CLASS (graph)->create_gc (graph, box);
+   return GTK_DATABOX_GRAPH_GET_CLASS (graph)->create_gc (graph, box);
 }
 
 static cairo_t *
-gtk_databox_graph_real_create_gc (GtkDataboxGraph * graph,
-                                  GtkDatabox* box)
+gtk_databox_graph_real_create_gc (GtkDataboxGraph * graph, GtkDatabox * box)
 {
-  GtkDataboxGraphPrivate *priv = gtk_databox_graph_get_instance_private(graph);
-  cairo_t *cr;
+   GtkDataboxGraphPrivate *priv =
+      gtk_databox_graph_get_instance_private (graph);
+   cairo_t *cr;
 
-  g_return_val_if_fail (GTK_DATABOX_IS_GRAPH (graph), NULL);
+   g_return_val_if_fail (GTK_DATABOX_IS_GRAPH (graph), NULL);
 
    cr = cairo_create (gtk_databox_get_backing_surface (box));
    gdk_cairo_set_source_rgba (cr, &priv->color);
-   cairo_set_line_width (cr,  (priv->size > 1) ? priv->size : 1);
+   cairo_set_line_width (cr, (priv->size > 1) ? priv->size : 1);
 
    return cr;
 }
 
 static void
-gtk_databox_graph_class_init (GtkDataboxGraphClass *klass)
+gtk_databox_graph_class_init (GtkDataboxGraphClass * klass)
 {
-  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-  GParamSpec *graph_param_spec;
+   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+   GParamSpec *graph_param_spec;
 
-  gobject_class->set_property = gtk_databox_graph_set_property;
-  gobject_class->get_property = gtk_databox_graph_get_property;
+   gobject_class->set_property = gtk_databox_graph_set_property;
+   gobject_class->get_property = gtk_databox_graph_get_property;
 
-  graph_param_spec = g_param_spec_pointer ("color",
-                     "Graph color",
-                     "Color of graph",
-                     G_PARAM_READWRITE);
+   graph_param_spec = g_param_spec_pointer ("color",
+					    "Graph color",
+					    "Color of graph",
+					    G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   GRAPH_COLOR, graph_param_spec);
+   g_object_class_install_property (gobject_class,
+				    GRAPH_COLOR, graph_param_spec);
 
-  graph_param_spec = g_param_spec_int ("size", "Graph size", "Size of displayed items", G_MININT, G_MAXINT, 0,	/* default value */
-                                       G_PARAM_READWRITE);
+   graph_param_spec = g_param_spec_int ("size", "Graph size", "Size of displayed items", G_MININT, G_MAXINT, 0,	/* default value */
+					G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   GRAPH_SIZE, graph_param_spec);
+   g_object_class_install_property (gobject_class,
+				    GRAPH_SIZE, graph_param_spec);
 
-  graph_param_spec = g_param_spec_boolean ("hide", "Graph hidden", "Determine if graph is hidden or not", FALSE,	/* default value */
-                     G_PARAM_READWRITE);
+   graph_param_spec = g_param_spec_boolean ("hide", "Graph hidden", "Determine if graph is hidden or not", FALSE,	/* default value */
+					    G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   GRAPH_HIDE, graph_param_spec);
+   g_object_class_install_property (gobject_class,
+				    GRAPH_HIDE, graph_param_spec);
 
-  klass->draw = gtk_databox_graph_real_draw;
-  klass->calculate_extrema = gtk_databox_graph_real_calculate_extrema;
-  klass->create_gc = gtk_databox_graph_real_create_gc;
+   klass->draw = gtk_databox_graph_real_draw;
+   klass->calculate_extrema = gtk_databox_graph_real_calculate_extrema;
+   klass->create_gc = gtk_databox_graph_real_create_gc;
 }
 
 static void
-gtk_databox_graph_init (GtkDataboxGraph *graph)
+gtk_databox_graph_init (GtkDataboxGraph * graph)
 {
-	if (graph == NULL) g_warning ("graph_init with NULL");
+   if (graph == NULL)
+      g_warning ("graph_init with NULL");
 }
 
 /**
@@ -205,11 +204,12 @@ gtk_databox_graph_init (GtkDataboxGraph *graph)
  *
  */
 void
-gtk_databox_graph_draw (GtkDataboxGraph * graph, GtkDatabox* box)
+gtk_databox_graph_draw (GtkDataboxGraph * graph, GtkDatabox * box)
 {
-  GtkDataboxGraphPrivate *priv = gtk_databox_graph_get_instance_private(graph);
-  if (!priv->hide)
-    GTK_DATABOX_GRAPH_GET_CLASS (graph)->draw (graph, box);
+   GtkDataboxGraphPrivate *priv =
+      gtk_databox_graph_get_instance_private (graph);
+   if (!priv->hide)
+      GTK_DATABOX_GRAPH_GET_CLASS (graph)->draw (graph, box);
 }
 
 /**
@@ -230,40 +230,39 @@ gtk_databox_graph_draw (GtkDataboxGraph * graph, GtkDatabox* box)
  */
 gint
 gtk_databox_graph_calculate_extrema (GtkDataboxGraph * graph,
-                                     gfloat * min_x, gfloat * max_x,
-                                     gfloat * min_y, gfloat * max_y)
+				     gfloat * min_x, gfloat * max_x,
+				     gfloat * min_y, gfloat * max_y)
 {
-  return
-    GTK_DATABOX_GRAPH_GET_CLASS (graph)->calculate_extrema (graph, min_x,
-        max_x, min_y,
-        max_y);
+   return
+      GTK_DATABOX_GRAPH_GET_CLASS (graph)->calculate_extrema (graph, min_x,
+							      max_x, min_y,
+							      max_y);
 }
 
 static void
-gtk_databox_graph_real_draw (GtkDataboxGraph * graph,
-                             GtkDatabox* box)
+gtk_databox_graph_real_draw (GtkDataboxGraph * graph, GtkDatabox * box)
 {
-  g_return_if_fail (graph);
-  g_return_if_fail (box);
+   g_return_if_fail (graph);
+   g_return_if_fail (box);
 
-  /* We have no data... */
-  return;
+   /* We have no data... */
+   return;
 }
 
 
 static gint
 gtk_databox_graph_real_calculate_extrema (GtkDataboxGraph * graph,
-    gfloat * min_x, gfloat * max_x,
-    gfloat * min_y, gfloat * max_y)
+					  gfloat * min_x, gfloat * max_x,
+					  gfloat * min_y, gfloat * max_y)
 {
-  g_return_val_if_fail (graph, -1);
-  g_return_val_if_fail (min_x, -1);
-  g_return_val_if_fail (max_x, -1);
-  g_return_val_if_fail (min_y, -1);
-  g_return_val_if_fail (max_y, -1);
+   g_return_val_if_fail (graph, -1);
+   g_return_val_if_fail (min_x, -1);
+   g_return_val_if_fail (max_x, -1);
+   g_return_val_if_fail (min_y, -1);
+   g_return_val_if_fail (max_y, -1);
 
-  /* We have no data... */
-  return -1;
+   /* We have no data... */
+   return -1;
 }
 
 /**
@@ -277,13 +276,14 @@ gtk_databox_graph_real_calculate_extrema (GtkDataboxGraph * graph,
 void
 gtk_databox_graph_set_color (GtkDataboxGraph * graph, GdkRGBA * color)
 {
-  GtkDataboxGraphPrivate *priv = gtk_databox_graph_get_instance_private(graph);
+   GtkDataboxGraphPrivate *priv =
+      gtk_databox_graph_get_instance_private (graph);
 
-  g_return_if_fail (GTK_DATABOX_IS_GRAPH (graph));
+   g_return_if_fail (GTK_DATABOX_IS_GRAPH (graph));
 
-  priv->color = *color;
+   priv->color = *color;
 
-  g_object_notify (G_OBJECT (graph), "color");
+   g_object_notify (G_OBJECT (graph), "color");
 }
 
 /**
@@ -298,8 +298,9 @@ gtk_databox_graph_set_color (GtkDataboxGraph * graph, GdkRGBA * color)
 GdkRGBA *
 gtk_databox_graph_get_color (GtkDataboxGraph * graph)
 {
-  GtkDataboxGraphPrivate *priv = gtk_databox_graph_get_instance_private(graph);
-  return &priv->color;
+   GtkDataboxGraphPrivate *priv =
+      gtk_databox_graph_get_instance_private (graph);
+   return &priv->color;
 }
 
 /**
@@ -313,11 +314,12 @@ gtk_databox_graph_get_color (GtkDataboxGraph * graph)
 void
 gtk_databox_graph_set_size (GtkDataboxGraph * graph, gint size)
 {
-  g_return_if_fail (GTK_DATABOX_IS_GRAPH (graph));
-  GtkDataboxGraphPrivate *priv = gtk_databox_graph_get_instance_private(graph);
-  priv->size = MAX (1, size);;
+   g_return_if_fail (GTK_DATABOX_IS_GRAPH (graph));
+   GtkDataboxGraphPrivate *priv =
+      gtk_databox_graph_get_instance_private (graph);
+   priv->size = MAX (1, size);;
 
-  g_object_notify (G_OBJECT (graph), "size");
+   g_object_notify (G_OBJECT (graph), "size");
 }
 
 /**
@@ -332,9 +334,10 @@ gtk_databox_graph_set_size (GtkDataboxGraph * graph, gint size)
 gint
 gtk_databox_graph_get_size (GtkDataboxGraph * graph)
 {
-  g_return_val_if_fail (GTK_DATABOX_IS_GRAPH (graph), -1);
-  GtkDataboxGraphPrivate *priv = gtk_databox_graph_get_instance_private(graph);
-  return priv->size;
+   g_return_val_if_fail (GTK_DATABOX_IS_GRAPH (graph), -1);
+   GtkDataboxGraphPrivate *priv =
+      gtk_databox_graph_get_instance_private (graph);
+   return priv->size;
 }
 
 /**
@@ -348,11 +351,12 @@ gtk_databox_graph_get_size (GtkDataboxGraph * graph)
 void
 gtk_databox_graph_set_hide (GtkDataboxGraph * graph, gboolean hide)
 {
-  g_return_if_fail (GTK_DATABOX_IS_GRAPH (graph));
-  GtkDataboxGraphPrivate *priv = gtk_databox_graph_get_instance_private(graph);
-  priv->hide = hide;
+   g_return_if_fail (GTK_DATABOX_IS_GRAPH (graph));
+   GtkDataboxGraphPrivate *priv =
+      gtk_databox_graph_get_instance_private (graph);
+   priv->hide = hide;
 
-  g_object_notify (G_OBJECT (graph), "hide");
+   g_object_notify (G_OBJECT (graph), "hide");
 }
 
 /**
@@ -367,7 +371,8 @@ gtk_databox_graph_set_hide (GtkDataboxGraph * graph, gboolean hide)
 gboolean
 gtk_databox_graph_get_hide (GtkDataboxGraph * graph)
 {
-  g_return_val_if_fail (GTK_DATABOX_IS_GRAPH (graph), -1);
-  GtkDataboxGraphPrivate *priv = gtk_databox_graph_get_instance_private(graph);
-  return priv->hide;
+   g_return_val_if_fail (GTK_DATABOX_IS_GRAPH (graph), -1);
+   GtkDataboxGraphPrivate *priv =
+      gtk_databox_graph_get_instance_private (graph);
+   return priv->hide;
 }

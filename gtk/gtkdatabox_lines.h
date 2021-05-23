@@ -47,14 +47,13 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_LINES_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_LINES, \
                                            GtkDataboxLinesClass))
-
 /**
  * GtkDataboxLines
  *
  * #GtkDataboxLines is a #GtkDataboxGraph class for displaying xy-values as series of connected lines.
  *
  */
-   typedef struct _GtkDataboxLines GtkDataboxLines;
+typedef struct _GtkDataboxLines GtkDataboxLines;
 
    /**
     * GtkDataboxLinesClass
@@ -62,28 +61,30 @@ G_BEGIN_DECLS
     * The object class of #GtkDataboxLines.
     *
     **/
-   typedef struct _GtkDataboxLinesClass GtkDataboxLinesClass;
+typedef struct _GtkDataboxLinesClass GtkDataboxLinesClass;
 
-   struct _GtkDataboxLines
-   {
-      /*< private >*/
-      GtkDataboxXYCGraph parent;
-   };
+struct _GtkDataboxLines
+{
+   /*< private > */
+   GtkDataboxXYCGraph parent;
+};
 
-   struct _GtkDataboxLinesClass
-   {
-      GtkDataboxXYCGraphClass parent_class;
-   };
+struct _GtkDataboxLinesClass
+{
+   GtkDataboxXYCGraphClass parent_class;
+};
 
-   GType gtk_databox_lines_get_type (void);
+GType gtk_databox_lines_get_type (void);
 
-   GtkDataboxGraph *gtk_databox_lines_new (guint len, gfloat * X, gfloat * Y,
-					   GdkRGBA * color, guint size);
+GtkDataboxGraph *gtk_databox_lines_new (guint len, gfloat * X, gfloat * Y,
+					GdkRGBA * color, guint size);
 
-   GtkDataboxGraph *gtk_databox_lines_new_full (guint maxlen, guint len,
-			void * X, guint xstart, guint xstride, GType xtype,
-			void * Y, guint ystart, guint ystride, GType ytype,
-		    GdkRGBA * color, guint size);
+GtkDataboxGraph *gtk_databox_lines_new_full (guint maxlen, guint len,
+					     void *X, guint xstart,
+					     guint xstride, GType xtype,
+					     void *Y, guint ystart,
+					     guint ystride, GType ytype,
+					     GdkRGBA * color, guint size);
 
 G_END_DECLS
-#endif				/* __GTK_DATABOX_LINES_H__ */
+#endif /* __GTK_DATABOX_LINES_H__ */

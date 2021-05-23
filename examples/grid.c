@@ -120,7 +120,8 @@ create_grid (void)
 
    graph = gtk_databox_grid_new (15, 15, &color, 2);
    gtk_databox_graph_add (GTK_DATABOX (box), graph);
-   gtk_databox_grid_set_line_style (GTK_DATABOX_GRID(graph), GTK_DATABOX_GRID_DOTTED_LINES);
+   gtk_databox_grid_set_line_style (GTK_DATABOX_GRID (graph),
+				    GTK_DATABOX_GRID_DOTTED_LINES);
 
    gtk_databox_auto_rescale (GTK_DATABOX (box), 0.05);
 
@@ -132,10 +133,9 @@ create_grid (void)
    gtk_box_pack_end (GTK_BOX (box1), box2, FALSE, TRUE, 0);
    close_button = gtk_button_new_with_label ("close");
    g_signal_connect_swapped (G_OBJECT (close_button), "clicked",
-			     G_CALLBACK (gtk_main_quit),
-			     G_OBJECT (box));
+			     G_CALLBACK (gtk_main_quit), G_OBJECT (box));
    gtk_box_pack_start (GTK_BOX (box2), close_button, TRUE, TRUE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
 
    gtk_widget_show_all (window);

@@ -47,7 +47,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_OFFSET_BARS_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_OFFSET_BARS, \
                                            GtkDataboxOffsetBarsClass))
-
 /**
  * GtkDataboxOffsetBars
  *
@@ -55,7 +54,7 @@ G_BEGIN_DECLS
  *
  * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines, #GtkDataboxMarkers, #GtkDataboxBars
  */
-   typedef struct _GtkDataboxOffsetBars GtkDataboxOffsetBars;
+typedef struct _GtkDataboxOffsetBars GtkDataboxOffsetBars;
 
    /**
     * GtkDataboxOffsetBarsClass
@@ -63,29 +62,35 @@ G_BEGIN_DECLS
     * The object class of #GtkDataboxOffsetBars.
     *
     **/
-   typedef struct _GtkDataboxOffsetBarsClass GtkDataboxOffsetBarsClass;
+typedef struct _GtkDataboxOffsetBarsClass GtkDataboxOffsetBarsClass;
 
-   struct _GtkDataboxOffsetBars
-   {
-      /*< private >*/
-      GtkDataboxXYYCGraph parent;
-   };
+struct _GtkDataboxOffsetBars
+{
+   /*< private > */
+   GtkDataboxXYYCGraph parent;
+};
 
-   struct _GtkDataboxOffsetBarsClass
-   {
-      GtkDataboxXYYCGraphClass parent_class;
-   };
+struct _GtkDataboxOffsetBarsClass
+{
+   GtkDataboxXYYCGraphClass parent_class;
+};
 
-   GType gtk_databox_offset_bars_get_type (void);
+GType gtk_databox_offset_bars_get_type (void);
 
-   GtkDataboxGraph *gtk_databox_offset_bars_new (guint len, gfloat * X, gfloat * Y1, gfloat * Y2,
-					  GdkRGBA * color, guint size);
+GtkDataboxGraph *gtk_databox_offset_bars_new (guint len, gfloat * X,
+					      gfloat * Y1, gfloat * Y2,
+					      GdkRGBA * color, guint size);
 
-   GtkDataboxGraph *gtk_databox_offset_bars_new_full (guint maxlen, guint len,
-			void * X, guint xstart, guint xstride, GType xtype,
-			void * Y1, guint y1start, guint y1stride,
-			void * Y2, guint y2start, guint y2stride, GType ytype,
-		    GdkRGBA * color, guint size);
+GtkDataboxGraph *gtk_databox_offset_bars_new_full (guint maxlen, guint len,
+						   void *X, guint xstart,
+						   guint xstride, GType xtype,
+						   void *Y1, guint y1start,
+						   guint y1stride, void *Y2,
+						   guint y2start,
+						   guint y2stride,
+						   GType ytype,
+						   GdkRGBA * color,
+						   guint size);
 
 G_END_DECLS
-#endif				/* __GTK_DATABOX_OFFSET_BARS_H__ */
+#endif /* __GTK_DATABOX_OFFSET_BARS_H__ */

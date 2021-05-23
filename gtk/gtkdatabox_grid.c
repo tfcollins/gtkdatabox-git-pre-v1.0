@@ -21,9 +21,9 @@
 #include <math.h>
 
 static void gtk_databox_grid_real_draw (GtkDataboxGraph * grid,
-					GtkDatabox* box);
-static cairo_t* gtk_databox_grid_real_create_gc (GtkDataboxGraph * graph,
-					     GtkDatabox* box);
+					GtkDatabox * box);
+static cairo_t *gtk_databox_grid_real_create_gc (GtkDataboxGraph * graph,
+						 GtkDatabox * box);
 
 /* IDs of properties */
 enum
@@ -53,13 +53,13 @@ struct _GtkDataboxGridPrivate
    GtkDataboxGridLineStyle line_style;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxGrid, gtk_databox_grid,
-	GTK_DATABOX_TYPE_GRAPH)
-
-static void
-gtk_databox_grid_set_property (GObject * object,
-			       guint property_id,
-			       const GValue * value, GParamSpec * pspec)
+G_DEFINE_TYPE_WITH_PRIVATE (GtkDataboxGrid, gtk_databox_grid,
+			    GTK_DATABOX_TYPE_GRAPH)
+     static void
+	gtk_databox_grid_set_property (GObject * object,
+				       guint property_id,
+				       const GValue * value,
+				       GParamSpec * pspec)
 {
    GtkDataboxGrid *grid = GTK_DATABOX_GRID (object);
 
@@ -77,12 +77,16 @@ gtk_databox_grid_set_property (GObject * object,
       break;
    case GRID_HLINE_VALS:
       {
-	 gtk_databox_grid_set_hline_vals (grid, (gfloat *) g_value_get_pointer (value));
+	 gtk_databox_grid_set_hline_vals (grid,
+					  (gfloat *)
+					  g_value_get_pointer (value));
       }
       break;
    case GRID_VLINE_VALS:
       {
-	 gtk_databox_grid_set_vline_vals (grid, (gfloat *) g_value_get_pointer (value));
+	 gtk_databox_grid_set_vline_vals (grid,
+					  (gfloat *)
+					  g_value_get_pointer (value));
       }
       break;
    case GRID_LINE_STYLE:
@@ -118,12 +122,12 @@ gtk_databox_grid_get_property (GObject * object,
       break;
    case GRID_HLINE_VALS:
       {
-    g_value_set_pointer (value, gtk_databox_grid_get_hline_vals (grid));
+	 g_value_set_pointer (value, gtk_databox_grid_get_hline_vals (grid));
       }
       break;
    case GRID_VLINE_VALS:
       {
-    g_value_set_pointer (value, gtk_databox_grid_get_vline_vals (grid));
+	 g_value_set_pointer (value, gtk_databox_grid_get_vline_vals (grid));
       }
       break;
    case GRID_LINE_STYLE:
@@ -140,15 +144,16 @@ gtk_databox_grid_get_property (GObject * object,
 
 
 
-static cairo_t*
-gtk_databox_grid_real_create_gc (GtkDataboxGraph * graph,
-				 GtkDatabox* box)
+static cairo_t *
+gtk_databox_grid_real_create_gc (GtkDataboxGraph * graph, GtkDatabox * box)
 {
    cairo_t *cr;
 
    g_return_val_if_fail (GTK_DATABOX_IS_GRID (graph), NULL);
 
-   cr = GTK_DATABOX_GRAPH_CLASS (gtk_databox_grid_parent_class)->create_gc (graph, box);
+   cr =
+      GTK_DATABOX_GRAPH_CLASS (gtk_databox_grid_parent_class)->
+      create_gc (graph, box);
 
    return cr;
 }
@@ -156,12 +161,12 @@ gtk_databox_grid_real_create_gc (GtkDataboxGraph * graph,
 static void
 grid_finalize (GObject * object)
 {
-  /* Chain up to the parent class */
-  G_OBJECT_CLASS (gtk_databox_grid_parent_class)->finalize (object);
+   /* Chain up to the parent class */
+   G_OBJECT_CLASS (gtk_databox_grid_parent_class)->finalize (object);
 }
 
 static void
-gtk_databox_grid_class_init (GtkDataboxGridClass *klass)
+gtk_databox_grid_class_init (GtkDataboxGridClass * klass)
 {
    GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
    GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (klass);
@@ -183,20 +188,28 @@ gtk_databox_grid_class_init (GtkDataboxGridClass *klass)
    g_object_class_install_property (gobject_class,
 				    GRID_VLINES, grid_param_spec);
 
-   grid_param_spec = g_param_spec_pointer ("grid-hline-vals", "Grid Hline Vals", "The locations of each of the horizontal lines", G_PARAM_READWRITE);
+   grid_param_spec =
+      g_param_spec_pointer ("grid-hline-vals", "Grid Hline Vals",
+			    "The locations of each of the horizontal lines",
+			    G_PARAM_READWRITE);
 
    g_object_class_install_property (gobject_class,
 				    GRID_HLINE_VALS, grid_param_spec);
 
-   grid_param_spec = g_param_spec_pointer ("grid-vline-vals", "Grid Vline Vals", "The locations of each of the vertical lines", G_PARAM_READWRITE);
+   grid_param_spec =
+      g_param_spec_pointer ("grid-vline-vals", "Grid Vline Vals",
+			    "The locations of each of the vertical lines",
+			    G_PARAM_READWRITE);
 
    g_object_class_install_property (gobject_class,
 				    GRID_VLINE_VALS, grid_param_spec);
 
-   grid_param_spec = g_param_spec_int ("line-style", "line-style", "Line style of grid lines",
-				       GTK_DATABOX_GRID_DASHED_LINES, GTK_DATABOX_GRID_DOTTED_LINES,
-				       GTK_DATABOX_GRID_DASHED_LINES,
-				       G_PARAM_READWRITE);
+   grid_param_spec =
+      g_param_spec_int ("line-style", "line-style",
+			"Line style of grid lines",
+			GTK_DATABOX_GRID_DASHED_LINES,
+			GTK_DATABOX_GRID_DOTTED_LINES,
+			GTK_DATABOX_GRID_DASHED_LINES, G_PARAM_READWRITE);
 
    g_object_class_install_property (gobject_class,
 				    GRID_LINE_STYLE, grid_param_spec);
@@ -207,9 +220,10 @@ gtk_databox_grid_class_init (GtkDataboxGridClass *klass)
 }
 
 static void
-gtk_databox_grid_init (GtkDataboxGrid *grid)
+gtk_databox_grid_init (GtkDataboxGrid * grid)
 {
-   if (grid == NULL) g_warning ("grid_init with NULL");
+   if (grid == NULL)
+      g_warning ("grid_init with NULL");
 }
 
 /**
@@ -230,7 +244,9 @@ gtk_databox_grid_new (gint hlines, gint vlines, GdkRGBA * color, guint size)
    grid = g_object_new (GTK_DATABOX_TYPE_GRID,
 			"color", color,
 			"size", size,
-			"grid-hlines", hlines, "grid-vlines", vlines, "grid-hline-vals",NULL, "grid-vline-vals", NULL, NULL);
+			"grid-hlines", hlines, "grid-vlines", vlines,
+			"grid-hline-vals", NULL, "grid-vline-vals", NULL,
+			NULL);
 
    return GTK_DATABOX_GRAPH (grid);
 }
@@ -248,26 +264,30 @@ gtk_databox_grid_new (gint hlines, gint vlines, GdkRGBA * color, guint size)
  *
  * Return value: A new #GtkDataboxGrid object
  **/
-GtkDataboxGraph *gtk_databox_grid_array_new (gint hlines, gint vlines, gfloat * local_hline_vals, gfloat * local_vline_vals,
-					  GdkRGBA * color, guint size)
+GtkDataboxGraph *
+gtk_databox_grid_array_new (gint hlines, gint vlines,
+			    gfloat * local_hline_vals,
+			    gfloat * local_vline_vals, GdkRGBA * color,
+			    guint size)
 {
    GtkDataboxGrid *grid;
 
    grid = g_object_new (GTK_DATABOX_TYPE_GRID,
 			"color", color,
 			"size", size,
-			"grid-hlines", hlines, "grid-vlines", vlines, "grid-hline-vals", local_hline_vals, "grid-vline-vals", local_vline_vals, NULL);
+			"grid-hlines", hlines, "grid-vlines", vlines,
+			"grid-hline-vals", local_hline_vals,
+			"grid-vline-vals", local_vline_vals, NULL);
 
    return GTK_DATABOX_GRAPH (grid);
 }
 
 static void
-gtk_databox_grid_real_draw (GtkDataboxGraph * graph,
-			    GtkDatabox* box)
+gtk_databox_grid_real_draw (GtkDataboxGraph * graph, GtkDatabox * box)
 {
    GtkWidget *widget;
    GtkDataboxGrid *grid = GTK_DATABOX_GRID (graph);
-   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
    gint i = 0;
    gfloat x;
    gfloat y;
@@ -282,15 +302,15 @@ gtk_databox_grid_real_draw (GtkDataboxGraph * graph,
    gfloat left, right, top, bottom;
    double pixel_right, pixel_left, pixel_top, pixel_bottom;
    double target_spacing, grid_spacing;
-   double grid_dot[] = {0.0, 0.0};
+   double grid_dot[] = { 0.0, 0.0 };
    cairo_t *cr;
    GtkAllocation allocation;
 
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
    g_return_if_fail (GTK_IS_DATABOX (box));
 
-   widget = GTK_WIDGET(box);
-   gtk_widget_get_allocation(widget, &allocation);
+   widget = GTK_WIDGET (box);
+   gtk_widget_get_allocation (widget, &allocation);
 
    gtk_databox_get_total_limits (box, &left, &right, &top, &bottom);
 
@@ -300,12 +320,10 @@ gtk_databox_grid_real_draw (GtkDataboxGraph * graph,
    height = allocation.height;
 
    offset_x = left;
-   factor_x =
-      (right - left) / (priv->vlines + 1);
+   factor_x = (right - left) / (priv->vlines + 1);
 
    offset_y = top;
-   factor_y =
-      (bottom - top) / (priv->hlines + 1);
+   factor_y = (bottom - top) / (priv->hlines + 1);
 
    /* Cairo accepts spacing of dotted and dashed lines in user-space
     * coordinates, in our case, pixels, but using floating point
@@ -327,83 +345,85 @@ gtk_databox_grid_real_draw (GtkDataboxGraph * graph,
 
    pixel_right = gtk_databox_value_to_pixel_x (box, right);
    pixel_left = gtk_databox_value_to_pixel_x (box, left);
-   grid_spacing = (pixel_right - pixel_left)/(priv->vlines+1);
-   target_spacing = 4.0 + cairo_get_line_width(cr);
+   grid_spacing = (pixel_right - pixel_left) / (priv->vlines + 1);
+   target_spacing = 4.0 + cairo_get_line_width (cr);
 
-   switch (priv->line_style) {
+   switch (priv->line_style)
+   {
    case GTK_DATABOX_GRID_DASHED_LINES:
-     grid_spacing /= 2*round(grid_spacing/target_spacing/2);
-     cairo_set_dash(cr, &grid_spacing, 1, grid_spacing/2);
-     break;
+      grid_spacing /= 2 * round (grid_spacing / target_spacing / 2);
+      cairo_set_dash (cr, &grid_spacing, 1, grid_spacing / 2);
+      break;
 
    case GTK_DATABOX_GRID_DOTTED_LINES:
-     grid_spacing /= round(grid_spacing/target_spacing);
-     grid_dot[1] = grid_spacing;
-     cairo_set_line_cap(cr, CAIRO_LINE_CAP_ROUND);
-     cairo_set_dash(cr, grid_dot, 2, 0.0);
-     break;
+      grid_spacing /= round (grid_spacing / target_spacing);
+      grid_dot[1] = grid_spacing;
+      cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
+      cairo_set_dash (cr, grid_dot, 2, 0.0);
+      break;
 
    case GTK_DATABOX_GRID_SOLID_LINES:
-     break;
+      break;
    }
 
    if (priv->hline_vals == NULL)
       for (i = 0; i < priv->hlines; i++)
       {
-         y = offset_y + (i + 1) * factor_y;
-         pixel_y = gtk_databox_value_to_pixel_y (box, y);
-         cairo_move_to (cr, 0.0, pixel_y + 0.5);
-         cairo_line_to (cr, width, pixel_y + 0.5);
+	 y = offset_y + (i + 1) * factor_y;
+	 pixel_y = gtk_databox_value_to_pixel_y (box, y);
+	 cairo_move_to (cr, 0.0, pixel_y + 0.5);
+	 cairo_line_to (cr, width, pixel_y + 0.5);
       }
    else
       for (i = 0; i < priv->hlines; i++)
       {
-         y = priv->hline_vals[i];
-         pixel_y = gtk_databox_value_to_pixel_y (box, y);
-         cairo_move_to (cr, 0.0, pixel_y + 0.5);
-         cairo_line_to (cr, width, pixel_y + 0.5);
+	 y = priv->hline_vals[i];
+	 pixel_y = gtk_databox_value_to_pixel_y (box, y);
+	 cairo_move_to (cr, 0.0, pixel_y + 0.5);
+	 cairo_line_to (cr, width, pixel_y + 0.5);
       }
 
-   cairo_stroke(cr);
+   cairo_stroke (cr);
 
    pixel_bottom = gtk_databox_value_to_pixel_y (box, bottom);
    pixel_top = gtk_databox_value_to_pixel_y (box, top);
-   grid_spacing = (pixel_bottom - pixel_top)/(priv->hlines+1);
+   grid_spacing = (pixel_bottom - pixel_top) / (priv->hlines + 1);
 
-   switch (priv->line_style) {
+   switch (priv->line_style)
+   {
    case GTK_DATABOX_GRID_DASHED_LINES:
-     grid_spacing /= 2*round(grid_spacing/target_spacing/2);
-     cairo_set_dash(cr, &grid_spacing, 1, grid_spacing/2);
-     break;
+      grid_spacing /= 2 * round (grid_spacing / target_spacing / 2);
+      cairo_set_dash (cr, &grid_spacing, 1, grid_spacing / 2);
+      break;
 
    case GTK_DATABOX_GRID_DOTTED_LINES:
-     grid_spacing /= round(grid_spacing/target_spacing);
-     grid_dot[1] = grid_spacing;
-     cairo_set_dash(cr, grid_dot, 2, 0.0);
-     break;
+      grid_spacing /= round (grid_spacing / target_spacing);
+      grid_dot[1] = grid_spacing;
+      cairo_set_dash (cr, grid_dot, 2, 0.0);
+      break;
 
    case GTK_DATABOX_GRID_SOLID_LINES:
-     break;
+      break;
    }
 
    if (priv->vline_vals == NULL)
       for (i = 0; i < priv->vlines; i++)
       {
-         x = offset_x + (i + 1) * factor_x;
-         pixel_x = gtk_databox_value_to_pixel_x (box, x);
-         cairo_move_to (cr, pixel_x + 0.5, 0.0);
-         cairo_line_to (cr, pixel_x + 0.5, height);
+	 x = offset_x + (i + 1) * factor_x;
+	 pixel_x = gtk_databox_value_to_pixel_x (box, x);
+	 cairo_move_to (cr, pixel_x + 0.5, 0.0);
+	 cairo_line_to (cr, pixel_x + 0.5, height);
       }
    else
       for (i = 0; i < priv->vlines; i++)
       {
-         x = priv->vline_vals[i];
-         pixel_x = gtk_databox_value_to_pixel_x (box, x);
-         cairo_move_to (cr, pixel_x + 0.5, 0);
-         cairo_line_to (cr, pixel_x + 0.5, height);
+	 x = priv->vline_vals[i];
+	 pixel_x = gtk_databox_value_to_pixel_x (box, x);
+	 cairo_move_to (cr, pixel_x + 0.5, 0);
+	 cairo_line_to (cr, pixel_x + 0.5, height);
       }
-   cairo_stroke(cr);
-   cairo_destroy(cr);
+   cairo_stroke (cr);
+   cairo_destroy (cr);
 
    return;
 }
@@ -419,7 +439,7 @@ void
 gtk_databox_grid_set_hlines (GtkDataboxGrid * grid, gint hlines)
 {
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
    priv->hlines = MAX (1, hlines);
 
    g_object_notify (G_OBJECT (grid), "grid-hlines");
@@ -437,7 +457,7 @@ gint
 gtk_databox_grid_get_hlines (GtkDataboxGrid * grid)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), -1);
-   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
    return priv->hlines;
 }
 
@@ -452,7 +472,7 @@ void
 gtk_databox_grid_set_vlines (GtkDataboxGrid * grid, gint vlines)
 {
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
    priv->vlines = MAX (1, vlines);
 
    g_object_notify (G_OBJECT (grid), "grid-vlines");
@@ -470,7 +490,7 @@ gint
 gtk_databox_grid_get_vlines (GtkDataboxGrid * grid)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), -1);
-   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
    return priv->vlines;
 }
 
@@ -482,10 +502,10 @@ gtk_databox_grid_get_vlines (GtkDataboxGrid * grid)
  * Sets the pointer to the horizontal lines in the @grid.
  **/
 void
-gtk_databox_grid_set_hline_vals (GtkDataboxGrid * grid, gfloat *hline_vals)
+gtk_databox_grid_set_hline_vals (GtkDataboxGrid * grid, gfloat * hline_vals)
 {
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
    priv->hline_vals = hline_vals;
 
    g_object_notify (G_OBJECT (grid), "grid-hline-vals");
@@ -499,11 +519,11 @@ gtk_databox_grid_set_hline_vals (GtkDataboxGrid * grid, gfloat *hline_vals)
  *
  * Return value: Pointer to the horizontal line values for the @grid. (or NULL if error)
  **/
-gfloat*
+gfloat *
 gtk_databox_grid_get_hline_vals (GtkDataboxGrid * grid)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), NULL);
-   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
    return priv->hline_vals;
 }
 
@@ -515,10 +535,10 @@ gtk_databox_grid_get_hline_vals (GtkDataboxGrid * grid)
  * Sets the pointer to the vertical lines in the @grid.
  **/
 void
-gtk_databox_grid_set_vline_vals (GtkDataboxGrid * grid, gfloat *vline_vals)
+gtk_databox_grid_set_vline_vals (GtkDataboxGrid * grid, gfloat * vline_vals)
 {
    g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
    priv->vline_vals = vline_vals;
 
    g_object_notify (G_OBJECT (grid), "grid-vline-vals");
@@ -532,11 +552,11 @@ gtk_databox_grid_set_vline_vals (GtkDataboxGrid * grid, gfloat *vline_vals)
  *
  * Return value: Pointer to the vertical line values for the @grid. (or NULL if error)
  **/
-gfloat*
+gfloat *
 gtk_databox_grid_get_vline_vals (GtkDataboxGrid * grid)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), NULL);
-   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
    return priv->vline_vals;
 }
 
@@ -549,13 +569,13 @@ gtk_databox_grid_get_vline_vals (GtkDataboxGrid * grid)
  * Sets the line style to draw the lines in the @grid.
  **/
 void
-gtk_databox_grid_set_line_style (GtkDataboxGrid *grid, gint line_style)
+gtk_databox_grid_set_line_style (GtkDataboxGrid * grid, gint line_style)
 {
-     g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
-     GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
-     priv->line_style = line_style;
+   g_return_if_fail (GTK_DATABOX_IS_GRID (grid));
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
+   priv->line_style = line_style;
 
-     g_object_notify (G_OBJECT (grid), "line-style");
+   g_object_notify (G_OBJECT (grid), "line-style");
 }
 
 /**
@@ -568,9 +588,9 @@ gtk_databox_grid_set_line_style (GtkDataboxGrid *grid, gint line_style)
  *   GTK_DATABOX_GRID_SOLID_LINES, or GTK_DATABOX_GRID_DOTTED_LINES
  **/
 gint
-gtk_databox_grid_get_line_style (GtkDataboxGrid *grid)
+gtk_databox_grid_get_line_style (GtkDataboxGrid * grid)
 {
-  g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), -1);
-  GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private(grid);
-  return priv->line_style;
+   g_return_val_if_fail (GTK_DATABOX_IS_GRID (grid), -1);
+   GtkDataboxGridPrivate *priv = gtk_databox_grid_get_instance_private (grid);
+   return priv->line_style;
 }

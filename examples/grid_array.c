@@ -30,8 +30,11 @@
  *  databox grid
  *----------------------------------------------------------------*/
 
-static gfloat gridVert[]={100.0,300.0,500.0,700.0,900.0,1100.0,1300.0,1500.0,1700.0, 1900.0};
-static gfloat gridHoriz[]={-100.0,-80.0,-60.0,-40.0,-20.0,0.0,20.0,40.0,60.0,80.0,100.0};
+static gfloat gridVert[] =
+   { 100.0, 300.0, 500.0, 700.0, 900.0, 1100.0, 1300.0, 1500.0, 1700.0,
+1900.0 };
+static gfloat gridHoriz[] =
+   { -100.0, -80.0, -60.0, -40.0, -20.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0 };
 
 static void
 create_grid (void)
@@ -63,9 +66,7 @@ create_grid (void)
    box1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
    gtk_container_add (GTK_CONTAINER (window), box1);
 
-   label =
-      gtk_label_new
-      ("This is an example of grid value arrays");
+   label = gtk_label_new ("This is an example of grid value arrays");
    gtk_box_pack_start (GTK_BOX (box1), label, FALSE, FALSE, 0);
    separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
    gtk_box_pack_start (GTK_BOX (box1), separator, FALSE, FALSE, 0);
@@ -113,7 +114,8 @@ create_grid (void)
    color.blue = 1;
    color.alpha = 1;
 
-   graph = gtk_databox_grid_array_new (11, 10, gridHoriz, gridVert, &color, 1);
+   graph =
+      gtk_databox_grid_array_new (11, 10, gridHoriz, gridVert, &color, 1);
    gtk_databox_graph_add (GTK_DATABOX (box), graph);
 
    color.red = 51000;
@@ -132,10 +134,9 @@ create_grid (void)
    gtk_box_pack_end (GTK_BOX (box1), box2, FALSE, TRUE, 0);
    close_button = gtk_button_new_with_label ("close");
    g_signal_connect_swapped (G_OBJECT (close_button), "clicked",
-			     G_CALLBACK (gtk_main_quit),
-			     G_OBJECT (box));
+			     G_CALLBACK (gtk_main_quit), G_OBJECT (box));
    gtk_box_pack_start (GTK_BOX (box2), close_button, TRUE, TRUE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
 
    gtk_widget_show_all (window);

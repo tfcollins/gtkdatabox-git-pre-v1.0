@@ -47,8 +47,9 @@ shift_markers (GtkDatabox * box, GtkDataboxMarkers * markers)
 
    g_sprintf (markLabel, "(%2.2f, %2.2f)", X[markIndex], Y[markIndex]);
    gtk_databox_markers_set_label (markers, 1,
-				 GTK_DATABOX_MARKERS_TEXT_SW, markLabel, TRUE);
-   gtk_widget_queue_draw (GTK_WIDGET(box));
+				  GTK_DATABOX_MARKERS_TEXT_SW, markLabel,
+				  TRUE);
+   gtk_widget_queue_draw (GTK_WIDGET (box));
 }
 
 static gint
@@ -133,8 +134,8 @@ create_basics (void)
    gtk_databox_create_box_with_scrollbars_and_rulers (&box, &table,
 						      TRUE, TRUE, TRUE, TRUE);
    gtk_widget_add_events (box, GDK_KEY_PRESS_MASK);
-   gtk_widget_set_can_focus(box, TRUE);
-   gtk_widget_set_can_default(box, TRUE);
+   gtk_widget_set_can_focus (box, TRUE);
+   gtk_widget_set_can_default (box, TRUE);
 
    gtk_box_pack_start (GTK_BOX (box1), table, TRUE, TRUE, 0);
 
@@ -165,11 +166,11 @@ create_basics (void)
    color.alpha = 1;
 
    graph = gtk_databox_markers_new (2, markX, markY, &color, 7,
-				   GTK_DATABOX_MARKERS_TRIANGLE);
+				    GTK_DATABOX_MARKERS_TRIANGLE);
    gtk_databox_markers_set_position (GTK_DATABOX_MARKERS (graph), 0,
-				    GTK_DATABOX_MARKERS_S);
+				     GTK_DATABOX_MARKERS_S);
    gtk_databox_markers_set_position (GTK_DATABOX_MARKERS (graph), 1,
-				    GTK_DATABOX_MARKERS_N);
+				     GTK_DATABOX_MARKERS_N);
    markIndex = 0;
    shift_markers (GTK_DATABOX (box), GTK_DATABOX_MARKERS (graph));
    gtk_databox_graph_add (GTK_DATABOX (box), graph);
@@ -199,7 +200,9 @@ create_basics (void)
    gtk_widget_grab_focus (box);
 
    gtk_widget_show_all (window);
-   gdk_window_set_cursor (gtk_widget_get_window(box), gdk_cursor_new_for_display (gdk_display_get_default (), GDK_CROSS));
+   gdk_window_set_cursor (gtk_widget_get_window (box),
+			  gdk_cursor_new_for_display (gdk_display_get_default
+						      (), GDK_CROSS));
 }
 
 gint

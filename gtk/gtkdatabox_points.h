@@ -47,7 +47,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_POINTS_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_POINTS, \
                                            GtkDataboxPointsClass))
-
 /**
  * GtkDataboxPoints
  *
@@ -55,8 +54,7 @@ G_BEGIN_DECLS
  *
  * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxLines, #GtkDataboxBars, #GtkDataboxMarkers
  */
-
-   typedef struct _GtkDataboxPoints GtkDataboxPoints;
+typedef struct _GtkDataboxPoints GtkDataboxPoints;
 
    /**
     * GtkDataboxPointsClass
@@ -64,28 +62,30 @@ G_BEGIN_DECLS
     * The object class of #GtkDataboxPoints.
     *
     **/
-   typedef struct _GtkDataboxPointsClass GtkDataboxPointsClass;
+typedef struct _GtkDataboxPointsClass GtkDataboxPointsClass;
 
-   struct _GtkDataboxPoints
-   {
-      /*< private >*/
-      GtkDataboxXYCGraph parent;
-   };
+struct _GtkDataboxPoints
+{
+   /*< private > */
+   GtkDataboxXYCGraph parent;
+};
 
-   struct _GtkDataboxPointsClass
-   {
-      GtkDataboxXYCGraphClass parent_class;
-   };
+struct _GtkDataboxPointsClass
+{
+   GtkDataboxXYCGraphClass parent_class;
+};
 
-   GType gtk_databox_points_get_type (void);
+GType gtk_databox_points_get_type (void);
 
-   GtkDataboxGraph *gtk_databox_points_new (guint len, gfloat * X, gfloat * Y,
-					    GdkRGBA * color, gint size);
+GtkDataboxGraph *gtk_databox_points_new (guint len, gfloat * X, gfloat * Y,
+					 GdkRGBA * color, gint size);
 
-   GtkDataboxGraph *gtk_databox_points_new_full (guint maxlen, guint len,
-			void * X, guint xstart, guint xstride, GType xtype,
-			void * Y, guint ystart, guint ystride, GType ytype,
-			GdkRGBA * color, gint size);
+GtkDataboxGraph *gtk_databox_points_new_full (guint maxlen, guint len,
+					      void *X, guint xstart,
+					      guint xstride, GType xtype,
+					      void *Y, guint ystart,
+					      guint ystride, GType ytype,
+					      GdkRGBA * color, gint size);
 
 G_END_DECLS
-#endif				/* __GTK_DATABOX_POINTS_H__ */
+#endif /* __GTK_DATABOX_POINTS_H__ */

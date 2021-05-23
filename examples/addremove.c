@@ -97,7 +97,7 @@ addremove_func (GtkDatabox * box)
    g_print ("minX: %10f, minY:%10f, maxX:%10f, maxY:%10f\n", min_x, min_y,
 	    max_x, max_y);
 
-   gtk_widget_queue_draw (GTK_WIDGET(box));
+   gtk_widget_queue_draw (GTK_WIDGET (box));
 
    return (TRUE);
 }
@@ -207,7 +207,7 @@ create_addremove (void)
    g_signal_connect_swapped (G_OBJECT (close_button), "clicked",
 			     G_CALLBACK (gtk_main_quit), G_OBJECT (box));
    gtk_box_pack_start (GTK_BOX (box2), close_button, TRUE, TRUE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
 
    gtk_widget_show_all (window);

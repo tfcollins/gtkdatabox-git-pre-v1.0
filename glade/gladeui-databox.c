@@ -47,8 +47,8 @@ databox_widget_parent_changed (GtkWidget * widget,
 
 void
 glade_gtk_databox_ruler_post_create (GladeWidgetAdaptor * adaptor,
-					  GObject * widget,
-					  GladeCreateReason reason)
+				     GObject * widget,
+				     GladeCreateReason reason)
 {
    GladeWidget *gwidget = glade_widget_get_from_gobject (widget);
 
@@ -66,19 +66,19 @@ glade_gtk_databox_ruler_post_create (GladeWidgetAdaptor * adaptor,
 
 void
 glade_databox_ruler_set_orientation (GtkDataboxRuler * ruler,
-                                   GtkOrientation orientation) 
+				     GtkOrientation orientation)
 {
-    gtk_databox_ruler_set_orientation (ruler, orientation);
+   gtk_databox_ruler_set_orientation (ruler, orientation);
 }
 
 GType
 glade_databox_type ()
 {
-	return (gtk_databox_get_type ());
+   return (gtk_databox_get_type ());
 }
 
 GType
 glade_databox_ruler_type ()
 {
-	return (gtk_databox_ruler_get_type ());
+   return (gtk_databox_ruler_get_type ());
 }

@@ -50,7 +50,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_CROSS_SIMPLE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_CROSS_SIMPLE, \
                                            GtkDataboxCrossSimpleClass))
-
 /**
  * GtkDataboxCrossSimple
  *
@@ -62,8 +61,7 @@ G_BEGIN_DECLS
  * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines,  #GtkDataboxBars, #GtkDataboxMarkers
  *
  */
-
-   typedef struct _GtkDataboxCrossSimple GtkDataboxCrossSimple;
+typedef struct _GtkDataboxCrossSimple GtkDataboxCrossSimple;
 
 /**
  * GtkDataboxCrossSimpleClass
@@ -71,23 +69,22 @@ G_BEGIN_DECLS
  * The object class of #GtkDataboxCrossSimple.
  *
  **/
-   typedef struct _GtkDataboxCrossSimpleClass GtkDataboxCrossSimpleClass;
+typedef struct _GtkDataboxCrossSimpleClass GtkDataboxCrossSimpleClass;
 
-   struct _GtkDataboxCrossSimple
-   {
-      /*< private >*/
-      GtkDataboxMarkers parent;
-   };
+struct _GtkDataboxCrossSimple
+{
+   /*< private > */
+   GtkDataboxMarkers parent;
+};
 
-   struct _GtkDataboxCrossSimpleClass
-   {
-      GtkDataboxMarkersClass parent_class;
-   };
+struct _GtkDataboxCrossSimpleClass
+{
+   GtkDataboxMarkersClass parent_class;
+};
 
-   GType gtk_databox_cross_simple_get_type (void);
+GType gtk_databox_cross_simple_get_type (void);
 
-   GtkDataboxGraph *gtk_databox_cross_simple_new (GdkRGBA * color,
-						  guint size);
+GtkDataboxGraph *gtk_databox_cross_simple_new (GdkRGBA * color, guint size);
 
 G_END_DECLS
-#endif				/* __GTK_DATABOX_CROSS_SIMPLE_H__ */
+#endif /* __GTK_DATABOX_CROSS_SIMPLE_H__ */

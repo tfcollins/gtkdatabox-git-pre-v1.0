@@ -47,7 +47,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_BARS_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_BARS, \
                                            GtkDataboxBarsClass))
-
 /**
  * GtkDataboxBars
  * #GtkDataboxBars is a #GtkDataboxGraph class for displaying xy-values as vertical bars which rise/drop from y=0.
@@ -55,7 +54,7 @@ G_BEGIN_DECLS
  * @see_also: #GtkDatabox, #GtkDataboxGraph, #GtkDataboxPoints, #GtkDataboxLines, #GtkDataboxMarkers
  *
  */
-   typedef struct _GtkDataboxBars GtkDataboxBars;
+typedef struct _GtkDataboxBars GtkDataboxBars;
 
 /**
  * GtkDataboxBarsClass
@@ -63,28 +62,30 @@ G_BEGIN_DECLS
  * The object class of #GtkDataboxBars.
  *
  **/
-   typedef struct _GtkDataboxBarsClass GtkDataboxBarsClass;
+typedef struct _GtkDataboxBarsClass GtkDataboxBarsClass;
 
-   struct _GtkDataboxBars
-   {
-      /*< private >*/
-      GtkDataboxXYCGraph parent;
-   };
+struct _GtkDataboxBars
+{
+   /*< private > */
+   GtkDataboxXYCGraph parent;
+};
 
-   struct _GtkDataboxBarsClass
-   {
-      GtkDataboxXYCGraphClass parent_class;
-   };
+struct _GtkDataboxBarsClass
+{
+   GtkDataboxXYCGraphClass parent_class;
+};
 
-   GType gtk_databox_bars_get_type (void);
+GType gtk_databox_bars_get_type (void);
 
-   GtkDataboxGraph *gtk_databox_bars_new (guint len, gfloat * X, gfloat * Y,
-					  GdkRGBA * color, guint size);
+GtkDataboxGraph *gtk_databox_bars_new (guint len, gfloat * X, gfloat * Y,
+				       GdkRGBA * color, guint size);
 
-   GtkDataboxGraph *gtk_databox_bars_new_full (guint maxlen, guint len,
-			void * X, guint xstart, guint xstride, GType xtype,
-			void * Y, guint ystart, guint ystride, GType ytype,
-		    GdkRGBA * color, guint size);
+GtkDataboxGraph *gtk_databox_bars_new_full (guint maxlen, guint len,
+					    void *X, guint xstart,
+					    guint xstride, GType xtype,
+					    void *Y, guint ystart,
+					    guint ystride, GType ytype,
+					    GdkRGBA * color, guint size);
 
 G_END_DECLS
-#endif				/* __GTK_DATABOX_BARS_H__ */
+#endif /* __GTK_DATABOX_BARS_H__ */

@@ -56,9 +56,7 @@ typedef struct _GtkDatabox GtkDatabox;
     *
     * @parent: the parent object 
     **/
-   typedef struct _GtkDataboxGraph GtkDataboxGraph;
+typedef struct _GtkDataboxGraph GtkDataboxGraph;
 
 G_END_DECLS
 #endif /* __GTK_DATABOX_TYPEDEFS_H__ */
-
-

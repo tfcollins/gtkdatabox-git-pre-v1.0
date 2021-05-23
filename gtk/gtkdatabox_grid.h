@@ -48,7 +48,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_GRID_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
                                            GTK_DATABOX_TYPE_GRID, \
                                            GtkDataboxGridClass))
-
 /**
  * GtkDataboxGrid
  *
@@ -56,8 +55,7 @@ G_BEGIN_DECLS
  * the number of horizontal and vertical lines. When you zoom in, the grid is also zoomed along with the data.
  *
  */
-
-   typedef struct _GtkDataboxGrid GtkDataboxGrid;
+typedef struct _GtkDataboxGrid GtkDataboxGrid;
 
    /**
     * GtkDataboxGridClass
@@ -65,7 +63,7 @@ G_BEGIN_DECLS
     * The object class of #GtkDataboxGrid.
     *
     **/
-   typedef struct _GtkDataboxGridClass GtkDataboxGridClass;
+typedef struct _GtkDataboxGridClass GtkDataboxGridClass;
 
    /**
     * GtkDataboxGridLineStyle:
@@ -75,45 +73,49 @@ G_BEGIN_DECLS
     *
     * Line styles to use in a #GtkDataboxGrid.
     */
-   typedef enum
-   {
-       GTK_DATABOX_GRID_DASHED_LINES = 0,
-       GTK_DATABOX_GRID_SOLID_LINES,
-       GTK_DATABOX_GRID_DOTTED_LINES
-   }
-   GtkDataboxGridLineStyle;
+typedef enum
+{
+   GTK_DATABOX_GRID_DASHED_LINES = 0,
+   GTK_DATABOX_GRID_SOLID_LINES,
+   GTK_DATABOX_GRID_DOTTED_LINES
+}
+GtkDataboxGridLineStyle;
 
-   struct _GtkDataboxGrid
-   {
-      GtkDataboxGraph parent;
-   };
+struct _GtkDataboxGrid
+{
+   GtkDataboxGraph parent;
+};
 
-   struct _GtkDataboxGridClass
-   {
-      GtkDataboxGraphClass parent_class;
-   };
+struct _GtkDataboxGridClass
+{
+   GtkDataboxGraphClass parent_class;
+};
 
-   GType gtk_databox_grid_get_type (void);
+GType gtk_databox_grid_get_type (void);
 
-   GtkDataboxGraph *gtk_databox_grid_new (gint hlines, gint vlines,
-					  GdkRGBA * color, guint size);
-   GtkDataboxGraph *gtk_databox_grid_array_new (gint hlines, gint vlines, gfloat *hline_vals, gfloat *vline_vals,
-					  GdkRGBA * color, guint size);
+GtkDataboxGraph *gtk_databox_grid_new (gint hlines, gint vlines,
+				       GdkRGBA * color, guint size);
+GtkDataboxGraph *gtk_databox_grid_array_new (gint hlines, gint vlines,
+					     gfloat * hline_vals,
+					     gfloat * vline_vals,
+					     GdkRGBA * color, guint size);
 
-   void gtk_databox_grid_set_hlines (GtkDataboxGrid * grid, gint hlines);
-   gint gtk_databox_grid_get_hlines (GtkDataboxGrid * grid);
+void gtk_databox_grid_set_hlines (GtkDataboxGrid * grid, gint hlines);
+gint gtk_databox_grid_get_hlines (GtkDataboxGrid * grid);
 
-   void gtk_databox_grid_set_vlines (GtkDataboxGrid * grid, gint vlines);
-   gint gtk_databox_grid_get_vlines (GtkDataboxGrid * grid);
+void gtk_databox_grid_set_vlines (GtkDataboxGrid * grid, gint vlines);
+gint gtk_databox_grid_get_vlines (GtkDataboxGrid * grid);
 
-   void gtk_databox_grid_set_hline_vals (GtkDataboxGrid * grid, gfloat* hline_vals);
-   gfloat* gtk_databox_grid_get_hline_vals (GtkDataboxGrid * grid);
+void gtk_databox_grid_set_hline_vals (GtkDataboxGrid * grid,
+				      gfloat * hline_vals);
+gfloat *gtk_databox_grid_get_hline_vals (GtkDataboxGrid * grid);
 
-   void gtk_databox_grid_set_vline_vals (GtkDataboxGrid * grid, gfloat* vline_vals);
-   gfloat* gtk_databox_grid_get_vline_vals (GtkDataboxGrid * grid);
+void gtk_databox_grid_set_vline_vals (GtkDataboxGrid * grid,
+				      gfloat * vline_vals);
+gfloat *gtk_databox_grid_get_vline_vals (GtkDataboxGrid * grid);
 
-   void gtk_databox_grid_set_line_style (GtkDataboxGrid *grid, gint line_style);
-   gint gtk_databox_grid_get_line_style (GtkDataboxGrid *grid);
+void gtk_databox_grid_set_line_style (GtkDataboxGrid * grid, gint line_style);
+gint gtk_databox_grid_get_line_style (GtkDataboxGrid * grid);
 
 G_END_DECLS
-#endif				/* __GTK_DATABOX_GRID_H__ */
+#endif /* __GTK_DATABOX_GRID_H__ */

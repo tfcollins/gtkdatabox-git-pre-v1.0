@@ -7,6 +7,6 @@ SUBDIRS = gtk glade examples doc
 
 EXTRA_DIST = m4 depcomp scripts gtkdatabox.pc.in gtkdatabox.spec.in glade/gtkdatabox.xml
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --enable-glade
 
 ACLOCAL_AMFLAGS = -I m4

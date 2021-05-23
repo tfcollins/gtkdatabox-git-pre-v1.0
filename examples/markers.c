@@ -34,40 +34,46 @@ void
 setM (GtkDataboxGraph * graph,
       guint index,
       GtkDataboxMarkersPosition position,
-      GtkDataboxMarkersTextPosition label_position, gchar * label, gboolean boxed)
+      GtkDataboxMarkersTextPosition label_position, gchar * label,
+      gboolean boxed)
 {
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (graph);
 
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));
 
    gtk_databox_markers_set_position (markers, index, position);
-   gtk_databox_markers_set_label (markers, index, label_position, label, boxed);
+   gtk_databox_markers_set_label (markers, index, label_position, label,
+				  boxed);
 }
 
 void
 setL (GtkDataboxGraph * graph,
       guint index,
       GtkDataboxMarkersPosition position,
-      GtkDataboxMarkersTextPosition label_position, gchar * label, gboolean boxed)
+      GtkDataboxMarkersTextPosition label_position, gchar * label,
+      gboolean boxed)
 {
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (graph);
 
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));
 
    gtk_databox_markers_set_position (markers, index, position);
-   gtk_databox_markers_set_label (markers, index, label_position, label, boxed);
+   gtk_databox_markers_set_label (markers, index, label_position, label,
+				  boxed);
 }
 
 void
 setT (GtkDataboxGraph * graph,
       guint index,
-      GtkDataboxMarkersTextPosition label_position, gchar * label, gboolean boxed)
+      GtkDataboxMarkersTextPosition label_position, gchar * label,
+      gboolean boxed)
 {
    GtkDataboxMarkers *markers = GTK_DATABOX_MARKERS (graph);
 
    g_return_if_fail (GTK_DATABOX_IS_MARKERS (markers));
 
-   gtk_databox_markers_set_label (markers, index, label_position, label, boxed);
+   gtk_databox_markers_set_label (markers, index, label_position, label,
+				  boxed);
 }
 
 static void
@@ -154,43 +160,67 @@ create_markerss (void)
    color.alpha = 1;
 
    graph = gtk_databox_markers_new (20, X, Y, &color, 15,
-				   GTK_DATABOX_MARKERS_TRIANGLE);
+				    GTK_DATABOX_MARKERS_TRIANGLE);
 
    gtk_databox_graph_add (GTK_DATABOX (box), graph);
-   setM (graph, 0, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_W, "West", FALSE);
-   setM (graph, 1, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_N, "North", FALSE);
-   setM (graph, 2, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_S, "South", FALSE);
-   setM (graph, 3, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_E, "East", FALSE);
+   setM (graph, 0, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_W, "West",
+	 FALSE);
+   setM (graph, 1, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_N, "North",
+	 FALSE);
+   setM (graph, 2, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_S, "South",
+	 FALSE);
+   setM (graph, 3, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_E, "East",
+	 FALSE);
 
-   setM (graph, 4, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_W, "West", TRUE);
-   setM (graph, 5, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_N, "North", TRUE);
-   setM (graph, 6, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_S, "South", TRUE);
-   setM (graph, 7, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_E, "East", TRUE);
+   setM (graph, 4, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_W, "West",
+	 TRUE);
+   setM (graph, 5, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_N, "North",
+	 TRUE);
+   setM (graph, 6, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_S, "South",
+	 TRUE);
+   setM (graph, 7, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_E, "East",
+	 TRUE);
 
-   setM (graph, 8, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_W, "West", TRUE);
-   setM (graph, 9, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_N, "North", TRUE);
-   setM (graph, 10, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_S, "South", TRUE);
-   setM (graph, 11, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_E, "East", TRUE);
+   setM (graph, 8, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_W, "West",
+	 TRUE);
+   setM (graph, 9, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_N, "North",
+	 TRUE);
+   setM (graph, 10, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_S,
+	 "South", TRUE);
+   setM (graph, 11, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_E, "East",
+	 TRUE);
 
-   setM (graph, 12, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_S, "South", TRUE);
-   setM (graph, 13, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_W, "West", TRUE);
-   setM (graph, 14, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_E, "East", TRUE);
-   setM (graph, 15, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_N, "North", TRUE);
+   setM (graph, 12, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_S,
+	 "South", TRUE);
+   setM (graph, 13, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_W, "West",
+	 TRUE);
+   setM (graph, 14, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_E, "East",
+	 TRUE);
+   setM (graph, 15, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_N,
+	 "North", TRUE);
 
-   setM (graph, 16, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_SW, "SW", TRUE);
-   setM (graph, 17, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_NW, "NW", TRUE);
-   setM (graph, 18, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_SE, "SE", TRUE);
-   setM (graph, 19, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_NE, "NE", TRUE);
+   setM (graph, 16, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_SW, "SW",
+	 TRUE);
+   setM (graph, 17, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_NW, "NW",
+	 TRUE);
+   setM (graph, 18, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_SE, "SE",
+	 TRUE);
+   setM (graph, 19, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_NE, "NE",
+	 TRUE);
 
 
    graph = gtk_databox_markers_new (4, X + 20, Y + 20, &color, 1,
-				   GTK_DATABOX_MARKERS_DASHED_LINE);
+				    GTK_DATABOX_MARKERS_DASHED_LINE);
 
    gtk_databox_graph_add (GTK_DATABOX (box), graph);
-   setL (graph, 0, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_W, "West", TRUE);
-   setL (graph, 1, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_S, "South", TRUE);
-   setL (graph, 2, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_N, "North", TRUE);
-   setL (graph, 3, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_E, "East", TRUE);
+   setL (graph, 0, GTK_DATABOX_MARKERS_N, GTK_DATABOX_MARKERS_TEXT_W, "West",
+	 TRUE);
+   setL (graph, 1, GTK_DATABOX_MARKERS_E, GTK_DATABOX_MARKERS_TEXT_S, "South",
+	 TRUE);
+   setL (graph, 2, GTK_DATABOX_MARKERS_W, GTK_DATABOX_MARKERS_TEXT_N, "North",
+	 TRUE);
+   setL (graph, 3, GTK_DATABOX_MARKERS_S, GTK_DATABOX_MARKERS_TEXT_E, "East",
+	 TRUE);
 
    color.red = 1;
    color.green = 1;
@@ -198,7 +228,7 @@ create_markerss (void)
    color.alpha = 1;
 
    graph = gtk_databox_markers_new (5, X + 20 + 4, Y + 20 + 4, &color, 1,
-				   GTK_DATABOX_MARKERS_NONE);
+				    GTK_DATABOX_MARKERS_NONE);
 
    gtk_databox_graph_add (GTK_DATABOX (box), graph);
    setT (graph, 0, GTK_DATABOX_MARKERS_TEXT_N, "North", FALSE);
@@ -220,7 +250,7 @@ create_markerss (void)
    g_signal_connect_swapped (G_OBJECT (close_button), "clicked",
 			     G_CALLBACK (gtk_main_quit), G_OBJECT (box));
    gtk_box_pack_start (GTK_BOX (box2), close_button, TRUE, TRUE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
 
    gtk_widget_show_all (window);

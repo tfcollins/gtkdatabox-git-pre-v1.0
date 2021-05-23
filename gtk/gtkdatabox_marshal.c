@@ -46,4 +46,3 @@
 #define g_marshal_value_peek_object(v)   (v)->data[0].v_pointer
 #define g_marshal_value_peek_variant(v)  (v)->data[0].v_pointer
 #endif /* !G_ENABLE_DEBUG */
-

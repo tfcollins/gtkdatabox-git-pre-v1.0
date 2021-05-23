@@ -75,7 +75,7 @@ create_full (void)
       gtk_label_new
       ("\nThe code for this example demonstrates\n the simplet way to use a GtkDatabox widget.\n\nUsage:\nDraw a selection with the left button pressed,\nThan click into the selection.\nUse the right mouse button to zoom out.\nShift+ right mouse button zooms to default.\n\nMouse scroll-wheel: \n*Holding Ctrl+ scrollwheel zooms in/out. \nScroll-wheel moves up/down. \n*Holding Shift+ scroll-wheel moves left/right in the plot.");
    gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
-   separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
+   separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
    gtk_box_pack_start (GTK_BOX (vbox), separator, FALSE, FALSE, 0);
 
    /* -----------------------------------------------------------------
@@ -97,12 +97,12 @@ create_full (void)
    color.alpha = 1;
 
    graph = gtk_databox_points_new_full (POINTS, POINTS,
-		X, 0, 1, G_TYPE_UINT,
-		Y, 0, 1, G_TYPE_DOUBLE,
-		&color, 1);
+					X, 0, 1, G_TYPE_UINT,
+					Y, 0, 1, G_TYPE_DOUBLE, &color, 1);
    gtk_databox_graph_add (GTK_DATABOX (box), graph);
 
-   gtk_databox_set_total_limits (GTK_DATABOX (box), -1000., 5000., -10000., 23000.);
+   gtk_databox_set_total_limits (GTK_DATABOX (box), -1000., 5000., -10000.,
+				 23000.);
    gtk_databox_auto_rescale (GTK_DATABOX (box), 0.05);
 
    /* -----------------------------------------------------------------
@@ -110,19 +110,21 @@ create_full (void)
     * -----------------------------------------------------------------
     */
 
-   separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
+   separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
    gtk_box_pack_start (GTK_BOX (vbox), separator, FALSE, TRUE, 0);
 
    close_button = gtk_button_new_with_label ("close");
    g_signal_connect_swapped (G_OBJECT (close_button), "clicked",
 			     G_CALLBACK (gtk_main_quit), G_OBJECT (box));
    gtk_box_pack_start (GTK_BOX (vbox), close_button, FALSE, FALSE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
    gtk_widget_grab_focus (close_button);
 
    gtk_widget_show_all (window);
-   gdk_window_set_cursor (gtk_widget_get_window(box), gdk_cursor_new_for_display (gdk_display_get_default (), GDK_CROSS));
+   gdk_window_set_cursor (gtk_widget_get_window (box),
+			  gdk_cursor_new_for_display (gdk_display_get_default
+						      (), GDK_CROSS));
 }
 
 gint

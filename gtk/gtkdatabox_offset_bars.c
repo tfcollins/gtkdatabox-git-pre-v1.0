@@ -20,7 +20,7 @@
 #include <gtkdatabox_offset_bars.h>
 
 static void gtk_databox_offset_bars_real_draw (GtkDataboxGraph * bars,
-					GtkDatabox* box);
+					       GtkDatabox * box);
 
 /**
  * GtkDataboxOffsetBarsPrivate
@@ -39,14 +39,13 @@ struct _GtkDataboxOffsetBarsPrivate
    guint pixelsalloc;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxOffsetBars, gtk_databox_offset_bars,
-	GTK_DATABOX_TYPE_XYYC_GRAPH)
-
-static void
-bars_finalize (GObject * object)
+G_DEFINE_TYPE_WITH_PRIVATE (GtkDataboxOffsetBars, gtk_databox_offset_bars,
+			    GTK_DATABOX_TYPE_XYYC_GRAPH)
+     static void bars_finalize (GObject * object)
 {
    GtkDataboxOffsetBars *bars = GTK_DATABOX_OFFSET_BARS (object);
-   GtkDataboxOffsetBarsPrivate *priv = gtk_databox_offset_bars_get_instance_private(bars);
+   GtkDataboxOffsetBarsPrivate *priv =
+      gtk_databox_offset_bars_get_instance_private (bars);
 
    g_free (priv->xpixels);
    g_free (priv->y1pixels);
@@ -57,7 +56,7 @@ bars_finalize (GObject * object)
 }
 
 static void
-gtk_databox_offset_bars_class_init (GtkDataboxOffsetBarsClass *klass)
+gtk_databox_offset_bars_class_init (GtkDataboxOffsetBarsClass * klass)
 {
    GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
    GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (klass);
@@ -70,7 +69,8 @@ gtk_databox_offset_bars_class_init (GtkDataboxOffsetBarsClass *klass)
 static void
 gtk_databox_offset_bars_complete (GtkDataboxOffsetBars * bars)
 {
-   GtkDataboxOffsetBarsPrivate *priv = gtk_databox_offset_bars_get_instance_private(bars);
+   GtkDataboxOffsetBarsPrivate *priv =
+      gtk_databox_offset_bars_get_instance_private (bars);
 
    priv->xpixels = NULL;
    priv->y1pixels = NULL;
@@ -79,7 +79,7 @@ gtk_databox_offset_bars_complete (GtkDataboxOffsetBars * bars)
 }
 
 static void
-gtk_databox_offset_bars_init (GtkDataboxOffsetBars *bars)
+gtk_databox_offset_bars_init (GtkDataboxOffsetBars * bars)
 {
    g_signal_connect (bars, "notify::length",
 		     G_CALLBACK (gtk_databox_offset_bars_complete), NULL);
@@ -100,7 +100,7 @@ gtk_databox_offset_bars_init (GtkDataboxOffsetBars *bars)
  **/
 GtkDataboxGraph *
 gtk_databox_offset_bars_new (guint len, gfloat * X, gfloat * Y1, gfloat * Y2,
-		      GdkRGBA * color, guint size)
+			     GdkRGBA * color, guint size)
 {
    GtkDataboxOffsetBars *bars;
    g_return_val_if_fail (X, NULL);
@@ -121,8 +121,7 @@ gtk_databox_offset_bars_new (guint len, gfloat * X, gfloat * Y1, gfloat * Y2,
 			"xtype", G_TYPE_FLOAT,
 			"ytype", G_TYPE_FLOAT,
 			"length", len,
-			"maxlen", len,
-			"color", color, "size", size, NULL);
+			"maxlen", len, "color", color, "size", size, NULL);
 
    return GTK_DATABOX_GRAPH (bars);
 }
@@ -151,10 +150,11 @@ gtk_databox_offset_bars_new (guint len, gfloat * X, gfloat * Y1, gfloat * Y2,
  **/
 GtkDataboxGraph *
 gtk_databox_offset_bars_new_full (guint maxlen, guint len,
-			void * X, guint xstart, guint xstride, GType xtype,
-			void * Y1, guint y1start, guint y1stride,
-			void * Y2, guint y2start, guint y2stride, GType ytype,
-		    GdkRGBA * color, guint size)
+				  void *X, guint xstart, guint xstride,
+				  GType xtype, void *Y1, guint y1start,
+				  guint y1stride, void *Y2, guint y2start,
+				  guint y2stride, GType ytype,
+				  GdkRGBA * color, guint size)
 {
    GtkDataboxOffsetBars *bars;
    g_return_val_if_fail (X, NULL);
@@ -175,18 +175,17 @@ gtk_databox_offset_bars_new_full (guint maxlen, guint len,
 			"xtype", xtype,
 			"ytype", ytype,
 			"length", len,
-			"maxlen", maxlen,
-			"color", color, "size", size, NULL);
+			"maxlen", maxlen, "color", color, "size", size, NULL);
 
    return GTK_DATABOX_GRAPH (bars);
 }
 
 static void
-gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph,
-			    GtkDatabox* box)
+gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph, GtkDatabox * box)
 {
    GtkDataboxOffsetBars *bars = GTK_DATABOX_OFFSET_BARS (graph);
-   GtkDataboxOffsetBarsPrivate *priv = gtk_databox_offset_bars_get_instance_private(bars);
+   GtkDataboxOffsetBarsPrivate *priv =
+      gtk_databox_offset_bars_get_instance_private (bars);
    guint i = 0;
    void *X;
    void *Y1;
@@ -205,14 +204,18 @@ gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph,
 	 ("gtk_databox_offset_bars do not work well with logarithmic scale in Y axis");
 
    len = gtk_databox_xyyc_graph_get_length (GTK_DATABOX_XYYC_GRAPH (graph));
-   maxlen = gtk_databox_xyyc_graph_get_maxlen (GTK_DATABOX_XYYC_GRAPH (graph));
+   maxlen =
+      gtk_databox_xyyc_graph_get_maxlen (GTK_DATABOX_XYYC_GRAPH (graph));
 
    if (priv->pixelsalloc < len)
    {
-   	priv->pixelsalloc = len;
-	priv->xpixels = (gint16 *)g_realloc(priv->xpixels, len * sizeof(gint16));
-	priv->y1pixels = (gint16 *)g_realloc(priv->y1pixels, len * sizeof(gint16));
-	priv->y2pixels = (gint16 *)g_realloc(priv->y2pixels, len * sizeof(gint16));
+      priv->pixelsalloc = len;
+      priv->xpixels =
+	 (gint16 *) g_realloc (priv->xpixels, len * sizeof (gint16));
+      priv->y1pixels =
+	 (gint16 *) g_realloc (priv->y1pixels, len * sizeof (gint16));
+      priv->y2pixels =
+	 (gint16 *) g_realloc (priv->y2pixels, len * sizeof (gint16));
    }
 
    xpixels = priv->xpixels;
@@ -220,21 +223,30 @@ gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph,
    y2pixels = priv->y2pixels;
 
    X = gtk_databox_xyyc_graph_get_X (GTK_DATABOX_XYYC_GRAPH (graph));
-   xstart = gtk_databox_xyyc_graph_get_xstart (GTK_DATABOX_XYYC_GRAPH (graph));
-   xstride = gtk_databox_xyyc_graph_get_xstride (GTK_DATABOX_XYYC_GRAPH (graph));
+   xstart =
+      gtk_databox_xyyc_graph_get_xstart (GTK_DATABOX_XYYC_GRAPH (graph));
+   xstride =
+      gtk_databox_xyyc_graph_get_xstride (GTK_DATABOX_XYYC_GRAPH (graph));
    xtype = gtk_databox_xyyc_graph_get_xtype (GTK_DATABOX_XYYC_GRAPH (graph));
-   gtk_databox_values_to_xpixels(box, xpixels, X, xtype, maxlen, xstart, xstride, len);
+   gtk_databox_values_to_xpixels (box, xpixels, X, xtype, maxlen, xstart,
+				  xstride, len);
 
    ytype = gtk_databox_xyyc_graph_get_ytype (GTK_DATABOX_XYYC_GRAPH (graph));
    Y1 = gtk_databox_xyyc_graph_get_Y1 (GTK_DATABOX_XYYC_GRAPH (graph));
-   y1start = gtk_databox_xyyc_graph_get_y1start (GTK_DATABOX_XYYC_GRAPH (graph));
-   y1stride = gtk_databox_xyyc_graph_get_y1stride (GTK_DATABOX_XYYC_GRAPH (graph));
-   gtk_databox_values_to_ypixels(box, y1pixels, Y1, ytype, maxlen, y1start, y1stride, len);
+   y1start =
+      gtk_databox_xyyc_graph_get_y1start (GTK_DATABOX_XYYC_GRAPH (graph));
+   y1stride =
+      gtk_databox_xyyc_graph_get_y1stride (GTK_DATABOX_XYYC_GRAPH (graph));
+   gtk_databox_values_to_ypixels (box, y1pixels, Y1, ytype, maxlen, y1start,
+				  y1stride, len);
 
    Y2 = gtk_databox_xyyc_graph_get_Y2 (GTK_DATABOX_XYYC_GRAPH (graph));
-   y2start = gtk_databox_xyyc_graph_get_y2start (GTK_DATABOX_XYYC_GRAPH (graph));
-   y2stride = gtk_databox_xyyc_graph_get_y2stride (GTK_DATABOX_XYYC_GRAPH (graph));
-   gtk_databox_values_to_ypixels(box, y2pixels, Y2, ytype, maxlen, y2start, y2stride, len);
+   y2start =
+      gtk_databox_xyyc_graph_get_y2start (GTK_DATABOX_XYYC_GRAPH (graph));
+   y2stride =
+      gtk_databox_xyyc_graph_get_y2stride (GTK_DATABOX_XYYC_GRAPH (graph));
+   gtk_databox_values_to_ypixels (box, y2pixels, Y2, ytype, maxlen, y2start,
+				  y2stride, len);
 
    cr = gtk_databox_graph_create_gc (graph, box);
 
@@ -243,8 +255,8 @@ gtk_databox_offset_bars_real_draw (GtkDataboxGraph * graph,
       cairo_move_to (cr, *xpixels + 0.5, *y1pixels + 0.5);
       cairo_line_to (cr, *xpixels + 0.5, *y2pixels + 0.5);
    }
-   cairo_stroke(cr);
-   cairo_destroy(cr);
+   cairo_stroke (cr);
+   cairo_destroy (cr);
 
    return;
 }

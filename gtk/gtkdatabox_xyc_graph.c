@@ -64,16 +64,17 @@ struct _GtkDataboxXYCGraphPrivate
    GType ytype;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxXYCGraph, gtk_databox_xyc_graph,
-	GTK_DATABOX_TYPE_GRAPH)
-
+G_DEFINE_TYPE_WITH_PRIVATE (GtkDataboxXYCGraph, gtk_databox_xyc_graph,
+			    GTK_DATABOX_TYPE_GRAPH)
 //static gpointer parent_class = NULL;
-
-void
-gtk_databox_xyc_graph_set_X_Y_length(GtkDataboxXYCGraph * xyc_graph, gfloat * X, gfloat * Y, guint len)
+     void
+	gtk_databox_xyc_graph_set_X_Y_length (GtkDataboxXYCGraph * xyc_graph,
+					      gfloat * X, gfloat * Y,
+					      guint len)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->X = X;
    priv->Y = Y;
    priv->len = len;
@@ -84,7 +85,8 @@ gtk_databox_xyc_graph_set_X (GtkDataboxXYCGraph * xyc_graph, gfloat * X)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
    g_return_if_fail (X);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->X = X;
 
    g_object_notify (G_OBJECT (xyc_graph), "X-Values");
@@ -95,7 +97,8 @@ gtk_databox_xyc_graph_set_Y (GtkDataboxXYCGraph * xyc_graph, gfloat * Y)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
    g_return_if_fail (Y);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->Y = Y;
 
    g_object_notify (G_OBJECT (xyc_graph), "Y-Values");
@@ -106,58 +109,69 @@ gtk_databox_xyc_graph_set_length (GtkDataboxXYCGraph * xyc_graph, guint len)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
    g_return_if_fail (len > 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->len = len;
 
    g_object_notify (G_OBJECT (xyc_graph), "length");
 }
 
 static void
-gtk_databox_xyc_graph_set_maxlen (GtkDataboxXYCGraph * xyc_graph, guint maxlen)
+gtk_databox_xyc_graph_set_maxlen (GtkDataboxXYCGraph * xyc_graph,
+				  guint maxlen)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
    g_return_if_fail (maxlen > 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->maxlen = maxlen;
 
    g_object_notify (G_OBJECT (xyc_graph), "maxlen");
 }
 
 static void
-gtk_databox_xyc_graph_set_xstart (GtkDataboxXYCGraph * xyc_graph, guint xstart)
+gtk_databox_xyc_graph_set_xstart (GtkDataboxXYCGraph * xyc_graph,
+				  guint xstart)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->xstart = xstart;
 
    g_object_notify (G_OBJECT (xyc_graph), "X-Values");
 }
 
 static void
-gtk_databox_xyc_graph_set_ystart (GtkDataboxXYCGraph * xyc_graph, guint ystart)
+gtk_databox_xyc_graph_set_ystart (GtkDataboxXYCGraph * xyc_graph,
+				  guint ystart)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->ystart = ystart;
 
    g_object_notify (G_OBJECT (xyc_graph), "Y-Values");
 }
 
 static void
-gtk_databox_xyc_graph_set_xstride (GtkDataboxXYCGraph * xyc_graph, guint xstride)
+gtk_databox_xyc_graph_set_xstride (GtkDataboxXYCGraph * xyc_graph,
+				   guint xstride)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->xstride = xstride;
 
    g_object_notify (G_OBJECT (xyc_graph), "X-Values");
 }
 
 static void
-gtk_databox_xyc_graph_set_ystride (GtkDataboxXYCGraph * xyc_graph, guint ystride)
+gtk_databox_xyc_graph_set_ystride (GtkDataboxXYCGraph * xyc_graph,
+				   guint ystride)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->ystride = ystride;
 
    g_object_notify (G_OBJECT (xyc_graph), "Y-Values");
@@ -167,7 +181,8 @@ static void
 gtk_databox_xyc_graph_set_xtype (GtkDataboxXYCGraph * xyc_graph, GType xtype)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->xtype = xtype;
 
    g_object_notify (G_OBJECT (xyc_graph), "X-Values");
@@ -178,7 +193,8 @@ gtk_databox_xyc_graph_set_ytype (GtkDataboxXYCGraph * xyc_graph, GType ytype)
 {
    g_return_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph));
 
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    priv->ytype = ytype;
 
    g_object_notify (G_OBJECT (xyc_graph), "Y-Values");
@@ -194,10 +210,12 @@ gtk_databox_xyc_graph_set_property (GObject * object,
    switch (property_id)
    {
    case PROP_X:
-      gtk_databox_xyc_graph_set_X (xyc_graph, (gfloat *) g_value_get_pointer (value));
+      gtk_databox_xyc_graph_set_X (xyc_graph,
+				   (gfloat *) g_value_get_pointer (value));
       break;
    case PROP_Y:
-      gtk_databox_xyc_graph_set_Y (xyc_graph, (gfloat *) g_value_get_pointer (value));
+      gtk_databox_xyc_graph_set_Y (xyc_graph,
+				   (gfloat *) g_value_get_pointer (value));
       break;
    case PROP_LEN:
       gtk_databox_xyc_graph_set_length (xyc_graph, g_value_get_int (value));
@@ -242,7 +260,8 @@ gfloat *
 gtk_databox_xyc_graph_get_X (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), NULL);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->X;
 }
 
@@ -258,7 +277,8 @@ gfloat *
 gtk_databox_xyc_graph_get_Y (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), NULL);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->Y;
 }
 
@@ -274,7 +294,8 @@ guint
 gtk_databox_xyc_graph_get_length (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->len;
 }
 
@@ -290,7 +311,8 @@ guint
 gtk_databox_xyc_graph_get_maxlen (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->maxlen;
 }
 
@@ -310,7 +332,8 @@ guint
 gtk_databox_xyc_graph_get_xstart (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->xstart;
 }
 
@@ -330,7 +353,8 @@ guint
 gtk_databox_xyc_graph_get_ystart (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->ystart;
 }
 
@@ -350,7 +374,8 @@ guint
 gtk_databox_xyc_graph_get_xstride (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->xstride;
 }
 
@@ -370,7 +395,8 @@ guint
 gtk_databox_xyc_graph_get_ystride (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->ystride;
 }
 
@@ -386,7 +412,8 @@ GType
 gtk_databox_xyc_graph_get_xtype (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->xtype;
 }
 
@@ -402,7 +429,8 @@ GType
 gtk_databox_xyc_graph_get_ytype (GtkDataboxXYCGraph * xyc_graph)
 {
    g_return_val_if_fail (GTK_DATABOX_IS_XYC_GRAPH (xyc_graph), 0);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    return priv->ytype;
 }
 
@@ -453,7 +481,7 @@ gtk_databox_xyc_graph_get_property (GObject * object,
 }
 
 static void
-gtk_databox_xyc_graph_class_init (GtkDataboxXYCGraphClass *klass)
+gtk_databox_xyc_graph_class_init (GtkDataboxXYCGraphClass * klass)
 {
    GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
    GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (klass);
@@ -517,26 +545,29 @@ gtk_databox_xyc_graph_class_init (GtkDataboxXYCGraphClass *klass)
    g_object_class_install_property (gobject_class,
 				    PROP_YSTRIDE, xyc_graph_param_spec);
 
-   xyc_graph_param_spec = g_param_spec_gtype ("xtype", "GType of X elements", "GType of X elements", G_TYPE_NONE,
-					    G_PARAM_CONSTRUCT_ONLY |
-					    G_PARAM_READWRITE);
-   g_object_class_install_property (gobject_class,
-				    PROP_XTYPE, xyc_graph_param_spec);
+   xyc_graph_param_spec =
+      g_param_spec_gtype ("xtype", "GType of X elements",
+			  "GType of X elements", G_TYPE_NONE,
+			  G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE);
+   g_object_class_install_property (gobject_class, PROP_XTYPE,
+				    xyc_graph_param_spec);
 
-   xyc_graph_param_spec = g_param_spec_gtype ("ytype", "GType of Y elements", "GType of Y elements", G_TYPE_NONE,
-					    G_PARAM_CONSTRUCT_ONLY |
-					    G_PARAM_READWRITE);
-   g_object_class_install_property (gobject_class,
-				    PROP_YTYPE, xyc_graph_param_spec);
+   xyc_graph_param_spec =
+      g_param_spec_gtype ("ytype", "GType of Y elements",
+			  "GType of Y elements", G_TYPE_NONE,
+			  G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE);
+   g_object_class_install_property (gobject_class, PROP_YTYPE,
+				    xyc_graph_param_spec);
 
    graph_class->calculate_extrema =
       gtk_databox_xyc_graph_real_calculate_extrema;
 }
 
 static void
-gtk_databox_xyc_graph_init (GtkDataboxXYCGraph *xyc_graph)
+gtk_databox_xyc_graph_init (GtkDataboxXYCGraph * xyc_graph)
 {
-	if (xyc_graph == NULL) g_warning ("xyc_graph_init with NULL");
+   if (xyc_graph == NULL)
+      g_warning ("xyc_graph_init with NULL");
 }
 
 static gint
@@ -545,7 +576,8 @@ gtk_databox_xyc_graph_real_calculate_extrema (GtkDataboxGraph * graph,
 					      gfloat * min_y, gfloat * max_y)
 {
    GtkDataboxXYCGraph *xyc_graph = GTK_DATABOX_XYC_GRAPH (graph);
-   GtkDataboxXYCGraphPrivate *priv = gtk_databox_xyc_graph_get_instance_private (xyc_graph);
+   GtkDataboxXYCGraphPrivate *priv =
+      gtk_databox_xyc_graph_get_instance_private (xyc_graph);
    guint i, indx, len, maxlen, start, stride;
    void *values;
    GType vtype;
@@ -567,46 +599,50 @@ gtk_databox_xyc_graph_real_calculate_extrema (GtkDataboxGraph * graph,
 
    indx = start * stride;
    i = 0;
-   do {
-		if (vtype == G_TYPE_FLOAT)
-			fval = ((gfloat *)values)[indx];
-		else if (vtype == G_TYPE_DOUBLE)
-			fval = ((gdouble *)values)[indx];
-		else if (vtype == G_TYPE_INT)
-			fval = ((gint *)values)[indx];
-		else if (vtype == G_TYPE_UINT)
-			fval = ((guint *)values)[indx];
-		else if (vtype == G_TYPE_LONG)
-			fval = ((glong *)values)[indx];
-		else if (vtype == G_TYPE_ULONG)
-			fval = ((gulong *)values)[indx];
-		else if (vtype == G_TYPE_INT64)
-			fval = ((gint64 *)values)[indx];
-		else if (vtype == G_TYPE_UINT64)
-			fval = ((guint64 *)values)[indx];
-		else if (vtype == G_TYPE_CHAR)
-			fval = ((gchar *)values)[indx];
-		else if (vtype == G_TYPE_UCHAR)
-			fval = ((guchar *)values)[indx];
+   do
+   {
+      if (vtype == G_TYPE_FLOAT)
+	 fval = ((gfloat *) values)[indx];
+      else if (vtype == G_TYPE_DOUBLE)
+	 fval = ((gdouble *) values)[indx];
+      else if (vtype == G_TYPE_INT)
+	 fval = ((gint *) values)[indx];
+      else if (vtype == G_TYPE_UINT)
+	 fval = ((guint *) values)[indx];
+      else if (vtype == G_TYPE_LONG)
+	 fval = ((glong *) values)[indx];
+      else if (vtype == G_TYPE_ULONG)
+	 fval = ((gulong *) values)[indx];
+      else if (vtype == G_TYPE_INT64)
+	 fval = ((gint64 *) values)[indx];
+      else if (vtype == G_TYPE_UINT64)
+	 fval = ((guint64 *) values)[indx];
+      else if (vtype == G_TYPE_CHAR)
+	 fval = ((gchar *) values)[indx];
+      else if (vtype == G_TYPE_UCHAR)
+	 fval = ((guchar *) values)[indx];
 
-		if (i==0)
-		{
-			minval = maxval = fval;
-		}
-		else
-		{
-			if (fval < minval) minval = fval;
-			if (fval > maxval) maxval = fval;
-		}
+      if (i == 0)
+      {
+	 minval = maxval = fval;
+      }
+      else
+      {
+	 if (fval < minval)
+	    minval = fval;
+	 if (fval > maxval)
+	    maxval = fval;
+      }
 
-		/* handle the wrap-around (ring buffer) issue using modulus.  for efficiency, don't do this for non-wraparound cases. */
-		/* note this allows multiple wrap-arounds.  One could hold a single cycle of a sine wave, and plot a continuous wave */
-		/* This can be optimized using pointers later */
-		if (i + start > maxlen)
-			indx = ((i + start) % maxlen) * stride;
-		else
-			indx += stride;
-   } while (++i < len);
+      /* handle the wrap-around (ring buffer) issue using modulus.  for efficiency, don't do this for non-wraparound cases. */
+      /* note this allows multiple wrap-arounds.  One could hold a single cycle of a sine wave, and plot a continuous wave */
+      /* This can be optimized using pointers later */
+      if (i + start > maxlen)
+	 indx = ((i + start) % maxlen) * stride;
+      else
+	 indx += stride;
+   }
+   while (++i < len);
 
    *min_x = minval;
    *max_x = maxval;
@@ -618,46 +654,50 @@ gtk_databox_xyc_graph_real_calculate_extrema (GtkDataboxGraph * graph,
 
    indx = start * stride;
    i = 0;
-   do {
-		if (vtype == G_TYPE_FLOAT)
-			fval = ((gfloat *)values)[indx];
-		else if (vtype == G_TYPE_DOUBLE)
-			fval = ((gdouble *)values)[indx];
-		else if (vtype == G_TYPE_INT)
-			fval = ((gint *)values)[indx];
-		else if (vtype == G_TYPE_UINT)
-			fval = ((guint *)values)[indx];
-		else if (vtype == G_TYPE_LONG)
-			fval = ((glong *)values)[indx];
-		else if (vtype == G_TYPE_ULONG)
-			fval = ((gulong *)values)[indx];
-		else if (vtype == G_TYPE_INT64)
-			fval = ((gint64 *)values)[indx];
-		else if (vtype == G_TYPE_UINT64)
-			fval = ((guint64 *)values)[indx];
-		else if (vtype == G_TYPE_CHAR)
-			fval = ((gchar *)values)[indx];
-		else if (vtype == G_TYPE_UCHAR)
-			fval = ((guchar *)values)[indx];
+   do
+   {
+      if (vtype == G_TYPE_FLOAT)
+	 fval = ((gfloat *) values)[indx];
+      else if (vtype == G_TYPE_DOUBLE)
+	 fval = ((gdouble *) values)[indx];
+      else if (vtype == G_TYPE_INT)
+	 fval = ((gint *) values)[indx];
+      else if (vtype == G_TYPE_UINT)
+	 fval = ((guint *) values)[indx];
+      else if (vtype == G_TYPE_LONG)
+	 fval = ((glong *) values)[indx];
+      else if (vtype == G_TYPE_ULONG)
+	 fval = ((gulong *) values)[indx];
+      else if (vtype == G_TYPE_INT64)
+	 fval = ((gint64 *) values)[indx];
+      else if (vtype == G_TYPE_UINT64)
+	 fval = ((guint64 *) values)[indx];
+      else if (vtype == G_TYPE_CHAR)
+	 fval = ((gchar *) values)[indx];
+      else if (vtype == G_TYPE_UCHAR)
+	 fval = ((guchar *) values)[indx];
 
-		if (i==0) /* yes putting this check inside the loop is inefficient, but it makes the code simpler */
-		{
-			minval = maxval = fval;
-		}
-		else
-		{
-			if (fval < minval) minval = fval;
-			if (fval > maxval) maxval = fval;
-		}
+      if (i == 0)		/* yes putting this check inside the loop is inefficient, but it makes the code simpler */
+      {
+	 minval = maxval = fval;
+      }
+      else
+      {
+	 if (fval < minval)
+	    minval = fval;
+	 if (fval > maxval)
+	    maxval = fval;
+      }
 
-		/* handle the wrap-around (ring buffer) issue using modulus.  for efficiency, don't do this for non-wraparound cases. */
-		/* note this allows multiple wrap-arounds.  One could hold a single cycle of a sine wave, and plot a continuous wave */
-		/* This can be optimized using pointers later */
-		if (i + start > maxlen)
-			indx = ((i + start) % maxlen) * stride;
-		else
-			indx += stride;
-   } while (++i < len);
+      /* handle the wrap-around (ring buffer) issue using modulus.  for efficiency, don't do this for non-wraparound cases. */
+      /* note this allows multiple wrap-arounds.  One could hold a single cycle of a sine wave, and plot a continuous wave */
+      /* This can be optimized using pointers later */
+      if (i + start > maxlen)
+	 indx = ((i + start) % maxlen) * stride;
+      else
+	 indx += stride;
+   }
+   while (++i < len);
 
    *min_y = minval;
    *max_y = maxval;

@@ -117,7 +117,7 @@ create_lissajous (void)
    gtk_databox_create_box_with_scrollbars_and_rulers (&box, &table,
 						      TRUE, TRUE, TRUE, TRUE);
 
-   g_object_set(G_OBJECT(box), "expand", TRUE, NULL);
+   g_object_set (G_OBJECT (box), "expand", TRUE, NULL);
 
    gtk_box_pack_start (GTK_BOX (box1), table, TRUE, TRUE, 0);
 
@@ -153,10 +153,11 @@ create_lissajous (void)
 			     G_CALLBACK (gtk_main_quit), G_OBJECT (box));
 
    gtk_box_pack_start (GTK_BOX (box2), close_button, TRUE, TRUE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
    lissajous_timeout_id = g_timeout_add (1000 / FRAME_RATE,
-               (GSourceFunc) lissajous_draw_func, box);
+					 (GSourceFunc) lissajous_draw_func,
+					 box);
 
    gtk_widget_show_all (window);
 }

@@ -73,7 +73,6 @@ G_BEGIN_DECLS
 #define GTK_DATABOX_IS_RULER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_DATABOX_TYPE_RULER))
 #define GTK_DATABOX_IS_RULER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_DATABOX_TYPE_RULER))
 #define GTK_DATABOX_RULER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_DATABOX_TYPE_RULER, GtkDataboxRulerClass))
-
 /**
  * GtkDataboxRuler:
  *
@@ -118,7 +117,9 @@ struct _GtkDataboxRuler
  */
 #define GTK_DATABOX_RULER_MAX_MAX_LENGTH 63
 
-     GType gtk_databox_ruler_get_type (void) G_GNUC_CONST;
+GType
+gtk_databox_ruler_get_type (void)
+   G_GNUC_CONST;
 
      GtkWidget *gtk_databox_ruler_new (GtkOrientation orientation);
 
@@ -137,47 +138,67 @@ struct _GtkDataboxRuler
      GtkDataboxScaleType gtk_databox_ruler_get_scale_type (GtkDataboxRuler *
 							   ruler);
 
-     void gtk_databox_ruler_set_orientation (GtkDataboxRuler * ruler, GtkOrientation orientation);
-     GtkOrientation gtk_databox_ruler_get_orientation (GtkDataboxRuler *ruler);
+     void gtk_databox_ruler_set_orientation (GtkDataboxRuler * ruler,
+					     GtkOrientation orientation);
+     GtkOrientation gtk_databox_ruler_get_orientation (GtkDataboxRuler *
+						       ruler);
 
-     void gtk_databox_ruler_set_text_orientation (GtkDataboxRuler * ruler, GtkOrientation orientation);
-     GtkOrientation gtk_databox_ruler_get_text_orientation (GtkDataboxRuler *ruler);
+     void gtk_databox_ruler_set_text_orientation (GtkDataboxRuler * ruler,
+						  GtkOrientation orientation);
+     GtkOrientation gtk_databox_ruler_get_text_orientation (GtkDataboxRuler *
+							    ruler);
 
-     void gtk_databox_ruler_set_text_alignment (GtkDataboxRuler * ruler, PangoAlignment alignment);
-     PangoAlignment gtk_databox_ruler_get_text_alignment (GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_text_alignment (GtkDataboxRuler * ruler,
+						PangoAlignment alignment);
+     PangoAlignment gtk_databox_ruler_get_text_alignment (GtkDataboxRuler *
+							  ruler);
 
-    void gtk_databox_ruler_set_text_hoffset (GtkDataboxRuler * ruler,gint offset);
-    gint gtk_databox_ruler_get_text_hoffset (GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_text_hoffset (GtkDataboxRuler * ruler,
+					      gint offset);
+     gint gtk_databox_ruler_get_text_hoffset (GtkDataboxRuler * ruler);
 
-     void gtk_databox_ruler_set_draw_ticks(GtkDataboxRuler * ruler, gboolean draw);
-    gboolean gtk_databox_ruler_get_draw_ticks(GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_draw_ticks (GtkDataboxRuler * ruler,
+					    gboolean draw);
+     gboolean gtk_databox_ruler_get_draw_ticks (GtkDataboxRuler * ruler);
 
-     void gtk_databox_ruler_set_draw_position(GtkDataboxRuler * ruler, gboolean draw);
-    gboolean gtk_databox_ruler_get_draw_position(GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_draw_position (GtkDataboxRuler * ruler,
+					       gboolean draw);
+     gboolean gtk_databox_ruler_get_draw_position (GtkDataboxRuler * ruler);
 
-     void gtk_databox_ruler_set_draw_subticks(GtkDataboxRuler * ruler, gboolean draw);
-    gboolean gtk_databox_ruler_get_draw_subticks(GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_draw_subticks (GtkDataboxRuler * ruler,
+					       gboolean draw);
+     gboolean gtk_databox_ruler_get_draw_subticks (GtkDataboxRuler * ruler);
 
-     void gtk_databox_ruler_set_invert_edge(GtkDataboxRuler * ruler, gboolean invert);
-    gboolean gtk_databox_ruler_get_invert_edge(GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_invert_edge (GtkDataboxRuler * ruler,
+					     gboolean invert);
+     gboolean gtk_databox_ruler_get_invert_edge (GtkDataboxRuler * ruler);
 
-    void gtk_databox_ruler_set_linear_label_format(GtkDataboxRuler * ruler, gchar *format);
-    void gtk_databox_ruler_set_log_label_format(GtkDataboxRuler * ruler, gchar *format);
+     void gtk_databox_ruler_set_linear_label_format (GtkDataboxRuler * ruler,
+						     gchar * format);
+     void gtk_databox_ruler_set_log_label_format (GtkDataboxRuler * ruler,
+						  gchar * format);
 
-    gchar* gtk_databox_ruler_get_linear_label_format(GtkDataboxRuler * ruler);
-    gchar* gtk_databox_ruler_get_log_label_format(GtkDataboxRuler * ruler);
+     gchar *gtk_databox_ruler_get_linear_label_format (GtkDataboxRuler *
+						       ruler);
+     gchar *gtk_databox_ruler_get_log_label_format (GtkDataboxRuler * ruler);
 
-    void gtk_databox_ruler_set_manual_ticks(GtkDataboxRuler * ruler, gfloat* manual_ticks);
-    gfloat* gtk_databox_ruler_get_manual_ticks(GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_manual_ticks (GtkDataboxRuler * ruler,
+					      gfloat * manual_ticks);
+     gfloat *gtk_databox_ruler_get_manual_ticks (GtkDataboxRuler * ruler);
 
-    void gtk_databox_ruler_set_manual_tick_cnt(GtkDataboxRuler * ruler, guint manual_tick_cnt);
-    guint gtk_databox_ruler_get_manual_tick_cnt(GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_manual_tick_cnt (GtkDataboxRuler * ruler,
+						 guint manual_tick_cnt);
+     guint gtk_databox_ruler_get_manual_tick_cnt (GtkDataboxRuler * ruler);
 
-    void gtk_databox_ruler_set_manual_tick_labels(GtkDataboxRuler *ruler, gchar **manual_tick_labels);
-    gchar ** gtk_databox_ruler_get_manual_tick_labels(GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_manual_tick_labels (GtkDataboxRuler * ruler,
+						    gchar **
+						    manual_tick_labels);
+     gchar **gtk_databox_ruler_get_manual_tick_labels (GtkDataboxRuler *
+						       ruler);
 
-    void gtk_databox_ruler_set_box_shadow(GtkDataboxRuler * ruler, GtkShadowType which_shadow);
-    GtkShadowType gtk_databox_ruler_get_box_shadow(GtkDataboxRuler * ruler);
+     void gtk_databox_ruler_set_box_shadow (GtkDataboxRuler * ruler,
+					    GtkShadowType which_shadow);
+     GtkShadowType gtk_databox_ruler_get_box_shadow (GtkDataboxRuler * ruler);
 
 G_END_DECLS
 #endif /* __GTK_DATABOX_RULER_H__ */

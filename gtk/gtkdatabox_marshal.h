@@ -5,14 +5,9 @@
 #include <glib-object.h>
 
 G_BEGIN_DECLS
-
 /* VOID:VOID (gtkdatabox_marshal.list:1) */
 #define gtk_databox_marshal_VOID__VOID	g_cclosure_marshal_VOID__VOID
-
 /* VOID:POINTER (gtkdatabox_marshal.list:2) */
 #define gtk_databox_marshal_VOID__POINTER	g_cclosure_marshal_VOID__POINTER
-
-
-G_END_DECLS
-
+   G_END_DECLS
 #endif /* __GTK_DATABOX_MARSHAL_MARSHAL_H__ */

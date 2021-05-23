@@ -20,7 +20,7 @@
 #include <gtkdatabox_lines.h>
 
 static void gtk_databox_lines_real_draw (GtkDataboxGraph * lines,
-					 GtkDatabox* box);
+					 GtkDatabox * box);
 
 /**
  * GtkDataboxLinesPrivate
@@ -39,14 +39,13 @@ struct _GtkDataboxLinesPrivate
    guint pixelsalloc;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE(GtkDataboxLines, gtk_databox_lines,
-	GTK_DATABOX_TYPE_XYC_GRAPH)
-
-static void
-lines_finalize (GObject * object)
+G_DEFINE_TYPE_WITH_PRIVATE (GtkDataboxLines, gtk_databox_lines,
+			    GTK_DATABOX_TYPE_XYC_GRAPH)
+     static void lines_finalize (GObject * object)
 {
    GtkDataboxLines *lines = GTK_DATABOX_LINES (object);
-   GtkDataboxLinesPrivate *priv=gtk_databox_lines_get_instance_private(lines);
+   GtkDataboxLinesPrivate *priv =
+      gtk_databox_lines_get_instance_private (lines);
 
    g_free (priv->xpixels);
    g_free (priv->ypixels);
@@ -56,7 +55,7 @@ lines_finalize (GObject * object)
 }
 
 static void
-gtk_databox_lines_class_init (GtkDataboxLinesClass *klass)
+gtk_databox_lines_class_init (GtkDataboxLinesClass * klass)
 {
    GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
    GtkDataboxGraphClass *graph_class = GTK_DATABOX_GRAPH_CLASS (klass);
@@ -67,9 +66,10 @@ gtk_databox_lines_class_init (GtkDataboxLinesClass *klass)
 }
 
 static void
-gtk_databox_lines_init (GtkDataboxLines *lines)
+gtk_databox_lines_init (GtkDataboxLines * lines)
 {
-   GtkDataboxLinesPrivate *priv=gtk_databox_lines_get_instance_private(lines);
+   GtkDataboxLinesPrivate *priv =
+      gtk_databox_lines_get_instance_private (lines);
    priv->xpixels = NULL;
    priv->ypixels = NULL;
    priv->pixelsalloc = 0;
@@ -106,8 +106,7 @@ gtk_databox_lines_new (guint len, gfloat * X, gfloat * Y,
 			 "xtype", G_TYPE_FLOAT,
 			 "ytype", G_TYPE_FLOAT,
 			 "length", len,
-			 "maxlen", len,
-			 "color", color, "size", size, NULL);
+			 "maxlen", len, "color", color, "size", size, NULL);
 
    return GTK_DATABOX_GRAPH (lines);
 }
@@ -133,9 +132,9 @@ gtk_databox_lines_new (guint len, gfloat * X, gfloat * Y,
  **/
 GtkDataboxGraph *
 gtk_databox_lines_new_full (guint maxlen, guint len,
-			void * X, guint xstart, guint xstride, GType xtype,
-			void * Y, guint ystart, guint ystride, GType ytype,
-		    GdkRGBA * color, guint size)
+			    void *X, guint xstart, guint xstride, GType xtype,
+			    void *Y, guint ystart, guint ystride, GType ytype,
+			    GdkRGBA * color, guint size)
 {
    GtkDataboxLines *lines;
    g_return_val_if_fail (X, NULL);
@@ -159,11 +158,11 @@ gtk_databox_lines_new_full (guint maxlen, guint len,
 }
 
 static void
-gtk_databox_lines_real_draw (GtkDataboxGraph * graph,
-			     GtkDatabox * box)
+gtk_databox_lines_real_draw (GtkDataboxGraph * graph, GtkDatabox * box)
 {
    GtkDataboxLines *lines = GTK_DATABOX_LINES (graph);
-   GtkDataboxLinesPrivate *priv=gtk_databox_lines_get_instance_private(lines);
+   GtkDataboxLinesPrivate *priv =
+      gtk_databox_lines_get_instance_private (lines);
    guint i = 0;
    void *X;
    void *Y;
@@ -182,9 +181,11 @@ gtk_databox_lines_real_draw (GtkDataboxGraph * graph,
 
    if (priv->pixelsalloc < len)
    {
-   	priv->pixelsalloc = len;
-	priv->xpixels = (gint16 *)g_realloc(priv->xpixels, len * sizeof(gint16));
-	priv->ypixels = (gint16 *)g_realloc(priv->ypixels, len * sizeof(gint16));
+      priv->pixelsalloc = len;
+      priv->xpixels =
+	 (gint16 *) g_realloc (priv->xpixels, len * sizeof (gint16));
+      priv->ypixels =
+	 (gint16 *) g_realloc (priv->ypixels, len * sizeof (gint16));
    }
 
    xpixels = priv->xpixels;
@@ -192,28 +193,32 @@ gtk_databox_lines_real_draw (GtkDataboxGraph * graph,
 
    X = gtk_databox_xyc_graph_get_X (GTK_DATABOX_XYC_GRAPH (graph));
    xstart = gtk_databox_xyc_graph_get_xstart (GTK_DATABOX_XYC_GRAPH (graph));
-   xstride = gtk_databox_xyc_graph_get_xstride (GTK_DATABOX_XYC_GRAPH (graph));
+   xstride =
+      gtk_databox_xyc_graph_get_xstride (GTK_DATABOX_XYC_GRAPH (graph));
    xtype = gtk_databox_xyc_graph_get_xtype (GTK_DATABOX_XYC_GRAPH (graph));
-   gtk_databox_values_to_xpixels(box, xpixels, X, xtype, maxlen, xstart, xstride, len);
+   gtk_databox_values_to_xpixels (box, xpixels, X, xtype, maxlen, xstart,
+				  xstride, len);
 
    Y = gtk_databox_xyc_graph_get_Y (GTK_DATABOX_XYC_GRAPH (graph));
    ystart = gtk_databox_xyc_graph_get_ystart (GTK_DATABOX_XYC_GRAPH (graph));
-   ystride = gtk_databox_xyc_graph_get_ystride (GTK_DATABOX_XYC_GRAPH (graph));
+   ystride =
+      gtk_databox_xyc_graph_get_ystride (GTK_DATABOX_XYC_GRAPH (graph));
    ytype = gtk_databox_xyc_graph_get_ytype (GTK_DATABOX_XYC_GRAPH (graph));
-   gtk_databox_values_to_ypixels(box, ypixels, Y, ytype, maxlen, ystart, ystride, len);
+   gtk_databox_values_to_ypixels (box, ypixels, Y, ytype, maxlen, ystart,
+				  ystride, len);
 
    cr = gtk_databox_graph_create_gc (graph, box);
 
    linewidth = gtk_databox_graph_get_size (graph);
-   cairo_set_line_width(cr, linewidth + 0.1);
+   cairo_set_line_width (cr, linewidth + 0.1);
 
-   cairo_move_to(cr, xpixels[0] + 0.5, ypixels[0] + 0.5);
+   cairo_move_to (cr, xpixels[0] + 0.5, ypixels[0] + 0.5);
    for (i = 1; i < len; i++)
-	  cairo_line_to(cr, xpixels[i] + 0.5, ypixels[i] + 0.5);
+      cairo_line_to (cr, xpixels[i] + 0.5, ypixels[i] + 0.5);
 
-   cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
-   cairo_stroke(cr);
-   cairo_destroy(cr);
+   cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
+   cairo_stroke (cr);
+   cairo_destroy (cr);
 
    return;
 }

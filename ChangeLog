@@ -1,3 +1,9 @@
+2021-??-?? (1.0.1)
+	* Changed:
+	- Source code indentation according to scripts/indent.sh
+	- Added AM_SILENT_RULES.
+	- Requiring to build glade on "make distcheck".
+
 2021-04-04 (1.0.0)
 	* Added:
 	- Convenience function to override the background-color of a databox: 

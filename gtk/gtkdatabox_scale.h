@@ -32,7 +32,6 @@
  */
 
 G_BEGIN_DECLS
-
 /**
  * GtkDataboxScaleType
  * @GTK_DATABOX_SCALE_LINEAR:           Linear scale
@@ -43,7 +42,7 @@ G_BEGIN_DECLS
  *
  * See also: #GtkDatabox:scale_type_x, #GtkDatabox:scale_type_y
  */
-typedef enum
+   typedef enum
 {
    GTK_DATABOX_SCALE_LINEAR = 0,
    GTK_DATABOX_SCALE_LOG2,
@@ -54,4 +53,4 @@ GtkDataboxScaleType;
 GType gtk_databox_scale_type_get_type (void);
 
 G_END_DECLS
-#endif				/* __GTK_DATABOX_SCALE_H__ */
+#endif /* __GTK_DATABOX_SCALE_H__ */

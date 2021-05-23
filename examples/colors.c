@@ -36,20 +36,20 @@ typedef struct
 col_sel;
 
 static void
-get_color_cb(GtkDialog *dialog, gint response_id, gpointer user_data)
+get_color_cb (GtkDialog * dialog, gint response_id, gpointer user_data)
 {
-	GdkRGBA rgba;
-	col_sel *sel = (col_sel *)user_data;
+   GdkRGBA rgba;
+   col_sel *sel = (col_sel *) user_data;
 
-	g_return_if_fail (GTK_IS_DATABOX (sel->box));
+   g_return_if_fail (GTK_IS_DATABOX (sel->box));
 
-	if (response_id == GTK_RESPONSE_OK)
-	{
-		gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(dialog), &rgba);
-		gtk_databox_graph_set_color (sel->graph, &rgba);
-		gtk_widget_queue_draw (GTK_WIDGET (sel->box));
-	}
-	gtk_widget_destroy(GTK_WIDGET(dialog));
+   if (response_id == GTK_RESPONSE_OK)
+   {
+      gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (dialog), &rgba);
+      gtk_databox_graph_set_color (sel->graph, &rgba);
+      gtk_widget_queue_draw (GTK_WIDGET (sel->box));
+   }
+   gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
@@ -60,13 +60,14 @@ menu_color_change_cb (col_sel * sel)
    GdkRGBA rgba;
 
    sprintf (title, "Choose color #%d", sel->index);
-   selector = gtk_color_chooser_dialog_new(title, NULL);
+   selector = gtk_color_chooser_dialog_new (title, NULL);
    sel->selector = selector;
 
    rgba = *gtk_databox_graph_get_color (sel->graph);
-   gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(sel->selector), &rgba);
-   gtk_color_chooser_set_use_alpha(GTK_COLOR_CHOOSER(sel->selector), FALSE);
-   g_signal_connect(G_OBJECT(sel->selector), "response", G_CALLBACK(get_color_cb), (gpointer)sel);
+   gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (sel->selector), &rgba);
+   gtk_color_chooser_set_use_alpha (GTK_COLOR_CHOOSER (sel->selector), FALSE);
+   g_signal_connect (G_OBJECT (sel->selector), "response",
+		     G_CALLBACK (get_color_cb), (gpointer) sel);
    gtk_widget_show (GTK_WIDGET (sel->selector));
 
    return;
@@ -182,7 +183,7 @@ create_colors (void)
    g_signal_connect (G_OBJECT (close_button), "clicked",
 		     G_CALLBACK (gtk_main_quit), (gpointer) NULL);
    gtk_box_pack_start (GTK_BOX (box2), close_button, TRUE, TRUE, 0);
-   gtk_widget_set_can_default(close_button, TRUE);
+   gtk_widget_set_can_default (close_button, TRUE);
    gtk_widget_grab_default (close_button);
 
 
